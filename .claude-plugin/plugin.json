@@ -1,0 +1,10 @@
+{
+  "name": "modern-code-guidelines",
+  "description": "Helps Claude Code write modern code across Java, JavaScript, TypeScript, Python, and C#.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Local developer"
+  },
+  "keywords": ["java", "javascript", "typescript", "python", "csharp", "modern-code-guidelines"],
+  "skills": "./skills/"
+}

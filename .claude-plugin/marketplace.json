@@ -1,0 +1,19 @@
+{
+  "name": "modern-code-guidelines",
+  "owner": {
+    "name": "Local developer"
+  },
+  "description": "Version-aware coding guidance for Java, JavaScript, TypeScript, Python, and C#.",
+  "plugins": [
+    {
+      "name": "modern-code-guidelines",
+      "source": "./",
+      "description": "Version-aware coding guidance for Java, JavaScript, TypeScript, Python, and C#.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Local developer"
+      },
+      "keywords": ["java", "javascript", "typescript", "python", "csharp", "modern-code-guidelines"]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Modern TypeScript Guidelines"
+  short_description: "Apply TypeScript rules for the declared compiler config"

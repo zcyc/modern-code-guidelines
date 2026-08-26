@@ -1,0 +1,19 @@
+{
+  "name": "modern-code-guidelines",
+  "version": "0.1.0",
+  "description": "Version-aware coding and standard-library guidance for Java, JavaScript, TypeScript, Python, and C#.",
+  "author": {
+    "name": "Local developer"
+  },
+  "skills": "./skills/",
+  "keywords": ["java", "javascript", "typescript", "python", "csharp", "modern-code-guidelines"],
+  "interface": {
+    "displayName": "Modern Code Guidelines",
+    "shortDescription": "Write modern code for the project's language targets.",
+    "longDescription": "Apply version-aware coding, standard-library, compiler, runtime, typing, and concurrency guidance for Java, JavaScript, TypeScript, Python, and C#.",
+    "developerName": "Local developer",
+    "category": "Developer Tools",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": ["Apply modern code guidelines for this project."]
+  }
+}

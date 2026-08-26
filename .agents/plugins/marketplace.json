@@ -1,0 +1,20 @@
+{
+  "name": "modern-code-guidelines",
+  "interface": {
+    "displayName": "Modern Code Guidelines"
+  },
+  "plugins": [
+    {
+      "name": "modern-code-guidelines",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
