@@ -1,19 +1,42 @@
 {
   "name": "modern-code-guidelines",
-  "version": "0.1.0",
+  "version": "0.1.0+codex.20260829113611",
   "description": "Version-aware coding, standard-library, database, and secure-coding guidance for sixteen language skills.",
   "author": {
     "name": "Local developer"
   },
   "skills": "./skills/",
-  "keywords": ["java", "javascript", "typescript", "python", "csharp", "go", "rust", "scala", "cpp", "swift", "kotlin", "dart", "php", "ruby", "c", "sql", "modern-code-guidelines"],
+  "keywords": [
+    "java",
+    "javascript",
+    "typescript",
+    "python",
+    "csharp",
+    "go",
+    "rust",
+    "scala",
+    "cpp",
+    "swift",
+    "kotlin",
+    "dart",
+    "php",
+    "ruby",
+    "c",
+    "sql",
+    "modern-code-guidelines"
+  ],
   "interface": {
     "displayName": "Modern Code Guidelines",
     "shortDescription": "Write modern code for the project's language targets.",
     "longDescription": "Apply version-aware language, standard-library, compiler, runtime, database, typing, concurrency, and secure-coding guidance across sixteen language skills.",
     "developerName": "Local developer",
     "category": "Developer Tools",
-    "capabilities": ["Read", "Write"],
-    "defaultPrompt": ["Apply modern code guidelines for this project."]
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Apply modern code guidelines for this project."
+    ]
   }
 }
