@@ -49,7 +49,26 @@ const routes = {
 ## TypeScript 6+
 
 - Read the TypeScript 6 release notes before changing compiler options: this release contains breaking changes and deprecations preparing for TypeScript 7.
+- Set `target`/`lib` to `es2025` only when the runtime provides those APIs; this
+  enables the corresponding standard-library types but does not polyfill them.
+- Use `RegExp.escape` when the selected runtime supports it instead of hand-written
+  regular-expression escaping.
+- Address deprecated `target: "es5"`, `moduleResolution: "node"`, `baseUrl`,
+  `outFile`, and related options directly; do not preserve them with a new
+  compatibility shim.
 - Remove deprecated compiler options rather than adding compatibility shims or suppressions.
+
+## TypeScript 7+
+
+- Treat TypeScript 7 as the current compiler line; do not preserve options or
+  constructs deprecated by TypeScript 6 with compatibility shims.
+- Expect `strict`, `module: "esnext"`, `noUncheckedSideEffectImports`, and
+  stable type ordering defaults; make project intent explicit when the defaults
+  do not fit.
+- Do not depend on the TypeScript 7 compiler API; choose the supported API or
+  remove the integration rather than adding a local compatibility facade.
+- Pin the compiler and editor language service together when CI and local
+  diagnostics must agree.
 
 ## Configuration defaults for new projects
 
@@ -64,3 +83,4 @@ const routes = {
 - [TSConfig reference](https://www.typescriptlang.org/tsconfig/)
 - [TypeScript 5.0 release notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html)
 - [TypeScript 6.0 release notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-6-0.html)
+- [Announcing TypeScript 7.0](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/)

@@ -37,3 +37,6 @@ target from the locally installed Node.js or browser.
 - Prefer standard built-ins over small utility dependencies when the target supports them.
 - Keep values and types distinct: JavaScript code must not rely on compile-time-only assumptions.
 - Modernize the smallest relevant diff and preserve the package's module/export contract.
+- For production Node.js code, target an Active or Maintenance LTS release; use
+  Current releases only when the project explicitly accepts their shorter support
+  window.

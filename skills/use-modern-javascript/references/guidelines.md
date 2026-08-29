@@ -53,6 +53,26 @@ whether an API is available.
 - Use JSON module import attributes only with an explicit ESM/runtime target that supports them.
 - Use `Promise.try` and `Float16Array` only when the runtime target guarantees them.
 
+## ECMAScript 2026+
+
+- Use `Error.isError` for cross-realm checks of unknown thrown values; do not use
+  `instanceof Error` when values can cross a worker, VM, or iframe boundary.
+- Use `Uint8Array` base64/hex conversion methods and `Map.getOrInsert` when they
+  match the data contract; keep explicit codecs when their validation policy is
+  stricter than the built-in API.
+- Use `Math.sumPrecise` for numerically sensitive summation of an iterable; do not
+  replace a performance-critical reduction without measuring the cost.
+
+## Node.js 24+
+
+- Prefer Active or Maintenance LTS releases for production; pin the runtime in
+  project metadata and CI rather than relying on the local Node installation.
+
+## Node.js 26+
+
+- Treat Node.js 26 as a Current release until it enters LTS; use its newer built-in
+  APIs only when the package explicitly targets Node 26 and its support window.
+
 ## Node.js module boundary
 
 - Make the package module system explicit with `package.json` `type`, `.mjs`, or `.cjs`.
@@ -61,7 +81,7 @@ whether an API is available.
 
 ## Authority
 
-- [ECMAScript 2025 specification](https://262.ecma-international.org/16.0/)
+- [ECMAScript 2026 specification](https://tc39.es/ecma262/2026/multipage/)
 - [Node.js ECMAScript modules](https://nodejs.org/dist/latest/docs/api/esm.html)
 - [Node.js API documentation](https://nodejs.org/dist/latest/docs/api/)
 - [Node.js release schedule](https://nodejs.org/en/about/previous-releases)

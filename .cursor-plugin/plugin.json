@@ -2,10 +2,10 @@
   "name": "modern-code-guidelines",
   "displayName": "Modern Code Guidelines",
   "version": "0.1.0",
-  "description": "Helps coding agents write modern code across Java, JavaScript, TypeScript, Python, and C#.",
+  "description": "Helps coding agents write modern code across sixteen language skills.",
   "author": {
     "name": "Local developer"
   },
-  "keywords": ["java", "javascript", "typescript", "python", "csharp", "modern-code-guidelines"],
+  "keywords": ["java", "javascript", "typescript", "python", "csharp", "go", "rust", "scala", "cpp", "swift", "kotlin", "dart", "php", "ruby", "c", "sql", "modern-code-guidelines"],
   "skills": "./skills/"
 }

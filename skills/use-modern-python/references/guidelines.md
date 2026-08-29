@@ -46,6 +46,14 @@ def first[T](items: list[T]) -> T:
 
 - Use `concurrent.interpreters` for explicit subinterpreter coordination and `concurrent.futures.InterpreterPoolExecutor` for workloads that benefit from isolated interpreters; verify extension-module compatibility first.
 - When introspecting annotations at runtime, use the documented `annotationlib` APIs rather than reading `__annotations__` dictionaries directly.
+- Treat annotations as lazily evaluated in Python 3.14+; request an explicit
+  annotation format when runtime introspection needs values, strings, or ASTs.
+- Use template string literals (`t"..."`) for custom string-processing APIs, not
+  ordinary interpolation; use f-strings when the result should be a string.
+- Use `compression.zstd` instead of a third-party Zstandard binding when the
+  project target and deployment environment provide it.
+- Do not use `return`, `break`, or `continue` to leave a `finally` block;
+  Python 3.14 rejects that control flow.
 - Do not add `from __future__ import annotations` merely as a cross-version habit when the project targets 3.14+.
 - On Unix, account for the `forkserver` multiprocessing default when code relies on fork inheritance or pickling behavior.
 

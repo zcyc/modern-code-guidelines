@@ -46,6 +46,14 @@ both constraints.
 - Use extension members when a group of extension properties/methods belongs to one coherent extension surface.
 - Use null-conditional assignment only when the skipped assignment semantics are intended.
 - Use `field`-backed properties and partial events/constructors only when they remove real boilerplate without hiding lifecycle behavior.
+- Use implicit `Span<T>`/`ReadOnlySpan<T>` conversions only when the API is
+  already span-oriented and the lifetime/allocation behavior remains obvious.
+- Use user-defined compound assignment operators only when the type's mutation
+  semantics are unsurprising and consistent with its ordinary operator.
+- Use unbound generic types in `nameof` when the type name—not a constructed
+  generic shape—is the intended diagnostic or API text.
+- Use modifiers on simple lambda parameters only when they make the delegate's
+  by-reference contract clearer than an explicit parameter type.
 
 ## C# 15 (preview)
 

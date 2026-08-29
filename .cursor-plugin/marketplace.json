@@ -4,18 +4,18 @@
     "name": "Local developer"
   },
   "metadata": {
-    "description": "Version-aware coding guidance for Java, JavaScript, TypeScript, Python, and C#."
+    "description": "Version-aware coding, database, and secure-coding guidance for sixteen language skills."
   },
   "plugins": [
     {
       "name": "modern-code-guidelines",
       "source": ".",
-      "description": "Version-aware coding guidance for Java, JavaScript, TypeScript, Python, and C#.",
+      "description": "Version-aware coding, database, and secure-coding guidance for sixteen language skills.",
       "version": "0.1.0",
       "author": {
         "name": "Local developer"
       },
-      "keywords": ["java", "javascript", "typescript", "python", "csharp", "modern-code-guidelines"]
+      "keywords": ["java", "javascript", "typescript", "python", "csharp", "go", "rust", "scala", "cpp", "swift", "kotlin", "dart", "php", "ruby", "c", "sql", "modern-code-guidelines"]
     }
   ]
 }

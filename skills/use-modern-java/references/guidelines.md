@@ -54,7 +54,8 @@ String label = switch (status) {
 ## Java 22+
 
 - Use unnamed variables and patterns (`_`) when a matched value is deliberately unused.
-- Treat string templates as unavailable: they were Java 21/22 previews and were withdrawn in Java 23; do not recommend them.
+- Treat string templates as unavailable: they were previewed and withdrawn in Java
+  23; do not recommend them.
 
 ## Java 25+
 
@@ -63,10 +64,25 @@ String label = switch (status) {
 - Use flexible constructor bodies only when pre-super validation or field preparation materially improves safety.
 - Primitive patterns remain `preview`; use them only with an explicit preview build.
 
+## Java 26+
+
+- Keep primitive patterns in `instanceof` and `switch` behind an explicit preview
+  build; they remain preview in Java 26.
+- Use the Java 26 HTTP/3 support in `HttpClient` only when the service contract
+  and deployment target require it; verify protocol fallback behavior explicitly.
+- Do not rely on deep reflection to mutate final fields; redesign the ownership
+  or initialization path when Java 26 migration diagnostics expose that pattern.
+- Remove uses of the removed Applet API rather than adding a compatibility layer;
+  choose a supported application or browser integration boundary.
+- Keep structured concurrency, lazy constants, and the Vector API behind their
+  explicit preview/incubator configuration; do not use them in ordinary
+  production code merely because the JDK provides them.
+
 ## Authority
 
-- [Oracle Java language updates](https://docs.oracle.com/en/java/javase/25/language/java-language-changes-summary.html)
+- [Oracle Java language updates](https://docs.oracle.com/en/java/javase/26/language/java-language-changes-summary.html)
+- [JDK 26 release notes](https://www.oracle.com/java/technologies/javase/26-relnote-issues.html)
 - [JEP 511: Module Import Declarations](https://openjdk.org/jeps/511)
-- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se25/html/index.html)
-- [Java SE 25 API documentation](https://docs.oracle.com/en/java/javase/25/docs/api/)
-- [Oracle JDK migration guide](https://docs.oracle.com/en/java/javase/25/migrate/migrating-jdk-8-later-jdk-releases.html)
+- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se26/html/index.html)
+- [Java SE 26 API documentation](https://docs.oracle.com/en/java/javase/26/docs/api/)
+- [Oracle JDK migration guide](https://docs.oracle.com/en/java/javase/26/migrate/migrating-jdk-8-later-jdk-releases.html)

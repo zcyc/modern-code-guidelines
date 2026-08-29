@@ -1,0 +1,3 @@
+interface:
+  display_name: "Modern SQL Guidelines"
+  short_description: "Apply SQL rules for the declared database dialect"
