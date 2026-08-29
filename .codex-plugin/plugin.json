@@ -1,6 +1,6 @@
 {
   "name": "modern-code-guidelines",
-  "version": "0.1.0+codex.20260829113611",
+  "version": "0.2.0",
   "description": "Version-aware coding, standard-library, database, and secure-coding guidance for sixteen language skills.",
   "author": {
     "name": "Local developer"

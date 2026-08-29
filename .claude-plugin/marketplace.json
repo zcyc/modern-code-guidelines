@@ -9,7 +9,7 @@
       "name": "modern-code-guidelines",
       "source": "./",
       "description": "Version-aware coding, database, and secure-coding guidance for sixteen language skills.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "author": {
         "name": "Local developer"
       },

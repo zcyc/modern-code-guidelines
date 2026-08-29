@@ -1,7 +1,7 @@
 {
   "name": "modern-code-guidelines",
   "description": "Helps Claude Code write modern code across sixteen language skills.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Local developer"
   },

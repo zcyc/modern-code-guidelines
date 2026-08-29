@@ -1,7 +1,7 @@
 {
   "name": "modern-code-guidelines",
   "displayName": "Modern Code Guidelines",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Helps coding agents write modern code across sixteen language skills.",
   "author": {
     "name": "Local developer"
