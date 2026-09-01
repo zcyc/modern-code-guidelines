@@ -2,8 +2,8 @@
 
 [简体中文](README.zh-CN.md)
 
-A shared skill package for Codex, Cursor, and Claude Code, containing sixteen
-independently triggered language skills:
+A shared skill package for Codex, Cursor, and Claude Code, containing thirty-five
+independently triggered language and framework skills:
 
 - Codex: `.codex-plugin/plugin.json`
 - Cursor: `.cursor-plugin/plugin.json`
@@ -100,9 +100,32 @@ change.
 - `use-modern-c`
 - `use-modern-sql`
 
-Each skill reads the project's explicit language/compiler/runtime target and applies
-only stable rules supported by that target. Version-specific references stay beside
-their skill.
+Framework skills:
+
+- `use-modern-react`
+- `use-modern-nextjs`
+- `use-modern-vue`
+- `use-modern-angular`
+- `use-modern-spring-boot`
+- `use-modern-aspnet-core`
+- `use-modern-django`
+- `use-modern-fastapi`
+- `use-modern-flutter`
+- `use-modern-swiftui`
+- `use-modern-nestjs`
+- `use-modern-nuxt`
+- `use-modern-expo`
+- `use-modern-react-native`
+- `use-modern-sveltekit`
+- `use-modern-astro`
+- `use-modern-jetpack-compose`
+- `use-modern-laravel`
+- `use-modern-rails`
+
+Language skills read the project's explicit language/compiler/runtime target.
+Framework skills additionally resolve the framework, build tool, deployment
+target, and project architecture before applying version-sensitive guidance.
+Version-specific references stay beside each skill.
 
 The JavaScript skill covers core ECMAScript and Node.js. TypeScript has its own skill
 for compiler/type-system behavior. Browser APIs, CSS, accessibility, and web
@@ -135,8 +158,9 @@ API documentation:
 | SQL | [ISO/IEC 9075:2023](https://www.iso.org/standard/76583.html), [SQLFluff rules](https://docs.sqlfluff.com/en/stable/reference/rules.html) | [PostgreSQL release notes](https://www.postgresql.org/docs/release/), or the selected database vendor's SQL and transaction documentation |
 
 The detailed rules and their source links live in each skill's local
-`references/guidelines.md`. Secondary guidance can inform examples, but it does not
-override the project's declared target or the primary sources above.
+`references/guidelines.md`. Framework references use the framework's official
+documentation as the primary source. Secondary guidance can inform examples, but
+it does not override the project's declared target or the primary sources above.
 
 ## Relationship to related projects
 

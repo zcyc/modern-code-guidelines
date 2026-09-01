@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-这是一个同时面向 Codex、Cursor 和 Claude Code 的共享 skill 包，包含十六个可独立触发的语言 skill：
+这是一个同时面向 Codex、Cursor 和 Claude Code 的共享 skill 包，包含三十五个可独立触发的语言与框架 skill：
 
 - Codex：`.codex-plugin/plugin.json`
 - Cursor：`.cursor-plugin/plugin.json`
@@ -94,7 +94,31 @@ Cursor 使用 `cursor-agent plugin marketplace update modern-code-guidelines` �
 - `use-modern-c`
 - `use-modern-sql`
 
-每个 skill 都会读取项目明确声明的语言、编译器或运行时版本，只应用该版本可用且稳定的现代实践。各语言的版本规则与 skill 放在一起。
+语言 skill 都会读取项目明确声明的语言、编译器或运行时版本，只应用该版本可用且稳定的现代实践。各语言的版本规则与 skill 放在一起。
+
+## 支持的框架
+
+- `use-modern-react`
+- `use-modern-nextjs`
+- `use-modern-vue`
+- `use-modern-angular`
+- `use-modern-spring-boot`
+- `use-modern-aspnet-core`
+- `use-modern-django`
+- `use-modern-fastapi`
+- `use-modern-flutter`
+- `use-modern-swiftui`
+- `use-modern-nestjs`
+- `use-modern-nuxt`
+- `use-modern-expo`
+- `use-modern-react-native`
+- `use-modern-sveltekit`
+- `use-modern-astro`
+- `use-modern-jetpack-compose`
+- `use-modern-laravel`
+- `use-modern-rails`
+
+框架 skill 还会解析框架、构建工具、部署目标和项目架构，再应用版本敏感的规则。浏览器 API、CSS、无障碍和 Web 性能仍由 `modern-web-guidance` 负责。
 
 JavaScript skill 覆盖 ECMAScript 和 Node.js；TypeScript 单独处理编译器与类型系统行为。浏览器 API、CSS、无障碍和 Web 性能仍由 `modern-web-guidance` 负责。
 
@@ -121,7 +145,7 @@ JavaScript skill 覆盖 ECMAScript 和 Node.js；TypeScript 单独处理编译�
 | C | [ISO/IEC 9899:2024（C23）](https://www.iso.org/standard/82075.html)、[C 语言参考](https://en.cppreference.com/w/c/language)、[SEI CERT C](https://wiki.sei.cmu.edu/confluence/display/c) | [C 标准库参考](https://en.cppreference.com/w/c/header) |
 | SQL | [ISO/IEC 9075:2023](https://www.iso.org/standard/76583.html)、[SQLFluff 规则](https://docs.sqlfluff.com/en/stable/reference/rules.html) | [PostgreSQL 发布说明](https://www.postgresql.org/docs/release/)，或项目所选数据库厂商的 SQL 与事务文档 |
 
-详细规则和来源链接位于各 skill 自带的 `references/guidelines.md`。第三方最佳实践可以用于补充示例，但不能覆盖项目声明的目标版本或上述一手来源。
+详细规则和来源链接位于各 skill 自带的 `references/guidelines.md`。框架 references 以对应框架的官方文档为主要来源。第三方最佳实践可以用于补充示例，但不能覆盖项目声明的目标版本或上述一手来源。
 
 ## 与相关项目的关系
 

@@ -1,7 +1,7 @@
 {
   "name": "modern-code-guidelines",
-  "version": "0.2.0",
-  "description": "Version-aware coding, standard-library, database, and secure-coding guidance for sixteen language skills.",
+  "version": "0.5.0",
+  "description": "Version-aware coding, standard-library, database, framework, and secure-coding guidance for sixteen language and nineteen framework skills.",
   "author": {
     "name": "Local developer"
   },
@@ -23,12 +23,31 @@
     "ruby",
     "c",
     "sql",
+    "react",
+    "nextjs",
+    "vue",
+    "angular",
+    "spring-boot",
+    "aspnet-core",
+    "django",
+    "fastapi",
+    "flutter",
+    "swiftui",
+    "nestjs",
+    "nuxt",
+    "expo",
+    "react-native",
+    "sveltekit",
+    "astro",
+    "jetpack-compose",
+    "laravel",
+    "rails",
     "modern-code-guidelines"
   ],
   "interface": {
     "displayName": "Modern Code Guidelines",
-    "shortDescription": "Write modern code for the project's language targets.",
-    "longDescription": "Apply version-aware language, standard-library, compiler, runtime, database, typing, concurrency, and secure-coding guidance across sixteen language skills.",
+    "shortDescription": "Write modern code for the project's language and framework targets.",
+      "longDescription": "Apply version-aware language, framework, standard-library, compiler, runtime, database, typing, concurrency, and secure-coding guidance across sixteen language and nineteen framework skills.",
     "developerName": "Local developer",
     "category": "Developer Tools",
     "capabilities": [

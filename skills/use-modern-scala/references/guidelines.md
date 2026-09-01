@@ -1,20 +1,18 @@
 # Scala version rules
 
 Use these rules after resolving the module's Scala version, binary target,
-platform, and JDK. Pin the latest patch release in the chosen support line.
+platform, and JDK. Pin a patched release in the chosen support line.
 
-## Current support lines
+## Support lines
 
-- Scala 3.8.4 is the current Scala 3 Next line; Scala 3.3.8 is the current
-  Scala 3 LTS line, and Scala 2.13.18 is the current Scala 2.13 line.
-- Treat Scala 3.9.0-RC6, nightly builds, and other development snapshots as
-  non-production toolchain versions.
-- Scala 3.8+ requires JDK 17 or later. Scala 3.3 LTS remains the line for
-  libraries that must publish JDK 8-compatible bytecode; Scala 2.13 has its own
-  JDK compatibility boundary.
-- At this audit date, sbt 2.0.8, Scala CLI 1.16.0, Scala.js 1.22.0, and Scala
-  Native 0.5.12 are independently versioned toolchains; do not infer one
-  version from another.
+- Resolve the selected Scala 2.13 or Scala 3 support line and platform
+  toolchain from the build. Compiler, standard library, plugins, and published
+  artifacts must remain aligned.
+- Treat release candidates, nightly builds, and other development snapshots as
+  non-production toolchain versions unless the project explicitly targets them.
+- Choose the Scala 3 LTS line when JDK 8-compatible bytecode or the project's
+  support policy requires it. Do not infer the JDK boundary from the Scala
+  language version alone.
 
 ## Scala 2.13+
 
@@ -77,8 +75,8 @@ platform, and JDK. Pin the latest patch release in the chosen support line.
   `Array.empty[Int]` when they are clearer.
 - Add an explicit `scala3-repl` dependency when embedding the REPL; the REPL is
   no longer bundled in the core distribution.
-- Do not target Scala 3.8.0 or 3.8.1 for new builds; use the latest 3.8.x patch
-  release because early 3.8 releases had documented runtime/compiler regressions.
+- Use a patched release from the selected support line; do not pin a known-bad
+  early release identified by the project's release notes.
 - Keep `into` preview, and flexible varargs and strict-equality pattern matching
   experimental; do not introduce them into ordinary production code without an
   explicit opt-in.
@@ -106,11 +104,11 @@ platform, and JDK. Pin the latest patch release in the chosen support line.
 - Cross-build only when the project explicitly publishes multiple Scala binary
   versions; otherwise migrate directly to the selected line rather than adding
   compatibility facades or duplicate APIs.
-- Scala.js 1.22.0 makes its WebAssembly backend stable, but backend artifacts
-  are not forward-binary-compatible across the 1.21/1.22 boundary; upgrade and
-  relink the complete backend/toolchain together.
-- Scala Native 0.5.12 has a separate compiler/backend support matrix; resolve
-  the exact Scala artifact instead of inferring support from the Native version.
+- Scala.js WebAssembly backend support and binary compatibility are governed by
+  the selected Scala.js line; upgrade and relink the complete backend/toolchain
+  together when crossing its compatibility boundary.
+- Scala Native has a separate compiler/backend support matrix; resolve the
+  exact Scala artifact instead of inferring support from the Native version.
   Keep Native virtual threads experimental.
 - Scala.js Wasm output still requires an ES2022+ host, Wasm 3.0, ES modules, and
   explicit JSPI support for `js.async`/`js.await`; Scala CLI Wasm directives
@@ -131,10 +129,8 @@ platform, and JDK. Pin the latest patch release in the chosen support line.
 
 ## Authority
 
-- [Scala downloads and current release lines](https://www.scala-lang.org/download/)
-- [Scala 3.8 release](https://www.scala-lang.org/news/3.8/)
-- [Scala 3.8.4 release](https://www.scala-lang.org/news/3.8.4/)
-- [Scala 2.13.18 release](https://www.scala-lang.org/news/2.13.18/)
+- [Scala downloads and support lines](https://www.scala-lang.org/download/)
+- [Scala 3 release notes](https://www.scala-lang.org/news/3.8/)
 - [Scala 3.7 release](https://www.scala-lang.org/news/3.7.0/)
 - [Scala 3 Reference](https://docs.scala-lang.org/scala3/reference/)
 - [TASTy compatibility](https://www.scala-lang.org/blog/state-of-tasty-reader.html)

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Modern Angular Guidelines"
+  short_description: "Apply Angular rules for the declared project version"

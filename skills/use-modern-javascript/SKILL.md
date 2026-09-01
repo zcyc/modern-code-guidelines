@@ -29,6 +29,9 @@ For browser code, read an explicit `browserslist` or build target. If no target 
 declared, report the runtime as unknown and avoid runtime-gated APIs. Never infer the
 target from the locally installed Node.js or browser.
 
+After resolving the target, read `references/guidelines.md` for the applicable
+ECMAScript and Node.js feature gates.
+
 ## Working rules
 
 - Use ESM for new packages when the package declares `"type": "module"`; preserve CommonJS only when the package contract requires it.
