@@ -13,6 +13,15 @@ not a single package version.
   targets, verify native library compatibility before adding a new-architecture
   dependency or module.
 
+## Runtime and toolchain gates
+
+- React Native 0.84 and later use Hermes V1 by default and remove more legacy
+  architecture components. Check worklets, animation libraries, and native
+  dependencies before changing the engine or upgrade line.
+- React Native 0.87 and later make the Strict TypeScript API the default and
+  require Node 22, AGP 9, and Kotlin 2.0 or later. Treat Swift Package Manager
+  support as experimental until the project's native build supports it.
+
 ## Architecture and native boundary
 
 - Treat the New Architecture as the baseline for new code. Custom native
@@ -36,6 +45,8 @@ not a single package version.
 ## Authority
 
 - https://reactnative.dev/releases/overview
+- https://reactnative.dev/blog/2026/08/11/react-native-0.87
+- https://reactnative.dev/blog/2026/02/11/react-native-0.84
 - https://reactnative.dev/architecture/landing-page
 - https://reactnative.dev/docs/the-new-architecture/landing-page
 - https://reactnative.dev/docs/turbo-native-modules-introduction

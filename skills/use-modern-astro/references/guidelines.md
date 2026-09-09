@@ -13,6 +13,12 @@ APIs are available at build time or request time.
   deployment. Static output cannot provide request-persistent sessions.
 - Content collection and content-layer APIs have changed across Astro majors;
   resolve the installed target before changing schemas or loaders.
+- Astro 6 requires Node 22 or later and uses Vite 7 and Zod 4. For content
+  schemas, use the target's `astro/zod` entry point rather than copying older
+  `astro:content` examples.
+- Astro 7 uses Vite 8/Rolldown and the Rust compiler by default. Treat compiler
+  parsing and whitespace changes as behavior changes, and test custom Vite
+  integrations and non-Node adapters when upgrading.
 
 ## Islands and rendering
 
@@ -23,6 +29,9 @@ APIs are available at build time or request time.
   request headers, sessions, and protected data on the server-rendered path.
 - Match `output`, per-route `prerender`, server islands, and adapter settings to
   the deployment runtime; test the built output rather than relying on dev mode.
+- On Astro 7+, use route caching only with an explicit freshness and
+  invalidation contract and a compatible provider; do not infer cache behavior
+  from prerendering alone.
 - Use server sessions for data that must persist across requests when the
   adapter/storage target supports them. They are not a replacement for a
   database, and edge middleware may have a different session contract.
@@ -39,6 +48,8 @@ APIs are available at build time or request time.
 
 ## Authority
 
+- https://astro.build/blog/astro-7/
+- https://astro.build/blog/astro-6/
 - https://docs.astro.build/en/concepts/islands/
 - https://docs.astro.build/en/guides/content-collections/
 - https://docs.astro.build/en/guides/on-demand-rendering/
