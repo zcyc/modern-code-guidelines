@@ -2,13 +2,19 @@
 
 [English](README.md)
 
-这是一个同时面向 Codex、Cursor 和 Claude Code 的共享 skill 包，包含三十五个可独立触发的语言与框架 skill：
+这是一个同时面向 Codex、Cursor、Claude Code、Kiro、Google Antigravity、Gemini CLI、GitHub Copilot、Cline、OpenCode、Devin、JetBrains Junie 和 OpenHands 的共享 skill 包，包含三十五个可独立触发的语言与框架 skill：
 
 - Codex：`.codex-plugin/plugin.json`
 - Cursor：`.cursor-plugin/plugin.json`
 - Claude Code：`.claude-plugin/plugin.json`
 
-三个宿主共用同一个 `skills/` 目录，不复制规则，避免不同集成之间逐渐产生差异。
+项目统一维护源目录，并提供分发入口：
+
+- `skills/`：唯一的 Agent Skills 源目录。
+- `AGENTS.md`：直接打开本仓库时使用的常驻项目指令。
+- `GEMINI.md`：直接 checkout 本仓库时的 Gemini CLI 上下文入口，会导入 `AGENTS.md`。
+- `npx skills`：只将唯一的 `skills/` 源目录安装到指定宿主的原生路径。
+- 插件 manifest：Codex、Cursor 和 Claude Code。
 
 项目也提供用于仓库或本地安装的三个宿主 marketplace catalog：
 
@@ -74,6 +80,38 @@ claude plugin update modern-code-guidelines@modern-code-guidelines
 
 Cursor 使用 `cursor-agent plugin marketplace update modern-code-guidelines` 刷新；
 如果缓存版本没有变化，重新打开 Cursor 并在 `/plugins` 中重新安装。
+
+### 原生 Agent Skills（`npx skills`）
+
+```bash
+# 在目标项目根目录执行。
+# 交互式安装：
+npx skills add zcyc/modern-code-guidelines
+
+# 将全部 skill 安装到一个宿主。
+npx skills add zcyc/modern-code-guidelines \
+  --skill '*' \
+  --agent gemini-cli \
+  --yes
+
+# --agent 支持：
+# codex cursor claude-code gemini-cli antigravity kiro-cli
+# github-copilot cline opencode devin junie openhands
+
+# 将全部 skill 安装到本项目支持的宿主。
+npx skills add zcyc/modern-code-guidelines \
+  --skill '*' \
+  --agent codex cursor claude-code gemini-cli antigravity kiro-cli \
+  --agent github-copilot cline opencode devin junie openhands \
+  --yes
+
+# 查看和更新。
+npx skills ls -a gemini-cli
+npx skills update
+
+# 不支持 symlink 时使用 --copy。
+npx skills add zcyc/modern-code-guidelines --skill '*' --agent gemini-cli --copy
+```
 
 ## 支持的语言
 
@@ -161,4 +199,4 @@ JavaScript 和 TypeScript skill 有意只覆盖核心语言、编译器、Node.j
 
 ## 兼容边界
 
-这里的“支持”是指 Codex、Cursor 和 Claude Code 可以通过各自的插件 manifest 发现并加载同一套 skill。项目不额外维护宿主专属的命令、agent 或重复规则文件。
+Codex、Cursor 和 Claude Code 通过各自的插件 manifest 发现并加载本包。直接打开本仓库时，Kiro、GitHub Copilot、Cline、OpenCode、Devin、JetBrains Junie 和 OpenHands 通过 `AGENTS.md` 加载，Gemini CLI 通过 `GEMINI.md` 加载。`npx skills` 命令只将唯一的 `skills/` 源目录安装到指定宿主的原生路径，不会复制根目录指令文件。所有入口都指向同一套 skill 规则。
