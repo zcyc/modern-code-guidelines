@@ -2,8 +2,8 @@
 
 [简体中文](README.zh-CN.md)
 
-A shared skill package for Codex, Cursor, and Claude Code, containing sixteen
-independently triggered language skills:
+A shared skill package for Codex, Cursor, and Claude Code, containing thirty-five
+independently triggered language and framework skills:
 
 - Codex: `.codex-plugin/plugin.json`
 - Cursor: `.cursor-plugin/plugin.json`
@@ -100,9 +100,32 @@ change.
 - `use-modern-c`
 - `use-modern-sql`
 
-Each skill reads the project's explicit language/compiler/runtime target and applies
-only stable rules supported by that target. Version-specific references stay beside
-their skill.
+Framework skills:
+
+- `use-modern-react`
+- `use-modern-nextjs`
+- `use-modern-vue`
+- `use-modern-angular`
+- `use-modern-spring-boot`
+- `use-modern-aspnet-core`
+- `use-modern-django`
+- `use-modern-fastapi`
+- `use-modern-flutter`
+- `use-modern-swiftui`
+- `use-modern-nestjs`
+- `use-modern-nuxt`
+- `use-modern-expo`
+- `use-modern-react-native`
+- `use-modern-sveltekit`
+- `use-modern-astro`
+- `use-modern-jetpack-compose`
+- `use-modern-laravel`
+- `use-modern-rails`
+
+Language skills read the project's explicit language/compiler/runtime target.
+Framework skills additionally resolve the framework, build tool, deployment
+target, and project architecture before applying version-sensitive guidance.
+Version-specific references stay beside each skill.
 
 The JavaScript skill covers core ECMAScript and Node.js. TypeScript has its own skill
 for compiler/type-system behavior. Browser APIs, CSS, accessibility, and web
@@ -124,7 +147,7 @@ API documentation:
 | C# | [C# version history](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history), [C# 15 preview](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15), [language versioning](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-versioning) | [C# language reference](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/), [.NET API browser](https://learn.microsoft.com/en-us/dotnet/api/) |
 | Go | [Go specification](https://go.dev/ref/spec), [Effective Go](https://go.dev/doc/effective_go), [Go Code Review Comments](https://go.dev/wiki/CodeReviewComments), [Go 1.27 release notes](https://go.dev/doc/go1.27); supplementary [Modern Go Guidelines](https://github.com/JetBrains/go-modern-guidelines) | [Go standard library](https://pkg.go.dev/std), [Go release history](https://go.dev/doc/devel/release) |
 | Rust | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/), [Rust Style Guide](https://doc.rust-lang.org/style-guide/) | [Rust release notes](https://doc.rust-lang.org/stable/releases.html), [Rust standard library](https://doc.rust-lang.org/std/), [Cargo Book](https://doc.rust-lang.org/cargo/) |
-| Scala | [Scala 3.8.4 / 3.3.8 LTS / 2.13.18 releases](https://www.scala-lang.org/download/), [Scala 3 Reference](https://docs.scala-lang.org/scala3/reference/) | [Scala/JDK compatibility](https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html), [sbt](https://www.scala-sbt.org/), [Scalafmt](https://scalameta.org/scalafmt/), [Scalafix](https://scalacenter.github.io/scalafix/) |
+| Scala | [Scala release lines](https://www.scala-lang.org/download/), [Scala 3 Reference](https://docs.scala-lang.org/scala3/reference/) | [Scala/JDK compatibility](https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html), [sbt](https://www.scala-sbt.org/), [Scalafmt](https://scalameta.org/scalafmt/), [Scalafix](https://scalacenter.github.io/scalafix/) |
 | C++ | [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html), [ISO/IEC 14882:2024](https://www.iso.org/standard/83626.html), [C++26 working papers](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2026/) | [cppreference C++ language](https://en.cppreference.com/w/cpp/language), [standard library](https://en.cppreference.com/w/cpp/standard_library) |
 | Swift | [Swift 6.3 release](https://www.swift.org/blog/swift-6.3-released/), [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/), [Swift Evolution](https://www.swift.org/swift-evolution/) | [Swift Book](https://docs.swift.org/swift-book/), [Swift concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html) |
 | Kotlin | [What's new in Kotlin 2.0](https://kotlinlang.org/docs/whatsnew20.html), [What's new in Kotlin 2.4](https://kotlinlang.org/docs/whatsnew24.html), [Kotlin coding conventions](https://kotlinlang.org/docs/coding-conventions.html) | [Kotlin language documentation](https://kotlinlang.org/docs/kotlin-reference.html), [Kotlin coroutines guide](https://kotlinlang.org/docs/coroutines-guide.html) |
@@ -135,8 +158,9 @@ API documentation:
 | SQL | [ISO/IEC 9075:2023](https://www.iso.org/standard/76583.html), [SQLFluff rules](https://docs.sqlfluff.com/en/stable/reference/rules.html) | [PostgreSQL release notes](https://www.postgresql.org/docs/release/), or the selected database vendor's SQL and transaction documentation |
 
 The detailed rules and their source links live in each skill's local
-`references/guidelines.md`. Secondary guidance can inform examples, but it does not
-override the project's declared target or the primary sources above.
+`references/guidelines.md`. Framework references use the framework's official
+documentation as the primary source. Secondary guidance can inform examples, but
+it does not override the project's declared target or the primary sources above.
 
 ## Relationship to related projects
 

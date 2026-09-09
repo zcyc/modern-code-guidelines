@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-这是一个同时面向 Codex、Cursor 和 Claude Code 的共享 skill 包，包含十六个可独立触发的语言 skill：
+这是一个同时面向 Codex、Cursor 和 Claude Code 的共享 skill 包，包含三十五个可独立触发的语言与框架 skill：
 
 - Codex：`.codex-plugin/plugin.json`
 - Cursor：`.cursor-plugin/plugin.json`
@@ -94,7 +94,31 @@ Cursor 使用 `cursor-agent plugin marketplace update modern-code-guidelines` �
 - `use-modern-c`
 - `use-modern-sql`
 
-每个 skill 都会读取项目明确声明的语言、编译器或运行时版本，只应用该版本可用且稳定的现代实践。各语言的版本规则与 skill 放在一起。
+语言 skill 都会读取项目明确声明的语言、编译器或运行时版本，只应用该版本可用且稳定的现代实践。各语言的版本规则与 skill 放在一起。
+
+## 支持的框架
+
+- `use-modern-react`
+- `use-modern-nextjs`
+- `use-modern-vue`
+- `use-modern-angular`
+- `use-modern-spring-boot`
+- `use-modern-aspnet-core`
+- `use-modern-django`
+- `use-modern-fastapi`
+- `use-modern-flutter`
+- `use-modern-swiftui`
+- `use-modern-nestjs`
+- `use-modern-nuxt`
+- `use-modern-expo`
+- `use-modern-react-native`
+- `use-modern-sveltekit`
+- `use-modern-astro`
+- `use-modern-jetpack-compose`
+- `use-modern-laravel`
+- `use-modern-rails`
+
+框架 skill 还会解析框架、构建工具、部署目标和项目架构，再应用版本敏感的规则。浏览器 API、CSS、无障碍和 Web 性能仍由 `modern-web-guidance` 负责。
 
 JavaScript skill 覆盖 ECMAScript 和 Node.js；TypeScript 单独处理编译器与类型系统行为。浏览器 API、CSS、无障碍和 Web 性能仍由 `modern-web-guidance` 负责。
 
@@ -111,7 +135,7 @@ JavaScript skill 覆盖 ECMAScript 和 Node.js；TypeScript 单独处理编译�
 | C# | [C# 版本历史](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history)、[C# 15 preview](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15)、[语言版本控制](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-versioning) | [C# 语言参考](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/)、[.NET API 浏览器](https://learn.microsoft.com/en-us/dotnet/api/) |
 | Go | [Go 语言规范](https://go.dev/ref/spec)、[Effective Go](https://go.dev/doc/effective_go)、[Go Code Review Comments](https://go.dev/wiki/CodeReviewComments)、[Go 1.27 发布说明](https://go.dev/doc/go1.27)；补充参考 [Modern Go Guidelines](https://github.com/JetBrains/go-modern-guidelines) | [Go 标准库](https://pkg.go.dev/std)、[Go 版本历史](https://go.dev/doc/devel/release) |
 | Rust | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)、[Rust Style Guide](https://doc.rust-lang.org/style-guide/) | [Rust 发布说明](https://doc.rust-lang.org/stable/releases.html)、[Rust 标准库](https://doc.rust-lang.org/std/)、[Cargo Book](https://doc.rust-lang.org/cargo/) |
-| Scala | [Scala 3.8.4 / 3.3.8 LTS / 2.13.18 发布版本](https://www.scala-lang.org/download/)、[Scala 3 Reference](https://docs.scala-lang.org/scala3/reference/) | [Scala/JDK 兼容性](https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html)、[sbt](https://www.scala-sbt.org/)、[Scalafmt](https://scalameta.org/scalafmt/)、[Scalafix](https://scalacenter.github.io/scalafix/) |
+| Scala | [Scala 发布线](https://www.scala-lang.org/download/)、[Scala 3 Reference](https://docs.scala-lang.org/scala3/reference/) | [Scala/JDK 兼容性](https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html)、[sbt](https://www.scala-sbt.org/)、[Scalafmt](https://scalameta.org/scalafmt/)、[Scalafix](https://scalacenter.github.io/scalafix/) |
 | C++ | [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html)、[ISO/IEC 14882:2024](https://www.iso.org/standard/83626.html)、[C++26 工作论文](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2026/) | [cppreference C++ 语言](https://en.cppreference.com/w/cpp/language)、[标准库](https://en.cppreference.com/w/cpp/standard_library) |
 | Swift | [Swift 6.3 发布说明](https://www.swift.org/blog/swift-6.3-released/)、[Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)、[Swift Evolution](https://www.swift.org/swift-evolution/) | [Swift Book](https://docs.swift.org/swift-book/)、[Swift 并发](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html) |
 | Kotlin | [Kotlin 2.0 更新](https://kotlinlang.org/docs/whatsnew20.html)、[Kotlin 2.4 更新](https://kotlinlang.org/docs/whatsnew24.html)、[Kotlin 编码约定](https://kotlinlang.org/docs/coding-conventions.html) | [Kotlin 语言文档](https://kotlinlang.org/docs/kotlin-reference.html)、[Kotlin 协程指南](https://kotlinlang.org/docs/coroutines-guide.html) |
@@ -121,7 +145,7 @@ JavaScript skill 覆盖 ECMAScript 和 Node.js；TypeScript 单独处理编译�
 | C | [ISO/IEC 9899:2024（C23）](https://www.iso.org/standard/82075.html)、[C 语言参考](https://en.cppreference.com/w/c/language)、[SEI CERT C](https://wiki.sei.cmu.edu/confluence/display/c) | [C 标准库参考](https://en.cppreference.com/w/c/header) |
 | SQL | [ISO/IEC 9075:2023](https://www.iso.org/standard/76583.html)、[SQLFluff 规则](https://docs.sqlfluff.com/en/stable/reference/rules.html) | [PostgreSQL 发布说明](https://www.postgresql.org/docs/release/)，或项目所选数据库厂商的 SQL 与事务文档 |
 
-详细规则和来源链接位于各 skill 自带的 `references/guidelines.md`。第三方最佳实践可以用于补充示例，但不能覆盖项目声明的目标版本或上述一手来源。
+详细规则和来源链接位于各 skill 自带的 `references/guidelines.md`。框架 references 以对应框架的官方文档为主要来源。第三方最佳实践可以用于补充示例，但不能覆盖项目声明的目标版本或上述一手来源。
 
 ## 与相关项目的关系
 

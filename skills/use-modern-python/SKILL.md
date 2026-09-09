@@ -5,7 +5,7 @@ description: "Use version-aware Python language, standard-library, typing, and c
 
 # Modern Python
 
-Apply the newest stable Python patterns supported by the project's explicit interpreter
+Apply stable Python patterns supported by the project's explicit interpreter
 range. Read `references/guidelines.md` before using version-gated syntax or APIs.
 
 ## Target resolution

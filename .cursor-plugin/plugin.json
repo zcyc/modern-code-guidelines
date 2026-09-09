@@ -1,11 +1,11 @@
 {
   "name": "modern-code-guidelines",
   "displayName": "Modern Code Guidelines",
-  "version": "0.2.0",
-  "description": "Helps coding agents write modern code across sixteen language skills.",
+  "version": "0.5.0",
+  "description": "Helps coding agents write modern code across sixteen language and nineteen framework skills.",
   "author": {
     "name": "Local developer"
   },
-  "keywords": ["java", "javascript", "typescript", "python", "csharp", "go", "rust", "scala", "cpp", "swift", "kotlin", "dart", "php", "ruby", "c", "sql", "modern-code-guidelines"],
+  "keywords": ["java", "javascript", "typescript", "python", "csharp", "go", "rust", "scala", "cpp", "swift", "kotlin", "dart", "php", "ruby", "c", "sql", "react", "nextjs", "vue", "angular", "spring-boot", "aspnet-core", "django", "fastapi", "flutter", "swiftui", "nestjs", "nuxt", "expo", "react-native", "sveltekit", "astro", "jetpack-compose", "laravel", "rails", "modern-code-guidelines"],
   "skills": "./skills/"
 }

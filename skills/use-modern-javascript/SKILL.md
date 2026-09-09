@@ -5,7 +5,7 @@ description: "Use version-aware ECMAScript and Node.js idioms when writing, modi
 
 # Modern JavaScript
 
-Apply the newest stable ECMAScript and Node.js patterns guaranteed by the project's
+Apply stable ECMAScript and Node.js patterns guaranteed by the project's
 declared runtime.
 
 ## Scope
@@ -28,6 +28,9 @@ Read the target from checked-in project metadata:
 For browser code, read an explicit `browserslist` or build target. If no target is
 declared, report the runtime as unknown and avoid runtime-gated APIs. Never infer the
 target from the locally installed Node.js or browser.
+
+After resolving the target, read `references/guidelines.md` for the applicable
+ECMAScript and Node.js feature gates.
 
 ## Working rules
 

@@ -25,6 +25,9 @@ If the compiler version or config cannot be established, report it as unknown an
 not introduce version-gated syntax. Never use a globally installed `tsc` as the source
 of truth.
 
+After resolving the target, read `references/guidelines.md` for the applicable
+TypeScript compiler and runtime feature gates.
+
 ## Working rules
 
 - Treat types as compile-time contracts: validate untrusted values at runtime.

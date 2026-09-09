@@ -60,8 +60,8 @@ const routes = {
 
 ## TypeScript 7+
 
-- Treat TypeScript 7 as the current compiler line; do not preserve options or
-  constructs deprecated by TypeScript 6 with compatibility shims.
+- When TypeScript 7 is the selected compiler line, remove options and constructs
+  deprecated by TypeScript 6 instead of preserving them with compatibility shims.
 - Expect `strict`, `module: "esnext"`, `noUncheckedSideEffectImports`, and
   stable type ordering defaults; make project intent explicit when the defaults
   do not fit.

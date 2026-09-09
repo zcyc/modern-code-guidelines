@@ -28,8 +28,6 @@ official Go source.
 
 - Use generics when one implementation genuinely serves multiple types; do not
   replace a clear interface or concrete function with a generic abstraction.
-- Use `any` as the spelling of the empty interface when it improves consistency;
-  it has the same semantics as `interface{}`.
 
 ## Go 1.20+
 
@@ -83,32 +81,17 @@ official Go source.
 
 - Use `new(value)` for pointers to values and `errors.AsType[T]` for type-safe
   error matching when the module target supports them.
-- Use `go fix -diff` to review the official modernizers before applying them; keep
-  the diff scoped and run tests/vet afterward.
 
 ## Go 1.27+
 
-- Use generic methods only when a method-level type parameter makes the API
-  clearer. Keep interface methods non-generic and do not use generic methods to
-  hide a missing package-level abstraction.
-- Use promoted or nested field selectors in struct literals only when they make
-  construction clearer; keep explicit nested literals when they communicate
-  ownership or zero-value behavior better.
-- Rely on generalized generic type inference when it remains readable; keep
-  explicit type arguments when inference would obscure the contract.
+- Use generic methods, promoted/nested field selectors, and generalized generic
+  inference only when they make the API or construction clearer; keep explicit
+  structure when it communicates ownership or keeps a contract readable.
 - Treat the `stdversion` vet check run by `go test` as a compatibility signal:
   fix the module/file Go target or the code instead of suppressing the warning.
-- Use the `atomictypes`, `embedlit`, `slicesbackward`, and `unsafefuncs`
-  `go fix` modernizers only during an intentional modernization pass, and review
-  the diff before applying it.
-- For modules declaring `go 1.27` or newer, let `go mod tidy` consolidate
-  duplicate `require` blocks rather than preserving the old layout manually.
 - Use `encoding/json/v2`/`jsontext`, `crypto/mldsa`, native `uuid`, or
   `httptest.NewTestServer` when the target and API contract require them; do not
   replace an established API merely because a newer one exists.
-- Use the generally available `runtime/pprof` `goroutineleak` profile when
-  diagnosing permanently blocked goroutines; do not treat it as a substitute
-  for giving each goroutine an owner and exit path.
 
 ## Authority
 
