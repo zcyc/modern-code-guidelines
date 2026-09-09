@@ -8,6 +8,8 @@ The WSGI/ASGI choice changes the concurrency model.
 - Django's built-in Tasks API and CSP middleware/settings are available from
   Django 6.0. On older targets, use only the project's selected task and CSP
   integration; do not import these APIs conditionally as a compatibility layer.
+- Django 6.0 requires Python 3.12 or later. Resolve the Python and Django
+  targets together before copying a 6.0 example or upgrading dependencies.
 - Async ORM coverage continues to grow across Django releases. Check the
   declared Django version and database backend for each async query method
   instead of assuming the synchronous ORM has an async equivalent.
@@ -40,6 +42,7 @@ The WSGI/ASGI choice changes the concurrency model.
 
 ## Authority
 
+- https://docs.djangoproject.com/en/6.0/releases/6.0/
 - https://docs.djangoproject.com/en/stable/
 - https://docs.djangoproject.com/en/stable/topics/async/
 - https://docs.djangoproject.com/en/stable/topics/db/optimization/

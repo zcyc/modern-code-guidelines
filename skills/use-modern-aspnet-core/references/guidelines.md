@@ -15,6 +15,10 @@ from the repository. New APIs and defaults must match that target.
 - .NET 10 and later provide the newer Minimal API validation surface. Do not
   introduce it into a project whose target does not expose the corresponding
   validation APIs and package references.
+- ASP.NET Core 10 and later deprecate `WithOpenApi` in favor of the target's
+  built-in OpenAPI and endpoint-metadata pipeline. Treat the old call as
+  migration material. Cookie authentication no longer redirects known API
+  endpoints to login; verify clients expect 401/403 responses after upgrading.
 
 ## HTTP pipeline
 
@@ -35,6 +39,7 @@ from the repository. New APIs and defaults must match that target.
 
 ## Authority
 
+- https://learn.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-10.0?view=aspnetcore-10.0
 - https://learn.microsoft.com/en-us/aspnet/core/
 - https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis
 - https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware

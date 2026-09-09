@@ -10,6 +10,8 @@ bootstrap and starter-kit conventions change across major versions.
   and providers through `bootstrap/app.php` and `bootstrap/providers.php` in a
   new application. Do not copy older `app/Http/Kernel.php`, exception-handler,
   or provider-registration instructions into that structure.
+- Laravel 13 requires PHP 8.3 or later. Resolve the PHP target with Laravel
+  before using its new framework APIs or attributes.
 - Existing applications may retain the older layout. Follow the files present
   in the repository rather than migrating structure as part of an unrelated
   feature.
@@ -41,6 +43,7 @@ bootstrap and starter-kit conventions change across major versions.
 
 ## Authority
 
+- https://laravel.com/framework/docs/releases
 - https://laravel.com/docs
 - https://laravel.com/docs/routing
 - https://laravel.com/docs/validation

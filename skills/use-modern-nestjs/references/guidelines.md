@@ -10,6 +10,9 @@ interchangeable in every integration.
   packages are ESM-oriented, and that generation adds Standard Schema and
   native observability paths. Do not copy those APIs into an older Nest target
   without checking its migration guide and package support.
+- A Nest 12 application needs Node 20.19+ or 22.12+ for its ESM interop;
+  `nest` CLI and schematics have a higher Node floor. Resolve runtime and
+  generation-tool targets separately.
 - Upgrade `@nestjs/*` packages as a coordinated set. A mixed-major framework
   install can make otherwise valid decorators and adapters fail at runtime.
 
