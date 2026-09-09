@@ -1,28 +1,31 @@
 # React version rules
 
 Read the project's declared React and build-tool versions before applying these
-rules. React documentation tracks the latest major separately from archived
-majors; do not assume an API is available because the editor autocomplete shows it.
+rules. React documentation separates the selected major from archived majors;
+do not assume an API is available because the editor autocomplete shows it.
 
 ## React 19+
 
 - Treat render purity as a correctness requirement; it is also required for
   compiler optimization.
-- Prefer the current React primitives supported by the project's renderer and
+- Prefer React primitives supported by the project's renderer and
   framework. Do not mix server-component conventions into a client-only app.
 
-## Actions and effect events
+## React 19.2+
 
-- Use `useActionState` and `useOptimistic` when they express an async mutation's
-  pending, error, or optimistic state. Keep server actions and client-only form
-  flows within the renderer and framework contract that the project actually
-  uses.
 - Use `useEffectEvent` when an effect needs the latest non-reactive value without
   making that value an effect trigger. It does not make an effect safe to omit
   real dependencies.
 - Use `Activity` only when the target renderer supports it and preserving the
   hidden subtree's state is useful; do not replace ordinary conditional
   rendering with it by default.
+
+## React 19 actions
+
+- Use `useActionState` and `useOptimistic` when they express an async mutation's
+  pending, error, or optimistic state. Keep server actions and client-only form
+  flows within the renderer and framework contract that the project actually
+  uses.
 
 ## React Compiler
 

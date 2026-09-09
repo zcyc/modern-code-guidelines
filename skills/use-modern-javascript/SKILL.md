@@ -5,7 +5,7 @@ description: "Use version-aware ECMAScript and Node.js idioms when writing, modi
 
 # Modern JavaScript
 
-Apply the newest stable ECMAScript and Node.js patterns guaranteed by the project's
+Apply stable ECMAScript and Node.js patterns guaranteed by the project's
 declared runtime.
 
 ## Scope

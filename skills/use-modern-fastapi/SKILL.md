@@ -1,6 +1,6 @@
 ---
 name: use-modern-fastapi
-description: "Use version-aware FastAPI routing, Pydantic validation, dependency, async, lifecycle, security, and OpenAPI idioms when writing, modifying, fixing, or reviewing FastAPI code."
+description: "Use version-aware FastAPI routing, Pydantic validation, async, security, and OpenAPI idioms when writing, modifying, fixing, or reviewing FastAPI code."
 ---
 
 # Modern FastAPI

@@ -1,6 +1,6 @@
 ---
 name: use-modern-spring-boot
-description: "Use version-aware Spring Boot configuration, web, data, security, observability, and concurrency idioms when writing, modifying, fixing, or reviewing Spring Boot code."
+description: "Use version-aware Spring Boot web, data, security, observability, and concurrency idioms when writing, modifying, fixing, or reviewing Spring Boot code."
 ---
 
 # Modern Spring Boot

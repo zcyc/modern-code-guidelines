@@ -1,6 +1,6 @@
 ---
 name: use-modern-laravel
-description: "Use version-aware Laravel routing, validation, authorization, Eloquent, queues, configuration, and frontend-integration idioms when writing, modifying, fixing, or reviewing Laravel code."
+description: "Use version-aware Laravel routing, validation, authorization, Eloquent, queues, and config idioms when writing, modifying, fixing, or reviewing Laravel code."
 ---
 
 # Modern Laravel

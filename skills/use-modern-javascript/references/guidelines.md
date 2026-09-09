@@ -63,15 +63,12 @@ whether an API is available.
 - Use `Math.sumPrecise` for numerically sensitive summation of an iterable; do not
   replace a performance-critical reduction without measuring the cost.
 
-## Node.js 24+
+## Node.js support policy
 
 - Prefer Active or Maintenance LTS releases for production; pin the runtime in
   project metadata and CI rather than relying on the local Node installation.
-
-## Node.js 26+
-
-- Treat Node.js 26 as a Current release until it enters LTS; use its newer built-in
-  APIs only when the package explicitly targets Node 26 and its support window.
+- Treat Current releases as an opt-in target; use their newer built-in APIs only
+  when the package explicitly declares that line and its support window.
 
 ## Node.js module boundary
 

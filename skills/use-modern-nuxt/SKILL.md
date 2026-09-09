@@ -1,6 +1,6 @@
 ---
 name: use-modern-nuxt
-description: "Use version-aware Nuxt routing, universal data fetching, rendering, server routes, runtime configuration, and deployment idioms when writing, modifying, fixing, or reviewing Nuxt code."
+description: "Use version-aware Nuxt routing, data fetching, rendering, server routes, and config idioms when writing, modifying, fixing, or reviewing Nuxt code."
 ---
 
 # Modern Nuxt

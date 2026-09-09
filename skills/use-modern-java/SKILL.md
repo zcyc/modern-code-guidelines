@@ -5,7 +5,7 @@ description: "Use version-aware Java language and standard-library idioms when w
 
 # Modern Java
 
-Apply the newest stable Java idioms supported by the project's explicit target. Read
+Apply stable Java idioms supported by the project's explicit target. Read
 `references/guidelines.md` and use only the rules for that target or older stable
 releases.
 

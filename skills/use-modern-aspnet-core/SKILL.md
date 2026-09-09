@@ -1,6 +1,6 @@
 ---
 name: use-modern-aspnet-core
-description: "Use version-aware ASP.NET Core API, middleware, dependency-injection, security, validation, and hosting idioms when writing, modifying, fixing, or reviewing .NET web code."
+description: "Use version-aware ASP.NET Core API, middleware, DI, security, and hosting idioms when writing, modifying, fixing, or reviewing .NET web code."
 ---
 
 # Modern ASP.NET Core

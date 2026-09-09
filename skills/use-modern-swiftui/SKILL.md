@@ -1,6 +1,6 @@
 ---
 name: use-modern-swiftui
-description: "Use version-aware SwiftUI state, view, concurrency, identity, accessibility, and platform-integration idioms when writing, modifying, fixing, or reviewing SwiftUI code."
+description: "Use version-aware SwiftUI state, view, concurrency, identity, and accessibility idioms when writing, modifying, fixing, or reviewing SwiftUI code."
 ---
 
 # Modern SwiftUI
@@ -31,5 +31,5 @@ using a newer API.
 - Build for Dynamic Type, localization, accessibility labels/traits, and the
   supported platform size classes; use UIKit/AppKit only at a real platform boundary.
 
-Read references/guidelines.md before using version-gated Observation, navigation,
-concurrency, or platform APIs.
+Read references/guidelines.md for SwiftUI state ownership, identity, async
+lifecycle, and version-gated Observation, navigation, concurrency, or platform APIs.

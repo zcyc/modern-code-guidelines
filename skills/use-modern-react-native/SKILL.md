@@ -1,6 +1,6 @@
 ---
 name: use-modern-react-native
-description: "Use version-aware React Native component, New Architecture, platform, performance, and native-module idioms when writing, modifying, fixing, or reviewing React Native code."
+description: "Use version-aware React Native New Architecture, performance, and native-module idioms when writing, modifying, fixing, or reviewing React Native code."
 ---
 
 # Modern React Native

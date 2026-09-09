@@ -1,6 +1,6 @@
 ---
 name: use-modern-jetpack-compose
-description: "Use version-aware Jetpack Compose state, recomposition, side-effect, architecture, accessibility, and UI testing idioms when writing, modifying, fixing, or reviewing Compose code."
+description: "Use version-aware Jetpack Compose state, recomposition, side-effect, and UI-testing idioms when writing, modifying, fixing, or reviewing Compose code."
 ---
 
 # Modern Jetpack Compose
