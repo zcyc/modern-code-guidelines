@@ -2,15 +2,21 @@
 
 [简体中文](README.zh-CN.md)
 
-A shared skill package for Codex, Cursor, and Claude Code, containing thirty-five
-independently triggered language and framework skills:
+A shared skill package for Codex, Cursor, Claude Code, Kiro, Google Antigravity,
+Gemini CLI, GitHub Copilot, Cline, OpenCode, Devin, JetBrains Junie, and OpenHands,
+containing thirty-five independently triggered language and framework skills:
 
 - Codex: `.codex-plugin/plugin.json`
 - Cursor: `.cursor-plugin/plugin.json`
 - Claude Code: `.claude-plugin/plugin.json`
 
-All three hosts use the same `skills/` directory, so language guidance is not
-duplicated or allowed to drift between integrations.
+Canonical sources and distribution entry points:
+
+- `skills/`: the canonical Agent Skills source directory.
+- `AGENTS.md`: always-on project guidance when this repository is opened directly.
+- `GEMINI.md`: Gemini CLI context for a direct checkout; it imports `AGENTS.md`.
+- `npx skills`: installs only the canonical `skills/` directory into selected host paths.
+- Plugin manifests: Codex, Cursor, and Claude Code.
 
 Marketplace catalogs are provided for direct repository or local installation:
 
@@ -80,6 +86,38 @@ claude plugin update modern-code-guidelines@modern-code-guidelines
 For Cursor, run `cursor-agent plugin marketplace update modern-code-guidelines`,
 then reopen Cursor and reinstall from `/plugins` if the cached version does not
 change.
+
+### Native Agent Skills (`npx skills`)
+
+```bash
+# Run from the target project's root.
+# Interactive installation:
+npx skills add zcyc/modern-code-guidelines
+
+# Install all skills into one host.
+npx skills add zcyc/modern-code-guidelines \
+  --skill '*' \
+  --agent gemini-cli \
+  --yes
+
+# Supported values for --agent:
+# codex cursor claude-code gemini-cli antigravity kiro-cli
+# github-copilot cline opencode devin junie openhands
+
+# Install all skills into this project's supported hosts.
+npx skills add zcyc/modern-code-guidelines \
+  --skill '*' \
+  --agent codex cursor claude-code gemini-cli antigravity kiro-cli \
+  --agent github-copilot cline opencode devin junie openhands \
+  --yes
+
+# Verify and update.
+npx skills ls -a gemini-cli
+npx skills update
+
+# Use --copy when symlinks are unavailable.
+npx skills add zcyc/modern-code-guidelines --skill '*' --agent gemini-cli --copy
+```
 
 ## Skills
 
@@ -186,6 +224,9 @@ boundaries.
 
 ## Compatibility boundary
 
-Support means that Codex, Cursor, and Claude Code can discover the shared skill
-package through their host-specific plugin manifest. This project does not add
-host-specific commands, agents, or duplicated rule files.
+Codex, Cursor, and Claude Code discover the package through host-specific plugin
+manifests. When this repository is opened directly, Kiro, GitHub Copilot, Cline,
+OpenCode, Devin, JetBrains Junie, and OpenHands use `AGENTS.md`; Gemini CLI uses
+`GEMINI.md`. The `npx skills` commands install only the canonical `skills/`
+directory into the selected host paths; they do not copy these root instruction
+files. Every entry point routes to the same skill rules.
