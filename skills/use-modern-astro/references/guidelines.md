@@ -34,9 +34,8 @@ APIs are available at build time or request time.
 - Middleware can populate `Astro.locals` for request-specific data. Keep that
   data out of static assumptions and do not expose secrets through component
   props that become browser HTML or JavaScript.
-- Astro Actions are a useful typed boundary for validated form or client
-  mutations. Keep authorization in the action/server boundary and use an API
-  endpoint when callers need a stable HTTP interface.
+- Keep authorization in the action/server boundary and use an API endpoint when
+  callers need a stable HTTP interface.
 
 ## Authority
 

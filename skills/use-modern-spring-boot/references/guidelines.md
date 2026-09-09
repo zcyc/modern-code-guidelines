@@ -23,12 +23,6 @@ generations or silently change the web stack.
 - For native images, check reflection, proxy, and resource requirements instead
   of assuming JVM reflection will work unchanged.
 
-## Modern Spring boundaries
-
-- Use `jakarta.*` APIs and bean-based security configuration on current Boot
-  lines. Treat `javax.*` imports and `WebSecurityConfigurerAdapter` examples as
-  migration material, not templates for new code.
-
 ## Concurrency
 
 - Virtual threads require a compatible JDK and may change thread-pool and

@@ -27,8 +27,6 @@ mix Compose APIs from incompatible BOM or compiler lines.
   immutable values and explicit event callbacks.
 - Give lazy lists and navigation destinations stable keys and identity; avoid
   using positions for entities that can be inserted or reordered.
-- Collect flows with the lifecycle-aware API supported by the project's
-  dependencies, and measure recomposition or frame problems before optimizing.
 
 Read references/guidelines.md before using version-sensitive Compose runtime,
 Material, navigation, or lifecycle APIs.

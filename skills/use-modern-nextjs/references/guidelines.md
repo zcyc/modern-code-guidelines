@@ -33,12 +33,9 @@ models; preserve the router already used by the file.
 
 ## Request interception
 
-- Use the request-interception file convention supported by the installed
-  Next.js target. In current App Router projects this is commonly `proxy.ts` for
-  Node-runtime redirects, rewrites, and lightweight prechecks; do not use it
-  for data fetching or long-running authorization work.
-- Treat `middleware.ts` as a target-specific boundary rather than copying old
-  examples into a project whose version expects `proxy.ts`.
+- Use the target's request-interception convention for redirects, rewrites, and
+  lightweight prechecks. Keep data fetching and long-running authorization work
+  outside that boundary.
 
 ## Authority
 

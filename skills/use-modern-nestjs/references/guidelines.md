@@ -6,8 +6,8 @@ interchangeable in every integration.
 
 ## Nest generation gate
 
-- Nest 12 and later require an explicit Node/module-format decision: current
-  core packages are ESM-oriented, and that generation adds Standard Schema and
+- Nest 12 and later require an explicit Node/module-format decision: its core
+  packages are ESM-oriented, and that generation adds Standard Schema and
   native observability paths. Do not copy those APIs into an older Nest target
   without checking its migration guide and package support.
 - Upgrade `@nestjs/*` packages as a coordinated set. A mixed-major framework
@@ -38,7 +38,7 @@ interchangeable in every integration.
   serialization pipes for new boundaries when the project already uses a
   compatible schema library. Keep class-based DTOs where that is the established
   contract; do not mix both styles invisibly.
-- Review module format and Node support when upgrading current Nest packages:
+- Review module format and Node support when upgrading Nest packages:
   core packages may be ESM while an application can still remain CommonJS if
   its runtime and tooling support that interop.
 

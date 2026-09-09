@@ -22,9 +22,6 @@ Vue 2 have different defaults and should not be blended in a partial rewrite.
 - Treat `watch` as an effect boundary, not a general-purpose way to derive state.
 - Use typed `defineProps`, `defineEmits`, and other compiler macros only when the
   installed Vue version supports the syntax.
-- Do not introduce the removed core Reactivity Transform (`$ref`, `$computed`,
-  and related syntax). Use ordinary refs, or a macros package only when the
-  repository explicitly chose and configured it.
 - Prefer `defineModel` for a simple component `v-model` contract when supported;
   keep explicit props and emits when a reusable component needs a more visible
   or multi-step contract.

@@ -31,9 +31,6 @@ must be compatible with the project.
   dependencies. Preserve cancellation when the screen leaves composition.
 - Use stable keys for lazy lists and navigation entities. Measure recomposition
   and frame performance before adding stability annotations or custom caching.
-- With modern Kotlin targets, prefer the Compose compiler Gradle plugin and keep
-  it aligned with the Kotlin toolchain. Do not add the older standalone compiler
-  extension configuration unless the project target requires it.
 
 ## Authority
 
