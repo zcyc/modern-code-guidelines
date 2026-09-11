@@ -4,7 +4,7 @@
 
 A shared skill package for Codex, Cursor, Claude Code, Kiro, Google Antigravity,
 Gemini CLI, GitHub Copilot, Cline, OpenCode, Devin, JetBrains Junie, and OpenHands,
-containing thirty-five independently triggered language and framework skills:
+containing forty-two independently triggered language and framework skills:
 
 - Codex: `.codex-plugin/plugin.json`
 - Cursor: `.cursor-plugin/plugin.json`
@@ -121,6 +121,8 @@ npx skills add zcyc/modern-code-guidelines --skill '*' --agent gemini-cli --copy
 
 ## Skills
 
+Language skills (17):
+
 - `use-modern-java`
 - `use-modern-javascript`
 - `use-modern-typescript`
@@ -137,8 +139,9 @@ npx skills add zcyc/modern-code-guidelines --skill '*' --agent gemini-cli --copy
 - `use-modern-ruby`
 - `use-modern-c`
 - `use-modern-sql`
+- `use-modern-shell`
 
-Framework skills:
+Framework skills (25):
 
 - `use-modern-react`
 - `use-modern-nextjs`
@@ -148,8 +151,14 @@ Framework skills:
 - `use-modern-aspnet-core`
 - `use-modern-django`
 - `use-modern-fastapi`
+- `use-modern-express`
+- `use-modern-flask`
 - `use-modern-flutter`
+- `use-modern-uikit`
+- `use-modern-appkit`
 - `use-modern-swiftui`
+- `use-modern-swiftdata`
+- `use-modern-ktor`
 - `use-modern-nestjs`
 - `use-modern-nuxt`
 - `use-modern-expo`
@@ -164,6 +173,11 @@ Language skills read the project's explicit language/compiler/runtime target.
 Framework skills additionally resolve the framework, build tool, deployment
 target, and project architecture before applying version-sensitive guidance.
 Version-specific references stay beside each skill.
+
+Apple skills are layered: use `use-modern-swift` for the language, then add
+only the frameworks present in the target. Keep SwiftUI, UIKit, and AppKit
+separate because their lifecycle and platform rules differ; keep SwiftData
+separate because persistence and migration have different boundaries.
 
 The JavaScript skill covers core ECMAScript and Node.js. TypeScript has its own skill
 for compiler/type-system behavior. Browser APIs, CSS, accessibility, and web
@@ -186,19 +200,20 @@ notes, compiler documentation, and runtime/standard-library/platform API documen
 | Rust | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/), [Rust Style Guide](https://doc.rust-lang.org/style-guide/) | [Rust release notes](https://doc.rust-lang.org/stable/releases.html), [Rust standard library](https://doc.rust-lang.org/std/), [Cargo Book](https://doc.rust-lang.org/cargo/) |
 | Scala | [Scala release lines](https://www.scala-lang.org/download/), [Scala 3 Reference](https://docs.scala-lang.org/scala3/reference/) | [Scala/JDK compatibility](https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html), [sbt](https://www.scala-sbt.org/), [Scalafmt](https://scalameta.org/scalafmt/), [Scalafix](https://scalacenter.github.io/scalafix/) |
 | C++ | [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html), [ISO/IEC 14882:2024](https://www.iso.org/standard/83626.html), [C++26 working papers](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2026/) | [cppreference C++ language](https://en.cppreference.com/w/cpp/language), [standard library](https://en.cppreference.com/w/cpp/standard_library) |
-| Swift | [Swift 6.3 release](https://www.swift.org/blog/swift-6.3-released/), [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/), [Swift Evolution](https://www.swift.org/swift-evolution/) | [Swift Book](https://docs.swift.org/swift-book/), [Swift concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html) |
+| Swift | [Swift 6.3 release](https://www.swift.org/blog/swift-6.3-released/), [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/), [Swift Evolution](https://www.swift.org/swift-evolution/) | [Swift Book](https://docs.swift.org/swift-book/), [Swift concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html), [Swift 6 data-race safety migration](https://www.swift.org/migration/documentation/swift-6-concurrency-migration-guide/dataracesafety/), [Swift Testing](https://developer.apple.com/documentation/testing), [XCTest](https://developer.apple.com/documentation/xctest) |
 | Kotlin | [What's new in Kotlin 2.0](https://kotlinlang.org/docs/whatsnew20.html), [What's new in Kotlin 2.4](https://kotlinlang.org/docs/whatsnew24.html), [Kotlin coding conventions](https://kotlinlang.org/docs/coding-conventions.html) | [Kotlin language documentation](https://kotlinlang.org/docs/kotlin-reference.html), [Kotlin coroutines guide](https://kotlinlang.org/docs/coroutines-guide.html) |
 | Dart | [Dart 3.13 announcement](https://dart.dev/blog/announcing-dart-3-13), [Effective Dart](https://dart.dev/effective-dart) | [Dart language specification](https://spec.dart.dev/), [Dart linter rules](https://dart.dev/tools/linter-rules) |
 | PHP | [PHP 8.5 release](https://www.php.net/releases/8.5/en.php), [PHP language manual](https://www.php.net/manual/en/langref.php) | [PHP standard library](https://www.php.net/manual/en/book.standard.php), [PHP-FIG PSR](https://www.php-fig.org/psr/) |
 | Ruby | [Ruby 4.0 release](https://www.ruby-lang.org/en/news/2025/12/25/ruby-4-0-0-released/), [Ruby documentation](https://www.ruby-lang.org/en/documentation/), [RuboCop style cops](https://docs.rubocop.org/rubocop/latest/cops_style.html) | [Ruby core API](https://docs.ruby-lang.org/en/) |
 | C | [ISO/IEC 9899:2024 (C23)](https://www.iso.org/standard/82075.html), [C language reference](https://en.cppreference.com/w/c/language), [SEI CERT C](https://wiki.sei.cmu.edu/confluence/display/c) | [C standard library reference](https://en.cppreference.com/w/c/header) |
 | SQL | [ISO/IEC 9075:2023](https://www.iso.org/standard/76583.html), [SQLFluff rules](https://docs.sqlfluff.com/en/stable/reference/rules.html) | [PostgreSQL release notes](https://www.postgresql.org/docs/release/), or the selected database vendor's SQL and transaction documentation |
+| Shell | [POSIX Shell Command Language](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html), [Bash manual](https://www.gnu.org/software/bash/manual/bash.html) | [ShellCheck](https://www.shellcheck.net/wiki/) |
 
 ### Framework sources
 
 | Framework | Release, version, and compatibility sources | Architecture and API sources |
 | --- | --- | --- |
-| React | [React versions](https://react.dev/versions), [React 19.2](https://react.dev/blog/2025/10/01/react-19-2) | [Rules of React](https://react.dev/reference/rules), [React Compiler](https://react.dev/learn/react-compiler/introduction), [React Actions](https://react.dev/reference/react/useActionState) |
+| React | [React versions](https://react.dev/versions), [React 19.3](https://react.dev/blog/2026/09/09/react-19-3) | [Rules of React](https://react.dev/reference/rules), [React Compiler](https://react.dev/learn/react-compiler/introduction), [React Actions](https://react.dev/reference/react/useActionState), [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition), [`<Fragment>` and Fragment refs](https://react.dev/reference/react/Fragment), [`browser`](https://react.dev/reference/react-dom/browser) |
 | Next.js | [Next.js 16](https://nextjs.org/blog/next-16), [Next.js release blog](https://nextjs.org/blog) | [App Router](https://nextjs.org/docs/app), [Server and Client Components](https://nextjs.org/docs/app/getting-started/server-and-client-components), [`use cache`](https://nextjs.org/docs/app/api-reference/directives/use-cache), [Cache Components](https://nextjs.org/docs/app/getting-started/partial-prerendering), [Proxy](https://nextjs.org/docs/app/api-reference/file-conventions/proxy) |
 | Vue | [Vue releases](https://github.com/vuejs/core/releases) | [Vue introduction](https://vuejs.org/guide/introduction), [Composition API FAQ](https://vuejs.org/guide/extras/composition-api-faq), [Vue with TypeScript](https://vuejs.org/guide/typescript/overview), [Composables](https://vuejs.org/guide/reusability/composables) |
 | Angular | [Angular releases](https://angular.dev/reference/releases), [Version compatibility](https://angular.dev/reference/versions) | [Angular overview](https://angular.dev/overview), [Component anatomy](https://angular.dev/guide/components), [Signals](https://angular.dev/guide/signals), [Zoneless](https://angular.dev/guide/zoneless), [Standalone migration](https://angular.dev/reference/migrations/standalone), [`resource`](https://angular.dev/guide/signals/resource) |
@@ -206,8 +221,14 @@ notes, compiler documentation, and runtime/standard-library/platform API documen
 | ASP.NET Core | [ASP.NET Core release notes](https://learn.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-10.0?view=aspnetcore-10.0) | [ASP.NET Core docs](https://learn.microsoft.com/en-us/aspnet/core/), [Minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis), [Middleware](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware), [Dependency injection](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection), [Error handling](https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors) |
 | Django | [Django 6.1 release](https://docs.djangoproject.com/en/6.1/releases/6.1/), [Django 6.0 release](https://docs.djangoproject.com/en/6.0/releases/6.0/) | [Django documentation](https://docs.djangoproject.com/en/stable/), [Async support](https://docs.djangoproject.com/en/stable/topics/async/), [Tasks](https://docs.djangoproject.com/en/stable/topics/tasks/), [Database optimization](https://docs.djangoproject.com/en/stable/topics/db/optimization/), [Transactions](https://docs.djangoproject.com/en/stable/topics/db/transactions/), [Security](https://docs.djangoproject.com/en/stable/topics/security/) |
 | FastAPI | [FastAPI release notes](https://fastapi.tiangolo.com/release-notes/) | [FastAPI documentation](https://fastapi.tiangolo.com/), [Async](https://fastapi.tiangolo.com/async/), [Dependencies](https://fastapi.tiangolo.com/tutorial/dependencies/), [Events](https://fastapi.tiangolo.com/advanced/events/), [Response models](https://fastapi.tiangolo.com/tutorial/response-model/) |
+| Express | [Express 5 migration](https://expressjs.com/en/guide/migrating-5.html) | [Express documentation](https://expressjs.com/), [Error handling](https://expressjs.com/en/guide/error-handling.html), [Security best practices](https://expressjs.com/en/advanced/best-practice-security.html) |
+| Flask | [Flask changes](https://flask.palletsprojects.com/en/stable/changes/) | [Flask documentation](https://flask.palletsprojects.com/en/stable/), [Application factories](https://flask.palletsprojects.com/en/stable/patterns/appfactories/), [Testing](https://flask.palletsprojects.com/en/stable/testing/) |
 | Flutter | [Flutter what's new](https://docs.flutter.dev/release/whats-new) | [Architectural overview](https://docs.flutter.dev/resources/architectural-overview), [App architecture](https://docs.flutter.dev/app-architecture/guide), [State management](https://docs.flutter.dev/data-and-backend/state-mgmt/intro), [Performance](https://docs.flutter.dev/perf), [Accessibility](https://docs.flutter.dev/ui/accessibility-and-internationalization) |
-| SwiftUI | [iOS and iPadOS release notes](https://developer.apple.com/documentation/ios-ipados-release-notes) | [SwiftUI documentation](https://developer.apple.com/documentation/SwiftUI), [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines), [Model data](https://developer.apple.com/documentation/swiftui/model-data), [NavigationStack](https://developer.apple.com/documentation/swiftui/navigationstack), [`task`](https://developer.apple.com/documentation/swiftui/task) |
+| Ktor | [Ktor releases](https://ktor.io/docs/releases.html) | [Ktor server documentation](https://ktor.io/docs/server-create-and-configure.html), [Plugins](https://ktor.io/docs/server-plugins.html), [Testing](https://ktor.io/docs/server-testing.html) |
+| UIKit | [UIKit updates](https://developer.apple.com/documentation/updates/uikit), [iOS and iPadOS release notes](https://developer.apple.com/documentation/ios-ipados-release-notes) | [UIKit documentation](https://developer.apple.com/documentation/uikit), [UIKit integration](https://developer.apple.com/documentation/swiftui/uikit-integration), [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) |
+| AppKit | [AppKit updates](https://developer.apple.com/documentation/updates/appkit), [macOS release notes](https://developer.apple.com/documentation/macos-release-notes) | [AppKit documentation](https://developer.apple.com/documentation/appkit), [AppKit integration](https://developer.apple.com/documentation/swiftui/appkit-integration), [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) |
+| SwiftUI | [SwiftUI updates](https://developer.apple.com/documentation/updates/swiftui) | [SwiftUI documentation](https://developer.apple.com/documentation/SwiftUI), [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines), [Model data](https://developer.apple.com/documentation/swiftui/model-data), [NavigationStack](https://developer.apple.com/documentation/swiftui/navigationstack), [`task`](https://developer.apple.com/documentation/swiftui/task), [ForEach](https://developer.apple.com/documentation/swiftui/foreach) |
+| SwiftData | [SwiftData updates](https://developer.apple.com/documentation/updates/swiftdata) | [SwiftData documentation](https://developer.apple.com/documentation/swiftdata), [ModelContainer](https://developer.apple.com/documentation/swiftdata/modelcontainer), [ModelContext](https://developer.apple.com/documentation/swiftdata/modelcontext), [ModelActor](https://developer.apple.com/documentation/swiftdata/modelactor), [Core Data](https://developer.apple.com/documentation/coredata), [Schema migration](https://developer.apple.com/documentation/swiftdata/schemamigrationplan) |
 | NestJS | [Migration guide](https://docs.nestjs.com/migration-guide) | [NestJS documentation](https://docs.nestjs.com/), [Modules](https://docs.nestjs.com/modules), [Providers](https://docs.nestjs.com/providers), [Pipes](https://docs.nestjs.com/pipes), [Guards](https://docs.nestjs.com/guards), [Interceptors](https://docs.nestjs.com/interceptors), [Security](https://docs.nestjs.com/security) |
 | Nuxt | [Nuxt releases](https://github.com/nuxt/nuxt/releases) | [Nuxt 4 data fetching](https://nuxt.com/docs/4.x/getting-started/data-fetching), [Nuxt 4 rendering](https://nuxt.com/docs/4.x/guide/concepts/rendering), [Nuxt 3 data fetching](https://nuxt.com/docs/3.x/getting-started/data-fetching), [Server directory](https://nuxt.com/docs/4.x/directory-structure/server), [Server components](https://nuxt.com/docs/4.x/guide/concepts/server-components), [Configuration](https://nuxt.com/docs/4.x/getting-started/configuration) |
 | Expo | [Expo SDK versions](https://docs.expo.dev/versions/latest/), [Upgrade the Expo SDK](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/) | [Workflow overview](https://docs.expo.dev/workflow/overview/), [Configuration](https://docs.expo.dev/workflow/configuration/), [Development builds](https://docs.expo.dev/develop/development-builds/introduction/), [Expo Router](https://docs.expo.dev/router/introduction/), [EAS Update runtime versions](https://docs.expo.dev/eas-update/runtime-versions/), [Using libraries](https://docs.expo.dev/workflow/using-libraries/) |

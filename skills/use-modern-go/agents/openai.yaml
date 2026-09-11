@@ -1,3 +1,0 @@
-interface:
-  display_name: "Modern Go Guidelines"
-  short_description: "Apply Go rules for the declared toolchain version"

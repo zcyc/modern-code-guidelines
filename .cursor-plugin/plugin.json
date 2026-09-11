@@ -1,11 +1,11 @@
 {
   "name": "modern-code-guidelines",
   "displayName": "Modern Code Guidelines",
-  "version": "0.9.0",
-  "description": "Helps coding agents write modern code across sixteen language and nineteen framework skills from one canonical Agent Skills source.",
+  "version": "0.11.0",
+  "description": "Helps coding agents write modern code across seventeen language and twenty-five framework skills from one canonical Agent Skills source.",
   "author": {
     "name": "Local developer"
   },
-  "keywords": ["java", "javascript", "typescript", "python", "csharp", "go", "rust", "scala", "cpp", "swift", "kotlin", "dart", "php", "ruby", "c", "sql", "react", "nextjs", "vue", "angular", "spring-boot", "aspnet-core", "django", "fastapi", "flutter", "swiftui", "nestjs", "nuxt", "expo", "react-native", "sveltekit", "astro", "jetpack-compose", "laravel", "rails", "modern-code-guidelines"],
+  "keywords": ["java", "javascript", "typescript", "python", "csharp", "go", "rust", "scala", "cpp", "swift", "kotlin", "dart", "php", "ruby", "c", "sql", "shell", "react", "nextjs", "vue", "angular", "spring-boot", "aspnet-core", "django", "fastapi", "express", "flask", "flutter", "ktor", "uikit", "appkit", "swiftui", "swiftdata", "nestjs", "nuxt", "expo", "react-native", "sveltekit", "astro", "jetpack-compose", "laravel", "rails", "modern-code-guidelines"],
   "skills": "./skills/"
 }

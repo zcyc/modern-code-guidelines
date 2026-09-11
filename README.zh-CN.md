@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-这是一个同时面向 Codex、Cursor、Claude Code、Kiro、Google Antigravity、Gemini CLI、GitHub Copilot、Cline、OpenCode、Devin、JetBrains Junie 和 OpenHands 的共享 skill 包，包含三十五个可独立触发的语言与框架 skill：
+这是一个同时面向 Codex、Cursor、Claude Code、Kiro、Google Antigravity、Gemini CLI、GitHub Copilot、Cline、OpenCode、Devin、JetBrains Junie 和 OpenHands 的共享 skill 包，包含四十二个可独立触发的语言与框架 skill：
 
 - Codex：`.codex-plugin/plugin.json`
 - Cursor：`.cursor-plugin/plugin.json`
@@ -113,7 +113,7 @@ npx skills update
 npx skills add zcyc/modern-code-guidelines --skill '*' --agent gemini-cli --copy
 ```
 
-## 支持的语言
+## 支持的语言（17 个）
 
 - `use-modern-java`
 - `use-modern-javascript`
@@ -131,10 +131,11 @@ npx skills add zcyc/modern-code-guidelines --skill '*' --agent gemini-cli --copy
 - `use-modern-ruby`
 - `use-modern-c`
 - `use-modern-sql`
+- `use-modern-shell`
 
 语言 skill 都会读取项目明确声明的语言、编译器或运行时版本，只应用该版本可用且稳定的现代实践。各语言的版本规则与 skill 放在一起。
 
-## 支持的框架
+## 支持的框架（25 个）
 
 - `use-modern-react`
 - `use-modern-nextjs`
@@ -144,8 +145,14 @@ npx skills add zcyc/modern-code-guidelines --skill '*' --agent gemini-cli --copy
 - `use-modern-aspnet-core`
 - `use-modern-django`
 - `use-modern-fastapi`
+- `use-modern-express`
+- `use-modern-flask`
 - `use-modern-flutter`
+- `use-modern-uikit`
+- `use-modern-appkit`
 - `use-modern-swiftui`
+- `use-modern-swiftdata`
+- `use-modern-ktor`
 - `use-modern-nestjs`
 - `use-modern-nuxt`
 - `use-modern-expo`
@@ -157,6 +164,8 @@ npx skills add zcyc/modern-code-guidelines --skill '*' --agent gemini-cli --copy
 - `use-modern-rails`
 
 框架 skill 还会解析框架、构建工具、部署目标和项目架构，再应用版本敏感的规则。浏览器 API、CSS、无障碍和 Web 性能仍由 `modern-web-guidance` 负责。
+
+Apple 相关 skill 采用分层方式：语言层使用 `use-modern-swift`，然后只添加目标中实际使用的框架。SwiftUI、UIKit、AppKit 的生命周期和平台规则不同，因此保持拆分；SwiftData 的持久化与迁移边界也不同，因此单独保留。
 
 JavaScript skill 覆盖 ECMAScript 和 Node.js；TypeScript 单独处理编译器与类型系统行为。浏览器 API、CSS、无障碍和 Web 性能仍由 `modern-web-guidance` 负责。
 
@@ -175,19 +184,20 @@ JavaScript skill 覆盖 ECMAScript 和 Node.js；TypeScript 单独处理编译�
 | Rust | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)、[Rust Style Guide](https://doc.rust-lang.org/style-guide/) | [Rust 发布说明](https://doc.rust-lang.org/stable/releases.html)、[Rust 标准库](https://doc.rust-lang.org/std/)、[Cargo Book](https://doc.rust-lang.org/cargo/) |
 | Scala | [Scala 发布线](https://www.scala-lang.org/download/)、[Scala 3 Reference](https://docs.scala-lang.org/scala3/reference/) | [Scala/JDK 兼容性](https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html)、[sbt](https://www.scala-sbt.org/)、[Scalafmt](https://scalameta.org/scalafmt/)、[Scalafix](https://scalacenter.github.io/scalafix/) |
 | C++ | [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html)、[ISO/IEC 14882:2024](https://www.iso.org/standard/83626.html)、[C++26 工作论文](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2026/) | [cppreference C++ 语言](https://en.cppreference.com/w/cpp/language)、[标准库](https://en.cppreference.com/w/cpp/standard_library) |
-| Swift | [Swift 6.3 发布说明](https://www.swift.org/blog/swift-6.3-released/)、[Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)、[Swift Evolution](https://www.swift.org/swift-evolution/) | [Swift Book](https://docs.swift.org/swift-book/)、[Swift 并发](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html) |
+| Swift | [Swift 6.3 发布说明](https://www.swift.org/blog/swift-6.3-released/)、[Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)、[Swift Evolution](https://www.swift.org/swift-evolution/) | [Swift Book](https://docs.swift.org/swift-book/)、[Swift 并发](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)、[Swift 6 数据竞争安全迁移指南](https://www.swift.org/migration/documentation/swift-6-concurrency-migration-guide/dataracesafety/)、[Swift Testing](https://developer.apple.com/documentation/testing)、[XCTest](https://developer.apple.com/documentation/xctest) |
 | Kotlin | [Kotlin 2.0 更新](https://kotlinlang.org/docs/whatsnew20.html)、[Kotlin 2.4 更新](https://kotlinlang.org/docs/whatsnew24.html)、[Kotlin 编码约定](https://kotlinlang.org/docs/coding-conventions.html) | [Kotlin 语言文档](https://kotlinlang.org/docs/kotlin-reference.html)、[Kotlin 协程指南](https://kotlinlang.org/docs/coroutines-guide.html) |
 | Dart | [Dart 3.13 发布说明](https://dart.dev/blog/announcing-dart-3-13)、[Effective Dart](https://dart.dev/effective-dart) | [Dart 语言规范](https://spec.dart.dev/)、[Dart lint 规则](https://dart.dev/tools/linter-rules) |
 | PHP | [PHP 8.5 发布说明](https://www.php.net/releases/8.5/en.php)、[PHP 语言手册](https://www.php.net/manual/en/langref.php) | [PHP 标准库](https://www.php.net/manual/en/book.standard.php)、[PHP-FIG PSR](https://www.php-fig.org/psr/) |
 | Ruby | [Ruby 4.0 发布说明](https://www.ruby-lang.org/en/news/2025/12/25/ruby-4-0-0-released/)、[Ruby 文档](https://www.ruby-lang.org/en/documentation/)、[RuboCop 风格规则](https://docs.rubocop.org/rubocop/latest/cops_style.html) | [Ruby Core API](https://docs.ruby-lang.org/en/) |
 | C | [ISO/IEC 9899:2024（C23）](https://www.iso.org/standard/82075.html)、[C 语言参考](https://en.cppreference.com/w/c/language)、[SEI CERT C](https://wiki.sei.cmu.edu/confluence/display/c) | [C 标准库参考](https://en.cppreference.com/w/c/header) |
 | SQL | [ISO/IEC 9075:2023](https://www.iso.org/standard/76583.html)、[SQLFluff 规则](https://docs.sqlfluff.com/en/stable/reference/rules.html) | [PostgreSQL 发布说明](https://www.postgresql.org/docs/release/)，或项目所选数据库厂商的 SQL 与事务文档 |
+| Shell | [POSIX Shell Command Language](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html)、[Bash 手册](https://www.gnu.org/software/bash/manual/bash.html) | [ShellCheck](https://www.shellcheck.net/wiki/) |
 
 ### 框架规则来源
 
 | 框架 | 发布、版本与兼容性来源 | 架构与 API 来源 |
 | --- | --- | --- |
-| React | [React versions](https://react.dev/versions)、[React 19.2](https://react.dev/blog/2025/10/01/react-19-2) | [Rules of React](https://react.dev/reference/rules)、[React Compiler](https://react.dev/learn/react-compiler/introduction)、[React Actions](https://react.dev/reference/react/useActionState) |
+| React | [React versions](https://react.dev/versions)、[React 19.3](https://react.dev/blog/2026/09/09/react-19-3) | [Rules of React](https://react.dev/reference/rules)、[React Compiler](https://react.dev/learn/react-compiler/introduction)、[React Actions](https://react.dev/reference/react/useActionState)、[`<ViewTransition>`](https://react.dev/reference/react/ViewTransition)、[`<Fragment>` 与 Fragment refs](https://react.dev/reference/react/Fragment)、[`browser`](https://react.dev/reference/react-dom/browser) |
 | Next.js | [Next.js 16](https://nextjs.org/blog/next-16)、[Next.js release blog](https://nextjs.org/blog) | [App Router](https://nextjs.org/docs/app)、[Server and Client Components](https://nextjs.org/docs/app/getting-started/server-and-client-components)、[`use cache`](https://nextjs.org/docs/app/api-reference/directives/use-cache)、[Cache Components](https://nextjs.org/docs/app/getting-started/partial-prerendering)、[Proxy](https://nextjs.org/docs/app/api-reference/file-conventions/proxy) |
 | Vue | [Vue releases](https://github.com/vuejs/core/releases) | [Vue introduction](https://vuejs.org/guide/introduction)、[Composition API FAQ](https://vuejs.org/guide/extras/composition-api-faq)、[Vue with TypeScript](https://vuejs.org/guide/typescript/overview)、[Composables](https://vuejs.org/guide/reusability/composables) |
 | Angular | [Angular releases](https://angular.dev/reference/releases)、[Version compatibility](https://angular.dev/reference/versions) | [Angular overview](https://angular.dev/overview)、[Component anatomy](https://angular.dev/guide/components)、[Signals](https://angular.dev/guide/signals)、[Zoneless](https://angular.dev/guide/zoneless)、[Standalone migration](https://angular.dev/reference/migrations/standalone)、[`resource`](https://angular.dev/guide/signals/resource) |
@@ -195,8 +205,14 @@ JavaScript skill 覆盖 ECMAScript 和 Node.js；TypeScript 单独处理编译�
 | ASP.NET Core | [ASP.NET Core release notes](https://learn.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-10.0?view=aspnetcore-10.0) | [ASP.NET Core docs](https://learn.microsoft.com/en-us/aspnet/core/)、[Minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis)、[Middleware](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware)、[Dependency injection](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection)、[Error handling](https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors) |
 | Django | [Django 6.1 release](https://docs.djangoproject.com/en/6.1/releases/6.1/)、[Django 6.0 release](https://docs.djangoproject.com/en/6.0/releases/6.0/) | [Django documentation](https://docs.djangoproject.com/en/stable/)、[Async support](https://docs.djangoproject.com/en/stable/topics/async/)、[Tasks](https://docs.djangoproject.com/en/stable/topics/tasks/)、[Database optimization](https://docs.djangoproject.com/en/stable/topics/db/optimization/)、[Transactions](https://docs.djangoproject.com/en/stable/topics/db/transactions/)、[Security](https://docs.djangoproject.com/en/stable/topics/security/) |
 | FastAPI | [FastAPI release notes](https://fastapi.tiangolo.com/release-notes/) | [FastAPI documentation](https://fastapi.tiangolo.com/)、[Async](https://fastapi.tiangolo.com/async/)、[Dependencies](https://fastapi.tiangolo.com/tutorial/dependencies/)、[Events](https://fastapi.tiangolo.com/advanced/events/)、[Response models](https://fastapi.tiangolo.com/tutorial/response-model/) |
+| Express | [Express 5 迁移指南](https://expressjs.com/en/guide/migrating-5.html) | [Express 文档](https://expressjs.com/)、[错误处理](https://expressjs.com/en/guide/error-handling.html)、[安全最佳实践](https://expressjs.com/en/advanced/best-practice-security.html) |
+| Flask | [Flask 更新](https://flask.palletsprojects.com/en/stable/changes/) | [Flask 文档](https://flask.palletsprojects.com/en/stable/)、[应用工厂](https://flask.palletsprojects.com/en/stable/patterns/appfactories/)、[测试](https://flask.palletsprojects.com/en/stable/testing/) |
 | Flutter | [Flutter what's new](https://docs.flutter.dev/release/whats-new) | [Architectural overview](https://docs.flutter.dev/resources/architectural-overview)、[App architecture](https://docs.flutter.dev/app-architecture/guide)、[State management](https://docs.flutter.dev/data-and-backend/state-mgmt/intro)、[Performance](https://docs.flutter.dev/perf)、[Accessibility](https://docs.flutter.dev/ui/accessibility-and-internationalization) |
-| SwiftUI | [iOS and iPadOS release notes](https://developer.apple.com/documentation/ios-ipados-release-notes) | [SwiftUI documentation](https://developer.apple.com/documentation/SwiftUI)、[Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines)、[Model data](https://developer.apple.com/documentation/swiftui/model-data)、[NavigationStack](https://developer.apple.com/documentation/swiftui/navigationstack)、[`task`](https://developer.apple.com/documentation/swiftui/task) |
+| Ktor | [Ktor 发布信息](https://ktor.io/docs/releases.html) | [Ktor 服务端文档](https://ktor.io/docs/server-create-and-configure.html)、[插件](https://ktor.io/docs/server-plugins.html)、[测试](https://ktor.io/docs/server-testing.html) |
+| UIKit | [UIKit 更新](https://developer.apple.com/documentation/updates/uikit)、[iOS 和 iPadOS 发布说明](https://developer.apple.com/documentation/ios-ipados-release-notes) | [UIKit 文档](https://developer.apple.com/documentation/uikit)、[UIKit 集成](https://developer.apple.com/documentation/swiftui/uikit-integration)、[Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) |
+| AppKit | [AppKit 更新](https://developer.apple.com/documentation/updates/appkit)、[macOS 发布说明](https://developer.apple.com/documentation/macos-release-notes) | [AppKit 文档](https://developer.apple.com/documentation/appkit)、[AppKit 集成](https://developer.apple.com/documentation/swiftui/appkit-integration)、[Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) |
+| SwiftUI | [SwiftUI 更新](https://developer.apple.com/documentation/updates/swiftui) | [SwiftUI 文档](https://developer.apple.com/documentation/SwiftUI)、[Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines)、[Model data](https://developer.apple.com/documentation/swiftui/model-data)、[NavigationStack](https://developer.apple.com/documentation/swiftui/navigationstack)、[`task`](https://developer.apple.com/documentation/swiftui/task)、[ForEach](https://developer.apple.com/documentation/swiftui/foreach) |
+| SwiftData | [SwiftData 更新](https://developer.apple.com/documentation/updates/swiftdata) | [SwiftData 文档](https://developer.apple.com/documentation/swiftdata)、[ModelContainer](https://developer.apple.com/documentation/swiftdata/modelcontainer)、[ModelContext](https://developer.apple.com/documentation/swiftdata/modelcontext)、[ModelActor](https://developer.apple.com/documentation/swiftdata/modelactor)、[Core Data](https://developer.apple.com/documentation/coredata)、[Schema migration](https://developer.apple.com/documentation/swiftdata/schemamigrationplan) |
 | NestJS | [Migration guide](https://docs.nestjs.com/migration-guide) | [NestJS documentation](https://docs.nestjs.com/)、[Modules](https://docs.nestjs.com/modules)、[Providers](https://docs.nestjs.com/providers)、[Pipes](https://docs.nestjs.com/pipes)、[Guards](https://docs.nestjs.com/guards)、[Interceptors](https://docs.nestjs.com/interceptors)、[Security](https://docs.nestjs.com/security) |
 | Nuxt | [Nuxt releases](https://github.com/nuxt/nuxt/releases) | [Nuxt 4 data fetching](https://nuxt.com/docs/4.x/getting-started/data-fetching)、[Nuxt 4 rendering](https://nuxt.com/docs/4.x/guide/concepts/rendering)、[Nuxt 3 data fetching](https://nuxt.com/docs/3.x/getting-started/data-fetching)、[Server directory](https://nuxt.com/docs/4.x/directory-structure/server)、[Server components](https://nuxt.com/docs/4.x/guide/concepts/server-components)、[Configuration](https://nuxt.com/docs/4.x/getting-started/configuration) |
 | Expo | [Expo SDK versions](https://docs.expo.dev/versions/latest/)、[Upgrade the Expo SDK](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/) | [Workflow overview](https://docs.expo.dev/workflow/overview/)、[Configuration](https://docs.expo.dev/workflow/configuration/)、[Development builds](https://docs.expo.dev/develop/development-builds/introduction/)、[Expo Router](https://docs.expo.dev/router/introduction/)、[EAS Update runtime versions](https://docs.expo.dev/eas-update/runtime-versions/)、[Using libraries](https://docs.expo.dev/workflow/using-libraries/) |

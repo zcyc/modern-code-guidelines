@@ -1,3 +1,0 @@
-interface:
-  display_name: "Modern Kotlin Guidelines"
-  short_description: "Apply Kotlin rules for the declared compiler target"

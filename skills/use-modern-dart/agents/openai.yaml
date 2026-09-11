@@ -1,3 +1,0 @@
-interface:
-  display_name: "Modern Dart Guidelines"
-  short_description: "Apply Dart rules for the declared SDK constraint"

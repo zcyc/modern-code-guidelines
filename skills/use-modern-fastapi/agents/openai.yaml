@@ -1,3 +1,0 @@
-interface:
-  display_name: "Modern FastAPI Guidelines"
-  short_description: "Apply FastAPI rules for the declared project version"
