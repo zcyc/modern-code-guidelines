@@ -1,3 +1,0 @@
-interface:
-  display_name: "Modern Rust Guidelines"
-  short_description: "Apply Rust rules for the declared edition and MSRV"

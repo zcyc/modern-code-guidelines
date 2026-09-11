@@ -20,6 +20,28 @@ do not assume an API is available because the editor autocomplete shows it.
   hidden subtree's state is useful; do not replace ordinary conditional
   rendering with it by default.
 
+## React 19.3+
+
+- Use `<ViewTransition>` for enter, exit, shared-element, or update animations
+  coordinated by React transitions or Suspense. It is currently a DOM-only API;
+  let React coordinate the browser view transition instead of calling
+  `document.startViewTransition` for the same update.
+- Use an explicit `<Fragment ref={...}>` when a group of DOM children needs
+  focus, event, observer, measurement, or scrolling behavior without a wrapper.
+  Its `FragmentInstance` targets first-level host children, and the shorthand
+  `<>...</>` cannot receive the ref.
+- For a component that has no meaningful server-rendered output, prefer
+  `use(browser(reason))` inside a `<Suspense>` boundary over mounted flags or
+  `typeof window` checks. This is a React DOM API; in an RSC app, call it only
+  from a Client Component.
+- When Trusted Types are enforced, pass `TrustedHTML` through
+  `dangerouslySetInnerHTML` without stringifying it, while keeping sanitization
+  in the application's security policy. React's support does not make unsafe
+  HTML safe.
+- In an RSC-capable framework, a Server Component may render a Context imported
+  from a `'use client'` module directly. Keep this within the framework's RSC
+  contract; it does not change how Context works in client-only apps.
+
 ## React 19 actions
 
 - Use `useActionState` and `useOptimistic` when they express an async mutation's
@@ -43,4 +65,8 @@ do not assume an API is available because the editor autocomplete shows it.
 - [React Compiler introduction](https://react.dev/learn/react-compiler/introduction)
 - [React Compiler installation](https://react.dev/learn/react-compiler/installation)
 - [React Actions](https://react.dev/reference/react/useActionState)
-- [React 19.2](https://react.dev/blog/2025/10/01/react-19-2)
+- [React 19.3](https://react.dev/blog/2026/09/09/react-19-3)
+- [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition)
+- [`<Fragment>` and Fragment refs](https://react.dev/reference/react/Fragment)
+- [`browser`](https://react.dev/reference/react-dom/browser)
+- [React DOM common components and Trusted Types](https://react.dev/reference/react-dom/components/common)

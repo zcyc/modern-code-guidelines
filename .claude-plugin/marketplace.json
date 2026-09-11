@@ -3,17 +3,17 @@
   "owner": {
     "name": "Local developer"
   },
-  "description": "Version-aware coding, database, framework, and secure-coding guidance for sixteen language and nineteen framework skills.",
+  "description": "Version-aware coding, database, framework, and secure-coding guidance for seventeen language and twenty-five framework skills.",
   "plugins": [
     {
       "name": "modern-code-guidelines",
       "source": "./",
-      "description": "Version-aware coding, database, framework, and secure-coding guidance for sixteen language and nineteen framework skills from one canonical Agent Skills source.",
-      "version": "0.9.0",
+      "description": "Version-aware coding, database, framework, and secure-coding guidance for seventeen language and twenty-five framework skills from one canonical Agent Skills source.",
+      "version": "0.11.0",
       "author": {
         "name": "Local developer"
       },
-      "keywords": ["java", "javascript", "typescript", "python", "csharp", "go", "rust", "scala", "cpp", "swift", "kotlin", "dart", "php", "ruby", "c", "sql", "react", "nextjs", "vue", "angular", "spring-boot", "aspnet-core", "django", "fastapi", "flutter", "swiftui", "nestjs", "nuxt", "expo", "react-native", "sveltekit", "astro", "jetpack-compose", "laravel", "rails", "modern-code-guidelines"]
+      "keywords": ["java", "javascript", "typescript", "python", "csharp", "go", "rust", "scala", "cpp", "swift", "kotlin", "dart", "php", "ruby", "c", "sql", "shell", "react", "nextjs", "vue", "angular", "spring-boot", "aspnet-core", "django", "fastapi", "express", "flask", "flutter", "ktor", "uikit", "appkit", "swiftui", "swiftdata", "nestjs", "nuxt", "expo", "react-native", "sveltekit", "astro", "jetpack-compose", "laravel", "rails", "modern-code-guidelines"]
     }
   ]
 }

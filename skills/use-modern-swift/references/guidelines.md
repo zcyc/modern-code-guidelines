@@ -22,6 +22,19 @@ is unavailable.
 - Keep `@MainActor` for UI/main-thread ownership, not as a blanket workaround for
   concurrency diagnostics.
 
+## Testing
+
+- Resolve the test target's Swift language mode, Xcode version, and deployment
+  target separately from the app target.
+- Prefer Swift Testing (`Testing`) for new unit and integration tests when the
+  target supports it. Swift Testing was introduced with Swift 6 and Xcode 16;
+  verify the declared toolchain instead of assuming availability.
+- Keep XCTest for UI automation, performance tests, and existing XCTest suites.
+  XCTest and Swift Testing can coexist in one test bundle, so migrate only when
+  the change improves the test rather than adding a compatibility wrapper.
+- Make asynchronous tests cancellation-aware and keep test inputs deterministic;
+  do not hide isolation errors with unchecked sendability.
+
 ## Swift 5.9+
 
 - Use macros, parameter packs, and other newer features only when the target and
@@ -56,5 +69,7 @@ is unavailable.
 - [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)
 - [Swift 6.3 release](https://www.swift.org/blog/swift-6.3-released/)
 - [The Swift Programming Language: Concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)
+- [Swift Testing](https://developer.apple.com/documentation/testing)
+- [XCTest](https://developer.apple.com/documentation/xctest)
 - [Swift 6 migration: data-race safety](https://www.swift.org/migration/documentation/swift-6-concurrency-migration-guide/dataracesafety/)
 - [Swift Evolution](https://www.swift.org/swift-evolution/)

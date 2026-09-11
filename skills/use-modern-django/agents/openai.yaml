@@ -1,3 +1,0 @@
-interface:
-  display_name: "Modern Django Guidelines"
-  short_description: "Apply Django rules for the declared project version"

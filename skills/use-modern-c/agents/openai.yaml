@@ -1,3 +1,0 @@
-interface:
-  display_name: "Modern C Guidelines"
-  short_description: "Apply C rules for the declared compiler standard"
