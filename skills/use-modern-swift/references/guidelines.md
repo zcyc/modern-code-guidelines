@@ -32,6 +32,8 @@ is unavailable.
 - Keep XCTest for UI automation, performance tests, and existing XCTest suites.
   XCTest and Swift Testing can coexist in one test bundle, so migrate only when
   the change improves the test rather than adding a compatibility wrapper.
+- Swift 6.4 permits `XCTAssert` in Swift Testing tests and `#expect` in XCTest
+  tests; use this for incremental migration instead of adding assertion wrappers.
 - Make asynchronous tests cancellation-aware and keep test inputs deterministic;
   do not hide isolation errors with unchecked sendability.
 
@@ -61,13 +63,19 @@ is unavailable.
   reviewed like a public API.
 - Use module selectors only to resolve a real import-name collision; do not use
   them to hide ambiguous module ownership.
-- Treat Swift Build integration and other 6.3 preview tooling as opt-in; keep
-  production builds on the repository's declared build system.
+
+## Swift 6.4+
+
+- Swift Package Manager uses Swift Build by default; verify custom build plugins,
+  CI caches, and toolchain selection against the declared Swift 6.4 toolchain.
+- Use asynchronous `defer` and `withTaskCancellationShield` when cleanup must
+  await and complete despite task cancellation; keep cancellation semantics
+  explicit.
 
 ## Authority
 
 - [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)
-- [Swift 6.3 release](https://www.swift.org/blog/swift-6.3-released/)
+- [Swift 6.4 release](https://www.swift.org/blog/swift-6.4-released/)
 - [The Swift Programming Language: Concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)
 - [Swift Testing](https://developer.apple.com/documentation/testing)
 - [XCTest](https://developer.apple.com/documentation/xctest)
