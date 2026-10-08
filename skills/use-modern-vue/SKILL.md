@@ -1,33 +1,16 @@
 ---
 name: use-modern-vue
-description: "Use version-aware Vue component, reactivity, Composition API, and TypeScript idioms when writing, modifying, fixing, or reviewing Vue code."
+description: "Use when writing or reviewing code involving Vue components, reactivity, Composition API, and SFC compiler macros."
 ---
 
-# Modern Vue
+# Vue
 
-Use for core Vue and single-file components. For Nuxt-specific server routing
-and deployment behavior, follow the project's Nuxt configuration and docs
-separately. Use `use-modern-typescript` for TypeScript rules and
-`modern-web-guidance` for browser, CSS, accessibility, and performance rules.
+Resolve the changed file's target from package.json/lockfile, Vue/compiler/build-tool versions, Vue 2 vs 3, SFC vs wrapper and Options vs Composition API.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read the nearest `package.json`, lockfile, Vite/build configuration, and Vue
-version. Establish whether the file is a Vue 3 SFC, a legacy Vue 2 module, or
-part of a framework wrapper before changing its API style.
+Use use-modern-javascript for runtime and use-modern-typescript for TS; use-modern-nuxt owns Nuxt server/routing/deployment rules.
 
-## Working rules
+For browser APIs/CSS/accessibility/performance, consult official browser docs or the separately installed modern-web-guidance.
 
-- For new Vue 3 application code, prefer Composition API with `<script setup>`;
-  preserve Options API in existing code unless migration is requested.
-- Use `computed` for derived state and `watch`/`watchEffect` for synchronization
-  with external systems. Clean up watchers and async work when their scope ends.
-- Preserve reactivity: do not destructure reactive objects casually, mutate
-  readonly props, or create duplicate local state that mirrors a prop.
-- Declare component props and emitted events explicitly. Keep runtime validation
-  and TypeScript contracts aligned at trust boundaries.
-- Keep templates and setup code free of unrelated side effects; move reusable
-  stateful logic into composables when it has a real second consumer.
-
-Read [references/guidelines.md](references/guidelines.md) before using
-version-sensitive macros or reactivity APIs.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

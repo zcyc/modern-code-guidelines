@@ -1,37 +1,12 @@
 ---
 name: use-modern-php
-description: Use version-aware PHP language, type-system, standard-library, and secure database idioms when writing, modifying, fixing, or reviewing PHP code.
+description: "Use when writing or reviewing code involving PHP language versions, typing, standard APIs, and database safety."
 ---
 
-# Modern PHP
+# PHP
 
-Apply stable PHP features supported by the package's declared runtime. Read
-`references/guidelines.md` before using version-gated syntax or functions.
+Resolve the changed file's target from composer.json require.php/config.platform.php, lockfile, .php-version, php.ini extensions, selected container/CI and framework constraints. Composer platform emulation is not proof of deployed PHP.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read the effective target from:
-
-1. `composer.json` `require.php` and `config.platform.php`.
-2. `.php-version`, `php.ini`, container, and CI declarations selected by the
-   package.
-3. The framework/runtime target when it constrains available APIs.
-
-If the target is unknown, report it and avoid version-gated features. Do not infer
-the target from the local PHP binary. Keep the package's autoloading and public API
-contract intact.
-
-## Working rules
-
-- Use strict scalar/return/property types and validate untrusted input at the
-  boundary; `declare(strict_types=1)` follows the repository's established policy.
-- Prefer enums, readonly data, constructor property promotion, `match`, nullsafe
-  access, and attributes when the target supports them and they clarify the model.
-- Use `DateTimeImmutable`, `random_int`, standard exceptions, and standard library
-  functions instead of hand-written equivalents.
-- Use Composer autoloading and the project's PSR-12/static-analysis configuration;
-  do not introduce a second coding standard for a local edit.
-- Use prepared statements/parameter binding for database values. Never construct
-  SQL by interpolating untrusted input.
-- Keep error handling explicit and never suppress warnings or expose internal
-  exceptions through a public response boundary.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

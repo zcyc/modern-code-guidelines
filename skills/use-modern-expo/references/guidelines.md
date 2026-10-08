@@ -1,32 +1,18 @@
-# Expo version rules
+# Expo
 
-Resolve Expo SDK, React Native, React, Node.js, app config, and EAS targets from
-the repository. SDK modules, native projects, and OTA updates have different
-compatibility contracts.
+## Build boundary
 
-## Native boundary
-
-- JavaScript-only changes can use the existing development client. A native
-  module, permission, config-plugin, or native-project change needs a new
-  development or production build.
-- Treat prebuild output as generated when the project uses Continuous Native
-  Generation; make durable native changes through app config or config plugins.
-- Inspect the native diff after prebuild or plugin changes and test each target
-  platform affected.
-- Treat the SDK's React Native version and native build tooling as one tested
-  compatibility line. A package can be JavaScript-compatible yet still require
-  a native rebuild or a newer development client.
+- Expo SDK pins a tested React Native/module/toolchain combination; use expo install and compatibility checks instead of arbitrary package versions.
+- JS-only changes can reuse a compatible development client. Native modules, permissions, config plugins and native edits need a new binary; inspect native diffs and test affected platforms.
+- With Continuous Native Generation, prebuild output is generated; durable edits belong in app config/plugins. Preserve directly maintained native projects when CNG is not used.
 
 ## Configuration and updates
 
-- app.json/app.config.* contributes to builds and public runtime configuration;
-  never place secrets in it.
-- Keep runtimeVersion and update channels aligned with the native binary. Do not
-  publish an OTA update that requires a native API absent from that binary.
-- Use Expo Router only when installed and configured by the project; preserve
-  its deep-link and file-based route contract.
+- app.json/app.config.* values shipped in builds/updates are public; use server-side secret storage for secrets. Native build-only secret inputs must not enter embedded config.
+- runtimeVersion expresses binary compatibility; channels/branches select updates. Publish only to binaries providing all required native APIs.
+- Router applies only when configured; preserve navigation/deep-link contracts. Handle permission denial, lifecycle and missing APIs per Android/iOS/web target.
 
-## Authority
+## Sources
 
 - https://docs.expo.dev/workflow/overview/
 - https://docs.expo.dev/workflow/configuration/

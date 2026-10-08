@@ -1,34 +1,18 @@
-# SvelteKit version rules
+# Svelte and SvelteKit
 
-Resolve Svelte, SvelteKit, Vite, adapter, Node.js, and deployment targets from
-the repository. Svelte 5 runes and SvelteKit's newer state APIs are not drop-in
-syntax for legacy components.
+## Core Svelte
 
-## Svelte 5 gate
+- Svelte 5 runes: $state owns state, $derived computes values, $effect synchronizes external systems with cleanup. Preserve legacy component mode unless intentionally migrating; legacy $: cannot be mixed into runes mode.
+- Standalone Svelte uses the selected bundler/runtime; SvelteKit file routes, load and $app modules are unavailable there.
 
-- Runes and `$app/state` require the Svelte 5/SvelteKit target that exposes
-  them. Keep legacy store-based code on `$app/stores` unless the change is an
-  intentional migration of that component or route.
+## SvelteKit only
 
-## Components and page state
+- $app/state requires SvelteKit 2.12+ and Svelte 5; reactive reads need runes. Keep legacy $app/stores until that component's migration is intentional.
+- load/event.fetch preserve SSR cookies, dependency tracking and invalidation. Private reads belong in +page.server/+layout.server; endpoints in +server and request auth/locals in hooks.server. Universal modules must not import credentials/private clients.
+- Form actions are server POST mutations; validate and authorize per operation, and use use:enhance only for progressive enhancement. Client fetch fits non-form interactions.
+- Match prerender/SSR/CSR and adapter to deployment; Node APIs need a Node-capable runtime. Avoid module-global request/user state during SSR.
 
-- Use `$state`, `$derived`, and `$effect` in rune-mode components. Keep `$effect`
-  for synchronization with external systems, not for copying derived values.
-- In Svelte 5 applications, `$app/state` exposes reactive page and navigation
-  state; derive values with runes. `$app/stores` is the older store-based path.
-
-## Server data and mutations
-
-- Use `load` for route data and `+page.server`/`+layout.server` for server-only
-  reads. Use `event.fetch` so cookies, SSR requests, and invalidation behave as
-  SvelteKit expects.
-- Form actions provide a native POST path that works without JavaScript. Add
-  `use:enhance` when client-side progressive enhancement is useful, not as a
-  substitute for server validation.
-- Keep credentials and private clients out of universal modules and browser
-  bundles. Use `hooks.server` for request-level auth and locals.
-
-## Authority
+## Sources
 
 - https://svelte.dev/docs/svelte/what-are-runes
 - https://svelte.dev/docs/kit/load

@@ -1,48 +1,19 @@
-# React Native version rules
+# React Native
 
-Resolve React Native, React, Node.js, Hermes, Metro, Android, iOS, and native
-library versions from the repository. React Native compatibility is a matrix,
-not a single package version.
+## Gates
 
-## Architecture gates
+- New Architecture defaults on in 0.76; inspect opt-out/library support on older targets. 0.82+ requires it.
+- 0.84+ defaults to Hermes V1; check worklets/animation/native libraries when changing engine or upgrading.
+- 0.87+ defaults to Strict TypeScript API and requires Node 22, AGP 9 and Kotlin 2.0+. SwiftPM support remains experimental until the native build explicitly supports it.
 
-- The New Architecture is enabled by default from React Native 0.76. Resolve
-  the target's opt-in or opt-out state before assuming Fabric, TurboModules, or
-  Codegen are available.
-- React Native 0.82 and later run only on the New Architecture. For older
-  targets, verify native library compatibility before adding a new-architecture
-  dependency or module.
+## Native and UI boundaries
 
-## Runtime and toolchain gates
+- Use supported Fabric/TurboModule/Codegen contracts for new native work; expose narrow typed APIs and explicit platform failure/absence.
+- Native dependencies, Podfile/Gradle, permissions, codegen or lifecycle changes require native rebuilds and affected-platform tests. JS reload does not verify a binary.
+- Core platform components and established navigation/data libraries preserve native behavior; virtualize large lists with stable domain keys and measure frames/memory/startup before memoization/native optimization.
+- Test accessibility, safe areas, keyboard, permission denial, backgrounding and deep links on each target. React render/effect rules still apply in Expo.
 
-- React Native 0.84 and later use Hermes V1 by default and remove more legacy
-  architecture components. Check worklets, animation libraries, and native
-  dependencies before changing the engine or upgrade line.
-- React Native 0.87 and later make the Strict TypeScript API the default and
-  require Node 22, AGP 9, and Kotlin 2.0 or later. Treat Swift Package Manager
-  support as experimental until the project's native build supports it.
-
-## Architecture and native boundary
-
-- Treat the New Architecture as the baseline for new code. Custom native
-  modules and components should use the supported TurboModule/Fabric and Codegen
-  paths instead of inventing a new bridge protocol.
-- A JavaScript-only change and a native change have different verification
-  paths. Rebuild after native dependencies, permissions, generated code, Podfile,
-  Gradle, or app lifecycle changes.
-- Keep native APIs narrow and typed, and surface platform failure or absence as
-  an explicit result rather than assuming both platforms behave identically.
-
-## UI and performance
-
-- Keep components pure and use React's state/effect rules. Prefer core platform
-  components and the project's established navigation/data libraries.
-- Virtualize large collections, use stable keys, and measure before changing
-  rendering strategy or adding memoization.
-- Test accessibility, safe areas, keyboard behavior, permissions, backgrounding,
-  and deep links on each supported platform.
-
-## Authority
+## Sources
 
 - https://reactnative.dev/releases/overview
 - https://reactnative.dev/blog/2026/08/11/react-native-0.87

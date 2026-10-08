@@ -1,34 +1,14 @@
 ---
 name: use-modern-dart
-description: Use version-aware Dart language, sound-null-safety, standard-library, and analyzer idioms when writing, modifying, fixing, or reviewing Dart code.
+description: "Use when writing or reviewing code involving Dart language features, null safety, async, and analyzer rules."
 ---
 
-# Modern Dart
+# Dart
 
-Apply stable Dart features supported by the package's SDK constraint. Read
-`references/guidelines.md` before using language-version-gated features.
+Resolve the changed file's target from package pubspec.yaml environment.sdk, workspace overrides, analysis_options.yaml, checked-in Dart/Flutter SDK and platform targets.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read the effective target from:
+Account for per-file // @dart language-version overrides.
 
-1. `pubspec.yaml` `environment: sdk` for the package containing the file.
-2. Workspace/package overrides and `analysis_options.yaml`.
-3. The selected Dart/Flutter SDK in checked-in toolchain or CI configuration.
-
-The SDK constraint controls language features; Flutter and platform versions also
-control available APIs. If the target is unknown, report it and avoid gated
-features. Do not infer it from the local SDK.
-
-## Working rules
-
-- Run the repository's `dart format` and `dart analyze` configuration.
-- Keep sound null safety intact; model absence with nullable types and promotion,
-  not unchecked `!` or `late` state.
-- Prefer `final`, `const`, typed collection literals, and immutable values where
-  mutation is not part of the model.
-- Use `async`/`await`, `Future`, and `Stream` with explicit error and cancellation
-  behavior; do not hide long-lived work in unowned callbacks.
-- Avoid `dynamic` at boundaries; validate and narrow untrusted values.
-- Follow Effective Dart naming, documentation, usage, and design guidance for
-  public libraries; let the analyzer enforce the configured subset.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

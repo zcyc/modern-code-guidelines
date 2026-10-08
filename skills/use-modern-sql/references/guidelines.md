@@ -1,46 +1,20 @@
-# SQL dialect rules
+# SQL
 
-Use these rules after resolving the database engine/version and the project's
-formatter configuration. Portable SQL and vendor extensions must stay visibly
-separate.
+## Dialect and trust boundaries
 
-## SQL:2023+
+- SQL:2023 is a reference, not an engine capability guarantee. Check vendor/version support for JSON, temporal, graph and routine features; document intentional dialect dependence.
+- Bind values; allow-list/quote dynamic identifiers with driver APIs. Types/ORM-generated SQL do not remove injection boundaries.
+- Use explicit columns/joins/aliases and qualified ambiguous names. NULL uses three-valued logic: use IS NULL/IS NOT NULL and deliberate COALESCE/NULLIF semantics.
+- Order contractual results explicitly; pagination needs a deterministic tie-breaker, not ORDER BY on a non-unique field alone.
 
-- Treat SQL:2023 as the portable reference point, not as a promise that a
-  database implements every feature. Resolve the actual engine/version before
-  using JSON, temporal, graph, routine, or other optional feature areas.
-- Keep standard SQL separate from vendor extensions in migrations and queries;
-  document the required dialect when portability is not the goal.
+## Data and plans
 
-## Portable SQL
+- Enforce invariants with constraints/foreign keys and transactions; application checks alone cannot protect concurrent writes.
+- Keep deployed migrations as history. Review destructive changes, locks, rewrites and backfills at production scale; use transactions/reversibility where the engine/deployment permits.
+- CTEs name meaningful stages; window/set operations can replace application loops. Avoid SELECT * in stable consumer contracts.
+- Use representative EXPLAIN plans before performance claims/index additions; follow the configured SQLFluff/equivalent dialect and style.
 
-- Use bound parameters for values and allow-list/quote identifiers through the
-  driver's identifier API when dynamic identifiers are unavoidable.
-- Prefer explicit select lists, qualified columns, explicit `JOIN ... ON`, and
-  deterministic `ORDER BY` clauses.
-- Preserve null semantics: use `IS NULL`, `IS NOT NULL`, `COALESCE`, and `NULLIF`
-  only when their exact missing-value behavior is intended.
-- Use constraints for invariants that the database can enforce; validate complex
-  business rules in the owning application/service as well.
-- Keep migrations transactional where the engine supports it and document locking,
-  table-rewrite, and backfill costs for production-sized tables.
-
-## Query structure
-
-- Use CTEs to name meaningful stages, not to wrap a single expression for style.
-- Use window functions for per-row aggregates/ranking instead of correlated loops
-  in application code when the database can express the relation directly.
-- Avoid `SELECT *` in stable application/report contracts; it couples consumers to
-  schema drift. Exploratory queries are a separate case.
-- Add `ORDER BY` before limiting or paginating; row order without it is undefined.
-
-## Tooling
-
-- Use SQLFluff or the repository's equivalent with the configured dialect.
-- Use `EXPLAIN`/execution plans and representative data before making a performance
-  claim or adding an index.
-
-## Authority
+## Sources
 
 - [SQLFluff rules reference](https://docs.sqlfluff.com/en/stable/reference/rules.html)
 - [ISO/IEC 9075:2023 SQL standard](https://www.iso.org/standard/76583.html)

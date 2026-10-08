@@ -1,64 +1,25 @@
-# React version rules
+# React
 
-Read the project's declared React and build-tool versions before applying these
-rules. React documentation separates the selected major from archived majors;
-do not assume an API is available because the editor autocomplete shows it.
+## Components and state
 
-## React 19+
+- Keep render pure and Hooks order stable; effects synchronize external systems with cleanup, not derivable state. use is a resource-reading API that may appear in conditionals/loops, but not try/catch.
+- Use domain keys for reorderable collections. Keep client state, remote data and external-store subscriptions as distinct sources of truth.
+- Actions/useActionState/useOptimistic model mutations when the renderer supports them; client forms and server actions have different execution/security contracts.
 
-- Treat render purity as a correctness requirement; it is also required for
-  compiler optimization.
-- Prefer React primitives supported by the project's renderer and
-  framework. Do not mix server-component conventions into a client-only app.
+## Gates
 
-## React 19.2+
+- React 19: Actions APIs; RSC behavior requires an RSC-capable framework, not just the React package.
+- 19.2: useEffectEvent reads latest non-reactive values without hiding real dependencies; Activity preserves hidden state only on supporting renderers.
+- 19.3 DOM: ViewTransition coordinates transition/Suspense animations; do not start a second browser transition for the same update. Explicit Fragment refs expose first-level host-child focus/events/observers/measurement/scrolling; shorthand fragments cannot receive refs.
+- 19.3 DOM: use(browser(reason)) inside Suspense models components without useful SSR output; RSC apps call it in Client Components. Preserve TrustedHTML for dangerouslySetInnerHTML under Trusted Types; application sanitization still owns safety.
+- 19.3 RSC: Server Components may render a Context imported from a client module; this does not enable reading client Context in Server Components.
 
-- Use `useEffectEvent` when an effect needs the latest non-reactive value without
-  making that value an effect trigger. It does not make an effect safe to omit
-  real dependencies.
-- Use `Activity` only when the target renderer supports it and preserving the
-  hidden subtree's state is useful; do not replace ordinary conditional
-  rendering with it by default.
+## Compiler
 
-## React 19.3+
+- Run compiler before source-changing Babel transforms. With compiler enabled, new manual memoization needs measured benefit or an identity contract; retain existing memoization until behavior/compiled output is checked.
+- Compiler opt-outs require documented incompatibility; ordinary derivation belongs in render, useMemo only when cost/identity justifies it.
 
-- Use `<ViewTransition>` for enter, exit, shared-element, or update animations
-  coordinated by React transitions or Suspense. It is currently a DOM-only API;
-  let React coordinate the browser view transition instead of calling
-  `document.startViewTransition` for the same update.
-- Use an explicit `<Fragment ref={...}>` when a group of DOM children needs
-  focus, event, observer, measurement, or scrolling behavior without a wrapper.
-  Its `FragmentInstance` targets first-level host children, and the shorthand
-  `<>...</>` cannot receive the ref.
-- For a component that has no meaningful server-rendered output, prefer
-  `use(browser(reason))` inside a `<Suspense>` boundary over mounted flags or
-  `typeof window` checks. This is a React DOM API; in an RSC app, call it only
-  from a Client Component.
-- When Trusted Types are enforced, pass `TrustedHTML` through
-  `dangerouslySetInnerHTML` without stringifying it, while keeping sanitization
-  in the application's security policy. React's support does not make unsafe
-  HTML safe.
-- In an RSC-capable framework, a Server Component may render a Context imported
-  from a `'use client'` module directly. Keep this within the framework's RSC
-  contract; it does not change how Context works in client-only apps.
-
-## React 19 actions
-
-- Use `useActionState` and `useOptimistic` when they express an async mutation's
-  pending, error, or optimistic state. Keep server actions and client-only form
-  flows within the renderer and framework contract that the project actually
-  uses.
-
-## React Compiler
-
-- If the project enables the compiler, rely on compiler memoization for new code
-  and use `useMemo`, `useCallback`, or `memo` only for a measured need or an
-  explicit identity contract.
-- Keep existing manual memoization until the compiled output and behavior have
-  been tested. Use compiler opt-out directives only for a documented incompatibility.
-- The compiler must run before other Babel transforms that change the source it analyzes.
-
-## Authority
+## Sources
 
 - [React versions](https://react.dev/versions)
 - [Rules of React](https://react.dev/reference/rules)

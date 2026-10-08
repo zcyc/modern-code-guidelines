@@ -1,35 +1,14 @@
 ---
 name: use-modern-uikit
-description: "Use version-aware UIKit view, controller, lifecycle, concurrency, accessibility, and SwiftUI interop idioms when writing, modifying, fixing, or reviewing UIKit code."
+description: "Use when writing or reviewing code involving UIKit scenes, controllers, collections, and SwiftUI integration."
 ---
 
-# Modern UIKit
+# UIKit
 
-Use for UIKit applications and UIKit code embedded in SwiftUI. Pair with
-`use-modern-swift` for language, concurrency, and API-availability rules.
+Resolve the changed file's target from Xcode/Swift, SDK, deployment/target settings, scenes, Mac Catalyst, restoration, Objective-C and SwiftUI interop.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read the Xcode and Swift toolchain, SDK, deployment target, and target settings.
-Establish whether the code uses the scene-based lifecycle, Mac Catalyst,
-Objective-C interop, or SwiftUI representables before using newer APIs.
+Use use-modern-swift for language/concurrency; use-modern-swiftui for embedded SwiftUI.
 
-
-## Working rules
-
-- Keep UI work on the main actor/main thread required by the API, and isolate
-  shared model state separately from view-controller lifecycle state.
-- Use the scene-based lifecycle for targets that support or require it; keep
-  app-wide responsibilities in the app delegate and scene responsibilities in
-  scene delegates or scene configuration.
-- Keep view controllers focused on lifecycle and view coordination. Use stable
-  domain identity with diffable data sources when collection contents change.
-- Prefer Auto Layout, safe areas, trait environments, Dynamic Type, localization,
-  and accessibility APIs over fixed device assumptions.
-- Treat `UIViewRepresentable` and `UIViewControllerRepresentable` as lifecycle
-  boundaries: forward updates, coordinate ownership, and release resources.
-- Make deployment checks explicit for newer UIKit APIs and keep platform-specific
-  code at the UIKit boundary.
-
-Read `references/guidelines.md` for lifecycle, concurrency, SwiftUI interop, and
-availability rules.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

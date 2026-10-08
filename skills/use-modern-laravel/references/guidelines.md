@@ -1,47 +1,19 @@
-# Laravel version rules
+# Laravel
 
-Resolve PHP, Laravel, Composer dependencies, database, queue backend, and
-frontend stack from composer.lock and the project configuration. Laravel's
-bootstrap and starter-kit conventions change across major versions.
+## Structure gates
 
-## Application-structure gate
+- New Laravel 11+ apps configure routing/middleware/exceptions in bootstrap/app.php and providers in bootstrap/providers.php; existing apps may retain older kernels/handlers. Follow actual structure.
+- Laravel 13 requires PHP 8.3+; verify PHP/framework/packages together.
 
-- Laravel 11 and later configure high-level routing, middleware, exceptions,
-  and providers through `bootstrap/app.php` and `bootstrap/providers.php` in a
-  new application. Do not copy older `app/Http/Kernel.php`, exception-handler,
-  or provider-registration instructions into that structure.
-- Laravel 13 requires PHP 8.3 or later. Resolve the PHP target with Laravel
-  before using its new framework APIs or attributes.
-- Existing applications may retain the older layout. Follow the files present
-  in the repository rather than migrating structure as part of an unrelated
-  feature.
+## Boundaries and persistence
 
-## Application boundaries
+- Routes/controllers orchestrate HTTP; Form Requests validate and policies/gates authorize. Actions/services need independent complexity/reuse.
+- Model validation does not replace database constraints/foreign keys/unique indexes. Inspect loading/query count and eager-load only needed relationships.
+- Append deployed migrations; use transactions for multi-step invariants. Queue jobs use stable IDs/idempotency and dispatch after commit when dependent on committed data.
+- Read env only in configuration and use resolved config at runtime. Do not expose private settings through frontend builds/Inertia/Livewire.
+- Preserve Blade/Livewire/Inertia/API architecture; starter kits do not supply application-specific authorization automatically.
 
-- Use named routes, middleware, Form Requests, policies, and gates where they
-  match the application's established boundary model.
-- Eloquent model validation does not replace database constraints. Use indexes,
-  foreign keys, and unique constraints for invariants the database must protect.
-- Keep env reads in configuration and use the resolved config at runtime. Do not
-  expose private config through Inertia, Livewire, or frontend build variables.
-
-## Persistence and jobs
-
-- Inspect relationship loading and query count; eager-load only the relationships
-  needed for the response and avoid serializing an accidental graph.
-- Migrations are deployed schema history. Add new migrations instead of
-  rewriting migrations that may already have run.
-- Queue jobs that are safe to retry, pass stable identifiers, and dispatch after
-  commit when they depend on newly committed database state.
-
-## Frontend choices
-
-- Preserve the project's Blade, Livewire, Inertia, or API architecture. Do not
-  add a second frontend stack for a single screen.
-- Use official starter-kit patterns only when the project has chosen that stack;
-  generated authentication code still needs project-specific authorization review.
-
-## Authority
+## Sources
 
 - https://laravel.com/framework/docs/releases
 - https://laravel.com/docs

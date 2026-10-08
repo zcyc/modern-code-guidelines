@@ -1,82 +1,26 @@
-# JavaScript version rules
+# JavaScript runtime
 
-Use these rules after resolving the project's explicit ECMAScript/Node target. The
-ECMAScript version describes language and built-ins; the host runtime still determines
-whether an API is available.
+## ECMAScript gates
 
-## ECMAScript 2015+
+- 2015: const/let, modules, destructuring/defaults/templates, Promise/iterables and Map/Set. Classes need an identity/behavior reason.
+- 2017: async/await, Object.entries/values.
+- 2019: flat/flatMap and optional catch binding; arbitrary values do not necessarily JSON-round-trip.
+- 2020: optional chaining/?? (absence differs from falsiness), globalThis, dynamic import and Promise.allSettled when every outcome matters; Promise.all fails as a group.
+- 2021: logical assignment with deliberate truthiness, replaceAll, Promise.any and numeric separators.
+- 2022: fields/private fields, top-level await, at, Object.hasOwn and Error causes for causal rethrows.
+- 2023: findLast/findLastIndex and copying toSorted/toReversed/toSpliced/with; copying changes allocation/mutation contracts.
+- 2024: Object/Map.groupBy, Promise.withResolvers, resizable buffers and RegExp v sets.
+- 2025: iterator helpers, Set composition, RegExp.escape, JSON import attributes, Promise.try and Float16Array.
+- 2026: Error.isError for cross-realm errors, Uint8Array base64/hex codecs, Map getOrInsert and Math.sumPrecise. Keep stricter codec validation and measured numeric hot paths explicit.
 
-- Use `const`/`let`, modules, classes only where they improve the model, destructuring, default parameters, template literals, promises, and iterables.
-- Prefer `for...of` for iterable values and avoid index loops when the index is not part of the logic.
-- Use `Map`/`Set` when keys or membership are the actual data model.
+## Host and module boundaries
 
-## ECMAScript 2017+
+- ECMAScript editions do not guarantee runtime support; check the declared Node/browser engine for each API. TypeScript lib declarations and transpiled syntax do not polyfill built-ins.
+- Resolve ESM/CommonJS through package type, extensions and exports; preserve existing contracts instead of mixing require/import to bypass an unresolved boundary.
+- Own async errors and cancellation (AbortSignal where supported). Prefer standard APIs to small utility dependencies.
+- Production Node defaults to Active/Maintenance LTS; Current requires an explicit project decision. Node built-ins and browser APIs are separate host surfaces.
 
-- Prefer `async`/`await` for sequential asynchronous control flow.
-- Use `Object.entries`/`Object.values` when iterating object data rather than maintaining parallel key/value logic.
-
-## ECMAScript 2019+
-
-- Use `Array.prototype.flat`/`flatMap` and optional catch bindings where they make intent direct.
-- Keep JSON serialization boundaries explicit; do not assume arbitrary values round-trip through JSON.
-
-## ECMAScript 2020+
-
-- Use optional chaining and nullish coalescing when absence and falsiness have distinct meanings.
-- Use `globalThis` for cross-host global access and dynamic `import()` for intentional lazy module loading.
-- Use `Promise.allSettled` when all outcomes matter; use `Promise.all` when one failure should fail the operation.
-
-## ECMAScript 2021+
-
-- Use logical assignment (`||=`, `&&=`, `??=`) only when its truthiness semantics are obvious.
-- Use `replaceAll`, `Promise.any`, and numeric separators where they improve clarity.
-
-## ECMAScript 2022+
-
-- Use class fields/private fields, top-level `await`, `Array.prototype.at`, `Object.hasOwn`, and `Error` causes when the runtime target supports them.
-- Prefer error causes (`new Error(message, { cause })`) when rethrowing across an abstraction boundary.
-
-## ECMAScript 2023+
-
-- Use `findLast`/`findLastIndex` and copying array methods (`toSorted`, `toReversed`, `toSpliced`, `with`) when mutation is not intended.
-- Do not replace a mutating operation with a copying operation in a hot path without checking the allocation cost.
-
-## ECMAScript 2024+
-
-- Use `Object.groupBy`/`Map.groupBy`, `Promise.withResolvers`, and resizable buffers only when the declared runtime supports them.
-- Use `RegExp` set notation and the `v` flag only when the target explicitly includes it; do not assume browser parity from Node support.
-
-## ECMAScript 2025+
-
-- Use the Iterator helpers and Set composition methods instead of hand-written iterator/set plumbing.
-- Use `RegExp.escape` for dynamic literal text in regular expressions.
-- Use JSON module import attributes only with an explicit ESM/runtime target that supports them.
-- Use `Promise.try` and `Float16Array` only when the runtime target guarantees them.
-
-## ECMAScript 2026+
-
-- Use `Error.isError` for cross-realm checks of unknown thrown values; do not use
-  `instanceof Error` when values can cross a worker, VM, or iframe boundary.
-- Use `Uint8Array` base64/hex conversion methods and `Map.getOrInsert` when they
-  match the data contract; keep explicit codecs when their validation policy is
-  stricter than the built-in API.
-- Use `Math.sumPrecise` for numerically sensitive summation of an iterable; do not
-  replace a performance-critical reduction without measuring the cost.
-
-## Node.js support policy
-
-- Prefer Active or Maintenance LTS releases for production; pin the runtime in
-  project metadata and CI rather than relying on the local Node installation.
-- Treat Current releases as an opt-in target; use their newer built-in APIs only
-  when the package explicitly declares that line and its support window.
-
-## Node.js module boundary
-
-- Make the package module system explicit with `package.json` `type`, `.mjs`, or `.cjs`.
-- Do not mix `require` and `import` in a new module to hide an unresolved package-boundary problem.
-- Treat Node built-ins and browser Web APIs as separate host surfaces; validate the one the project actually runs on.
-
-## Authority
+## Sources
 
 - [ECMAScript 2026 specification](https://tc39.es/ecma262/2026/multipage/)
 - [Node.js ECMAScript modules](https://nodejs.org/dist/latest/docs/api/esm.html)

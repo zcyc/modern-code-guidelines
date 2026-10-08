@@ -1,58 +1,26 @@
-# C++ standard rules
+# C++
 
-Use these rules after resolving the compiler standard and standard-library
-implementation. The C++ Core Guidelines are a design baseline; the project build
-and ABI remain authoritative.
+## Ownership and checks
 
-## C++11+
+- Use RAII, values and std::unique_ptr; std::shared_ptr requires shared ownership. Raw pointers/references are non-owning unless documented otherwise.
+- Non-owning std::string_view/std::span/ranges require valid lifetimes. Preserve ABI and compiler settings; check narrowing and indexing with configured warnings/sanitizers/static analysis.
+- Prefer scoped enums, const/constexpr and standard algorithms; concepts should clarify reusable template contracts.
 
-- Use RAII, scoped objects, move semantics, `nullptr`, `enum class`, `override`,
-  `const`, and standard containers where they improve the contract.
-- Return values instead of transferring ownership through raw pointers. Make
-  ownership explicit with a value or smart pointer.
+## Standards
 
-## C++14+
+- C++11: move semantics, nullptr, enum class, override and standard resource/container types.
+- C++14: generic lambdas and expanded constexpr.
+- C++17: structured bindings, if constexpr, optional, variant, string_view and filesystem.
+- C++20: concepts, ranges, span and format. Coroutines need a runtime that owns scheduling/cancellation.
+- C++23: expected for value-or-error boundaries, print, ranges::to and mdspan.
+- C++26: reflection, inplace_vector, function_ref and copyable_function require explicit toolchain/library support. Treat draft/experimental modes as opt-in until the selected implementation provides the needed feature.
+- Language flags do not prove library availability; check feature-test macros and the exact standard-library implementation.
 
-- Use generic lambdas and `constexpr` where they remove boilerplate without
-  hiding control flow.
-
-## C++17+
-
-- Prefer structured bindings, `if constexpr`, `std::optional`, `std::variant`,
-  `std::string_view`, and `std::filesystem` when the target provides them.
-- Use `std::span` only from C++20; do not substitute a project-specific view type
-  without checking the existing codebase first.
-
-## C++20+
-
-- Use concepts for meaningful template constraints, ranges when the pipeline is
-  clearer, and `std::span` for bounded non-owning sequences.
-- Use coroutines only when the project already has a coroutine runtime contract;
-  the language feature alone does not provide scheduling or cancellation.
-
-## C++23+
-
-- Use C++23 library features only when both the compiler and standard library
-  support them. Do not assume the compiler's `-std=c++23` flag proves API support.
-- Prefer `std::expected` for value-or-error APIs when the project does not use
-  exceptions for that boundary.
-- Use `std::print`/`std::format`, `std::ranges::to`, `std::mdspan`, and
-  other C++23 facilities when they remove local boilerplate and their ownership,
-  formatting, or lifetime contracts are explicit.
-
-## C++26 draft
-
-- Treat C++26 as a draft/toolchain mode until the project explicitly adopts a
-  conforming implementation; do not introduce `-std=c++2c` features in ordinary
-  production code.
-- Keep reflection, `std::inplace_vector`, `std::function_ref`, `std::copyable_function`,
-  and other C++26 facilities behind explicit compiler/standard-library support;
-  test the exact toolchain rather than relying on the language-mode flag alone.
-
-## Authority
+## Sources
 
 - [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html)
 - [ISO/IEC 14882:2024 (C++23)](https://www.iso.org/standard/83626.html)
 - [cppreference C++ language](https://en.cppreference.com/w/cpp/language)
 - [cppreference C++ standard library](https://en.cppreference.com/w/cpp/standard_library)
 - [WG21 C++26 working papers](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2026/)
+- [C++20 formatting](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/p2909r4.html)

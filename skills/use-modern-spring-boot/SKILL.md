@@ -1,34 +1,14 @@
 ---
 name: use-modern-spring-boot
-description: "Use version-aware Spring Boot web, data, security, observability, and concurrency idioms when writing, modifying, fixing, or reviewing Spring Boot code."
+description: "Use when writing or reviewing code involving Spring Boot injection, transactions, security, and execution models."
 ---
 
-# Modern Spring Boot
+# Spring Boot
 
-Use for Spring Boot applications. Pair with use-modern-java for Java language
-rules and use-modern-kotlin for Kotlin rules.
+Resolve the changed file's target from pom.xml/build.gradle(.kts), dependency management/locks, Boot/Framework, Java/Kotlin toolchain, MVC vs WebFlux, native-image and virtual-thread settings.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read the nearest pom.xml or build.gradle, lockfile/dependency management, Java
-toolchain, and Spring Boot version. Establish whether the application uses
-Spring MVC, WebFlux, servlet, reactive, native-image, or virtual-thread
-execution before changing its model.
+Use use-modern-java or use-modern-kotlin for the source language.
 
-## Working rules
-
-- Prefer constructor injection and immutable configuration; use
-  ConfigurationProperties for grouped external configuration.
-- Keep blocking and reactive execution models separate. Do not call blocking
-  I/O from a WebFlux pipeline without an explicit boundary.
-- Put transaction boundaries around business operations and remember that
-  proxy-based annotations do not apply to self-invocation.
-- Treat security, validation, and error responses as boundary behavior; preserve
-  the project's established Spring Security configuration rather than weakening it.
-- Use Actuator and Micrometer when the application needs operational signals;
-  keep metric labels low-cardinality.
-- Use virtual threads only when the declared JDK and workload support them and
-  measurement shows a benefit. Do not assume they improve every workload.
-
-Read references/guidelines.md before using version-gated Boot, framework, or
-JDK integration features.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

@@ -1,38 +1,14 @@
 ---
 name: use-modern-expo
-description: "Use version-aware Expo configuration, routing, native-module, development-build, and OTA-update idioms when writing, modifying, fixing, or reviewing Expo code."
+description: "Use when writing or reviewing code involving Expo SDK configuration, native builds, Router, and OTA updates."
 ---
 
-# Modern Expo
+# Expo
 
-Use for Expo applications and Expo modules. For a bare React Native app without
-Expo's SDK/configuration boundary, use use-modern-react-native instead. Pair with
-use-modern-react for React rules and use-modern-typescript for TypeScript rules.
+Resolve the changed file's target from package.json/lockfile, Expo SDK/React Native/React/Node, app config, eas.json, Router, committed vs generated android/ios projects.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read package.json, the lockfile, Expo SDK, React Native, React, Node.js, app
-config, eas.json, Expo Router presence, and whether android/ios directories are
-managed or committed. Resolve the native and JavaScript targets separately.
+Add use-modern-react-native for native/UI work; Expo supplies SDK, build and update rules.
 
-## Working rules
-
-- Distinguish JavaScript-only changes from native changes. Native modules,
-  permissions, config plugins, and native project edits require a development
-  build or a new native binary.
-- Treat app.json/app.config.* as build and public-runtime configuration. Never
-  put secrets in values that are embedded in the app or OTA manifest.
-- Use Expo Router only when it is part of the project; preserve the existing
-  navigation model and deep-link contract.
-- Keep runtimeVersion and update channels compatible with the native binary.
-  OTA updates must not require native code or native dependency changes.
-- Prefer Expo's supported install/configuration flow for SDK modules and inspect
-  the resolved native configuration after prebuild or plugin changes.
-- Keep Expo SDK packages on the project's selected SDK line; prefer `expo
-  install` and its compatibility checks over generic package installation for
-  Expo modules.
-- Handle platform permissions, lifecycle, and unavailable APIs explicitly on
-  Android, iOS, and web targets.
-
-Read references/guidelines.md before using SDK-specific, EAS, Router, or
-development-build behavior.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

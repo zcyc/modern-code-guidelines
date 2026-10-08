@@ -1,37 +1,19 @@
-# Spring Boot version rules
-
-Resolve the Boot, Spring Framework, Java, and dependency-management versions
-from the build before using a feature. Do not mix examples from different Boot
-generations or silently change the web stack.
+# Spring Boot
 
 ## Generation gates
 
-- Spring Boot 3 and later use Jakarta EE namespaces and bean-based Spring
-  Security configuration. Treat `javax.*` imports and
-  `WebSecurityConfigurerAdapter` examples as older-generation migration
-  material, not new-code templates.
-- Spring Boot 4 targets require Java 17 or later and Spring Framework 7 APIs.
-  Resolve the Boot dependency-management platform and Java toolchain together
-  before using those APIs.
+- Boot 3+ uses Jakarta EE namespaces and bean-based Security configuration; older javax/WebSecurityConfigurerAdapter examples are migration material.
+- Boot 4 requires Java 17+ and Spring Framework 7; use its dependency-management line instead of mixing framework generations.
 
-## Configuration and operations
+## Injection, transactions and execution
 
-- Prefer type-safe configuration properties for related settings and validate
-  them at startup when invalid configuration would make the service unsafe.
-- Use Actuator and Micrometer's observation model when the project has an
-  observability requirement; avoid high-cardinality tags.
-- For native images, check reflection, proxy, and resource requirements instead
-  of assuming JVM reflection will work unchanged.
+- Constructor injection and validated ConfigurationProperties express dependencies/configuration; keep invalid required settings as startup failures.
+- Transaction boundaries protect business operations; proxy annotations do not intercept self-invocation. Preserve established validation/security/error contracts.
+- MVC/blocking and WebFlux/reactive have different execution models. Isolate blocking I/O from reactive pipelines through a deliberate scheduler boundary.
+- Virtual threads require matching JDK/workload support; measure benefit, pinning and shutdown. Scarce resources still need bounds.
+- Actuator/Micrometer serve operational requirements with low-cardinality tags. Native images need explicit reflection/proxy/resource and library compatibility checks.
 
-## Concurrency
-
-- Virtual threads require a compatible JDK and may change thread-pool and
-  scheduler behavior. Enable them only with an explicit workload decision and
-  validate pinned-thread and shutdown behavior.
-- WebFlux code must remain non-blocking end to end, or isolate blocking work
-  with a deliberate scheduler boundary.
-
-## Authority
+## Sources
 
 - https://docs.spring.io/spring-boot/reference/
 - https://docs.spring.io/spring-boot/reference/features/spring-application.html

@@ -1,37 +1,16 @@
 ---
 name: use-modern-nextjs
-description: "Use version-aware Next.js routing, rendering, caching, security, and deployment idioms when writing, modifying, fixing, or reviewing Next.js code."
+description: "Use when writing or reviewing code involving Next.js routing, server boundaries, actions, caching, and deployment."
 ---
 
-# Modern Next.js
+# Next.js
 
-Use for Next.js applications and libraries. Pair with `use-modern-react` for
-React component rules, `use-modern-typescript` for type-system decisions, and
-`modern-web-guidance` for browser-platform, CSS, accessibility, and performance
-decisions.
+Resolve the changed file's target from package.json/lockfile, next.config.*, Next/React/Node, deployment runtime and file router (App or Pages).
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read the nearest `package.json`, lockfile, `next.config.*`, and the router used
-by the changed file. Establish the Next.js, React, Node.js, and deployment
-targets before using version-sensitive routing, cache, or server APIs. Do not
-infer behavior from a different Next.js project or a globally installed CLI.
+Use use-modern-react for components; add use-modern-typescript for TS and use-modern-javascript for runtime.
 
-## Working rules
+For browser APIs/CSS/accessibility/performance, consult official browser docs or the separately installed modern-web-guidance.
 
-- In the App Router, keep layouts and pages as Server Components by default;
-  add `'use client'` only for interactivity, client hooks, or browser APIs.
-- Keep secrets, request-bound data, and privileged access on the server. Treat a
-  Client Component boundary as a data-exposure boundary, not just a rendering choice.
-- Resolve the project's cache configuration before assuming whether data is
-  static, cached, revalidated, or request-time. Make freshness and invalidation
-  intent explicit.
-- Use route-level `loading`, `error`, and `not-found` boundaries where the user
-  can encounter those states; do not replace them with one global spinner.
-- Prefer framework primitives for navigation, metadata, images, and route
-  handlers when they match the project architecture.
-- Do not migrate Pages Router code to App Router, or change rendering/cache
-  semantics, unless the request includes that migration.
-
-Read [references/guidelines.md](references/guidelines.md) for version-gated
-App Router and cache rules.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

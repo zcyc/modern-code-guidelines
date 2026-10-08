@@ -1,42 +1,20 @@
-# C standard rules
+# C
 
-Use these rules after resolving the compiler standard, libc, ABI, and warning
-configuration. Secure coding rules are correctness requirements at boundaries,
-not permission to rewrite a whole legacy codebase.
+## Ownership and checks
 
-## C99+
+- Make allocation sizes, buffer lengths, ownership and cleanup paths explicit; use const and size_t where appropriate. Check bounds, overflow, conversions, allocation and return values. snprintf still requires truncation checks.
+- Prefer enums/functions to function-like macros; retain macros for conditional compilation or compile-time operations. Preserve ABI/C linkage.
+- Use configured warnings, sanitizers and static analysis; fix causes rather than hiding them with casts.
 
-- Use designated initializers, `static inline`, `restrict` only with a documented
-  aliasing contract, and `snprintf` where they improve correctness.
-- Keep array lengths paired with buffers; prefer an explicit span-like `(pointer,
-  count)` contract when no project type exists.
+## Standards
 
-## C11+
+- C99+: designated initializers, static inline, fixed-width types/inttypes and snprintf; restrict requires a valid aliasing contract. Pair buffers with lengths.
+- C11+: _Static_assert, atomics and optional threads APIs; verify libc/toolchain support. Memory ordering requires a synchronization design.
+- C17 is primarily defect corrections, not a new library/API generation.
+- C23: nullptr, auto inference, constexpr objects, attributes, static_assert, typeof/typeof_unqual and #embed require verified compiler support; keep embedded inputs and size explicit.
+- C23 library: stdckdint.h for checked arithmetic, stdbit.h for bit operations, memset_explicit for sensitive-data clearing; verify libc availability separately.
 
-- Use `_Static_assert`, `<stdint.h>`, `<inttypes.h>`, `<stdatomic.h>`, and
-  `<threads.h>` only when the target libc/toolchain provides them.
-- Treat atomics and memory ordering as a synchronization design, not a compiler
-  warning workaround.
-
-## C17+
-
-- Prefer the C17 standard library and diagnostics where supported, but do not
-  claim portability to a libc merely because the compiler accepts the syntax.
-
-## C23+
-
-- Use `nullptr`, `auto` type inference, `constexpr` objects, attributes,
-  `static_assert`, `typeof`/`typeof_unqual`, and other C23 features only
-  with an explicit C23 target and a verified toolchain/libc.
-- Prefer `<stdckdint.h>` for checked integer arithmetic and `<stdbit.h>` for
-  standard bit operations when they express the overflow/bit contract directly.
-- Use `memset_explicit` when clearing sensitive data must not be optimized away;
-  verify that the target libc actually provides it.
-- Use `#embed` only for deliberate compile-time binary embedding with a clear
-  size and build-input contract.
-- Do not make C23 the default for a project whose build target is unspecified.
-
-## Authority
+## Sources
 
 - [cppreference C language](https://en.cppreference.com/w/c/language)
 - [cppreference C23](https://en.cppreference.com/w/c/23)

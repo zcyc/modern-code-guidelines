@@ -1,45 +1,16 @@
 ---
 name: use-modern-javascript
-description: "Use version-aware ECMAScript and Node.js idioms when writing, modifying, fixing, or reviewing JavaScript code."
+description: "Use when writing or reviewing code involving JavaScript and TypeScript runtime behavior, ECMAScript APIs, and Node.js."
 ---
 
-# Modern JavaScript
+# JavaScript
 
-Apply stable ECMAScript and Node.js patterns guaranteed by the project's
-declared runtime.
+Resolve the changed file's target from package.json engines.node/type, .nvmrc/.node-version, CI/container runtime; browserslist/build target for browsers. Resolve package module/export contracts.
 
-## Scope
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-This skill covers core JavaScript, Node.js, modules, async control flow, and built-in
-runtime APIs. For browser UI, DOM, CSS, accessibility, browser compatibility, or web
-performance, use `modern-web-guidance` as well.
+For TS, also use use-modern-typescript; it covers types/compiler, this skill covers runtime.
 
-Keep JavaScript and TypeScript decisions separate. If the file is TypeScript, use the
-`use-modern-typescript` skill instead.
+For browser APIs/CSS/accessibility/performance, consult official browser docs or the separately installed modern-web-guidance.
 
-## Target resolution
-
-Read the target from checked-in project metadata:
-
-1. `package.json` `engines.node` and `type`.
-2. `.nvmrc`, `.node-version`, or an equivalent explicit runtime file.
-3. A checked-in CI/container runtime declaration.
-
-For browser code, read an explicit `browserslist` or build target. If no target is
-declared, report the runtime as unknown and avoid runtime-gated APIs. Never infer the
-target from the locally installed Node.js or browser.
-
-After resolving the target, read `references/guidelines.md` for the applicable
-ECMAScript and Node.js feature gates.
-
-## Working rules
-
-- Use ESM for new packages when the package declares `"type": "module"`; preserve CommonJS only when the package contract requires it.
-- Prefer `const`, then `let` when reassignment is required; never introduce `var` in new code.
-- Prefer `async`/`await`, explicit error handling, and cancellation with `AbortSignal` over nested promise callbacks.
-- Prefer standard built-ins over small utility dependencies when the target supports them.
-- Keep values and types distinct: JavaScript code must not rely on compile-time-only assumptions.
-- Modernize the smallest relevant diff and preserve the package's module/export contract.
-- For production Node.js code, target an Active or Maintenance LTS release; use
-  Current releases only when the project explicitly accepts their shorter support
-  window.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

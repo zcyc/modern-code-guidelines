@@ -163,11 +163,13 @@ npx skills add zcyc/modern-code-guidelines --skill '*' --agent gemini-cli --copy
 - `use-modern-laravel`
 - `use-modern-rails`
 
-框架 skill 还会解析框架、构建工具、部署目标和项目架构，再应用版本敏感的规则。浏览器 API、CSS、无障碍和 Web 性能仍由 `modern-web-guidance` 负责。
+框架 skill 还会解析框架、构建工具、部署目标和项目架构，再应用版本敏感的规则。入口只保留目标解析和路由，具体规则统一放在 references。各 skill 自带目标未知时的处理要求，不依赖安装时复制根目录 `AGENTS.md`。
+
+选择性安装时，需一起安装入口中列出的配套 skill：TypeScript 补充 JavaScript 的类型与编译器规则；Expo 补充 React Native 的 SDK、构建和更新规则。`use-modern-sveltekit` 也覆盖独立 Svelte 项目，仅在使用 Kit 时应用 Kit 专属规则。
 
 Apple 相关 skill 采用分层方式：语言层使用 `use-modern-swift`，然后只添加目标中实际使用的框架。SwiftUI、UIKit、AppKit 的生命周期和平台规则不同，因此保持拆分；SwiftData 的持久化与迁移边界也不同，因此单独保留。
 
-JavaScript skill 覆盖 ECMAScript 和 Node.js；TypeScript 单独处理编译器与类型系统行为。浏览器 API、CSS、无障碍和 Web 性能仍由 `modern-web-guidance` 负责。
+JavaScript skill 覆盖 ECMAScript 和 Node.js；TypeScript 单独处理编译器与类型系统行为。浏览器 API、CSS、无障碍和 Web 性能使用官方浏览器文档或另行安装的 [`modern-web-guidance`](https://github.com/GoogleChrome/modern-web-guidance)。该 skill 为可选配套，本包不包含也不会自动安装它。
 
 ## 规则来源
 
@@ -235,7 +237,18 @@ JavaScript skill 覆盖 ECMAScript 和 Node.js；TypeScript 单独处理编译�
 - [`modern-web-guidance`](https://github.com/GoogleChrome/modern-web-guidance) 专注于 Web API、CSS、无障碍和 Web 性能等浏览器与 Web 平台实践。
 - `modern-code-guidelines` 专注于上述语言的版本感知语言、编译器、运行时、标准库、数据库及安全编码实践。Go 规则以官方 Go 文档为准，JetBrains 的 `go-modern-guidelines` 仅作补充参考；格式化、测试和正确性检查则按项目需要选择最合适的工具，不绑定某个 CLI 入口。
 
-JavaScript 和 TypeScript skill 有意只覆盖核心语言、编译器、Node.js 和运行时问题；浏览器 UI、CSS、无障碍和 Web 性能仍由 `modern-web-guidance` 负责，因此两个项目可以一起使用，同时保持清晰的职责边界。
+JavaScript 和 TypeScript skill 有意只覆盖核心语言、编译器、Node.js 和运行时问题；浏览器 UI、CSS、无障碍和 Web 性能可以配合 `modern-web-guidance`，职责边界保持清晰。
+
+## 维护检查
+
+使用 Python 3.11+ 执行，无第三方依赖：
+
+```bash
+python scripts/check_skills.py
+python -m unittest discover -s scripts -p 'test_*.py'
+```
+
+CI 检查 frontmatter、本地引用、配套 skill 名称、插件 manifest 和 README 清单，不验证 API 事实或远程链接可用性。修改版本规则时，逐项核对 API 准确名称、首次支持版本、稳定或预览状态、独立运行时与平台要求，并链接官方发布说明或 API 文档。具体规则只在 references 维护；压缩后仍须保留安全、生命周期、迁移和验证要求。
 
 ## 兼容边界
 

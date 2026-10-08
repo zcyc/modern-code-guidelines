@@ -1,38 +1,19 @@
-# Jetpack Compose version rules
+# Jetpack Compose
 
-Resolve Kotlin, Android Gradle Plugin, Compose BOM/compiler, lifecycle, and
-min/target SDK versions from Gradle before using an API. The BOM and compiler
-must be compatible with the project.
+## Compiler and platform gates
 
-## Compiler gate
+- Kotlin 2.0+ uses the Compose Compiler Gradle plugin versioned with Kotlin; earlier targets use the compiler-extension configuration. BOM versions libraries, not the compiler.
+- Check AGP/Kotlin/BOM plus lifecycle/navigation/Material library versions and Android min SDK; matching Kotlin alone does not establish API availability.
 
-- Kotlin 2.0 and later use the Compose Compiler Gradle plugin, whose version
-  follows Kotlin. Older Kotlin targets use the legacy compiler-extension
-  configuration; do not mix the two configuration models in one module.
-- Keep Kotlin, AGP, Compose compiler, and Compose BOM compatibility aligned;
-  the compiler plugin and BOM solve different compatibility constraints.
+## State and effects
 
-## State and recomposition
+- Render without side effects; LaunchedEffect/DisposableEffect/SideEffect own external work with lifecycle keys. Hoist immutable state to the lowest common owner and pass events upward.
+- remember is composition-local; rememberSaveable stores small recreatable UI values; ViewModel/state holders own business state.
+- Mutating an ordinary ArrayList is not observable state. Use immutable replacements or observable state holders.
+- Collect flows through supported lifecycle-aware APIs; cancel composition-owned work on exit. Stable list/navigation keys preserve identity.
+- Measure frames/recomposition before stability annotations/caching; test UI semantics and state restoration where changed.
 
-- Composables should be side-effect free. Use LaunchedEffect, DisposableEffect,
-  SideEffect, or other supported effect APIs with keys that match the work's
-  lifecycle.
-- Hoist state to the lowest common owner that reads or changes it. Expose
-  immutable state and event callbacks rather than mutable state objects.
-- Use remember for composition lifetime and rememberSaveable for small UI values
-  that must survive recreation. Keep business state in the project's supported
-  state holder or ViewModel.
-- Prefer immutable collections or observable state holders; mutating an
-  ArrayList in place does not reliably trigger recomposition.
-
-## Android integration
-
-- Collect flows with the lifecycle-aware API supported by the project's
-  dependencies. Preserve cancellation when the screen leaves composition.
-- Use stable keys for lazy lists and navigation entities. Measure recomposition
-  and frame performance before adding stability annotations or custom caching.
-
-## Authority
+## Sources
 
 - https://developer.android.com/develop/ui/compose/architecture
 - https://developer.android.com/develop/ui/compose/state

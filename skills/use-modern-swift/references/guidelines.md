@@ -1,78 +1,26 @@
-# Swift version rules
+# Swift
 
-Use these rules after resolving the Swift language mode, SDK, and deployment
-target. A compiler feature can be available while the corresponding platform API
-is unavailable.
+## Isolation and ownership
 
-## Swift 5+
+- Prefer value types; classes/actors represent identity/shared state. Optionals/enums model absence/finite domains; !/try! require proven invariants.
+- Follow call-site API clarity and narrow access control. async/await does not itself establish isolation: own tasks, cancellation and actor boundaries.
+- Sendable is a cross-isolation contract; unchecked conformance needs an audited invariant. MainActor expresses UI ownership, not a blanket diagnostics workaround.
 
-- Prefer value types for data, protocol requirements that express real behavior,
-  and standard collection algorithms over hand-written indexing.
-- Use `guard`, optional binding, and typed errors instead of force-unwrapping
-  values that came from input, I/O, or a platform API.
-- Follow Swift API Design Guidelines: optimize for clarity at the point of use,
-  not merely short declarations.
+## Gates
 
-## Swift concurrency
+- Swift 5.9: macros and parameter packs require supporting toolchain/target and a real contract benefit.
+- Swift 6 language mode: repair strict-concurrency isolation/sendability errors at their boundary.
+- 6.2: @concurrent explicitly leaves caller isolation; ordinary async executor behavior also depends on concurrency settings. Span/InlineArray need clear lifetimes and measured memory reasons.
+- 6.3: @c for reviewed C exports; module selectors resolve actual import-name collisions.
+- 6.4: Swift Build is SwiftPM's default; verify plugins/caches/CI. Async defer and withTaskCancellationShield support awaited cleanup that must finish despite cancellation.
 
-- Use structured tasks and `async`/`await`; make cancellation observable in long
-  operations.
-- Use actors for isolated shared mutable state and mark cross-isolation values
-  `Sendable` only when their semantics satisfy the protocol.
-- Keep `@MainActor` for UI/main-thread ownership, not as a blanket workaround for
-  concurrency diagnostics.
+## Tests and tools
 
-## Testing
+- Swift Testing requires Swift 6/Xcode 16 tooling; prefer it for new unit/integration tests. XCTest remains for UI/performance and existing suites; both coexist in one bundle.
+- Swift 6.4 permits XCTAssert in Testing tests and #expect in XCTest tests. Check test-target toolchain/deployment separately; keep async tests deterministic and cancellation-aware.
+- Use configured swift-format/lint rather than introducing another formatting policy.
 
-- Resolve the test target's Swift language mode, Xcode version, and deployment
-  target separately from the app target.
-- Prefer Swift Testing (`Testing`) for new unit and integration tests when the
-  target supports it. Swift Testing was introduced with Swift 6 and Xcode 16;
-  verify the declared toolchain instead of assuming availability.
-- Keep XCTest for UI automation, performance tests, and existing XCTest suites.
-  XCTest and Swift Testing can coexist in one test bundle, so migrate only when
-  the change improves the test rather than adding a compatibility wrapper.
-- Swift 6.4 permits `XCTAssert` in Swift Testing tests and `#expect` in XCTest
-  tests; use this for incremental migration instead of adding assertion wrappers.
-- Make asynchronous tests cancellation-aware and keep test inputs deterministic;
-  do not hide isolation errors with unchecked sendability.
-
-## Swift 5.9+
-
-- Use macros, parameter packs, and other newer features only when the target and
-  project toolchain explicitly support them; do not introduce them for small
-  boilerplate reductions.
-
-## Swift 6 language mode
-
-- Treat strict concurrency diagnostics as design feedback. Fix isolation and
-  sendability at the boundary instead of suppressing the diagnostic.
-
-## Swift 6.2+
-
-- Use `@concurrent` only for work that must leave the actor or caller executor;
-  keep ordinary asynchronous code on the caller's isolation when that is the
-  intended ownership model.
-- Use `Span` and `InlineArray` for measured contiguous-memory or fixed-size data
-  paths; do not replace ordinary collections without a lifetime and allocation
-  reason.
-
-## Swift 6.3+
-
-- Use `@c` for deliberate Swift/C boundaries and keep the generated C contract
-  reviewed like a public API.
-- Use module selectors only to resolve a real import-name collision; do not use
-  them to hide ambiguous module ownership.
-
-## Swift 6.4+
-
-- Swift Package Manager uses Swift Build by default; verify custom build plugins,
-  CI caches, and toolchain selection against the declared Swift 6.4 toolchain.
-- Use asynchronous `defer` and `withTaskCancellationShield` when cleanup must
-  await and complete despite task cancellation; keep cancellation semantics
-  explicit.
-
-## Authority
+## Sources
 
 - [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)
 - [Swift 6.4 release](https://www.swift.org/blog/swift-6.4-released/)
