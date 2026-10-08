@@ -1,34 +1,14 @@
 ---
 name: use-modern-nestjs
-description: "Use version-aware NestJS module, dependency-injection, validation, security, and transport idioms when writing, modifying, fixing, or reviewing NestJS code."
+description: "Use when writing or reviewing code involving NestJS modules, providers, validation, transports, and adapter behavior."
 ---
 
-# Modern NestJS
+# NestJS
 
-Use for NestJS applications and packages. Pair with use-modern-typescript for
-TypeScript rules and use-modern-javascript for Node.js runtime rules.
+Resolve the changed file's target from package.json/lockfile, Nest core/packages, platform adapter, Node/TypeScript, module format and Express/Fastify/GraphQL/WebSocket/microservice transport.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read package.json, the lockfile, Nest core and platform adapter versions, the
-Node.js target, and whether the application uses Express, Fastify, GraphQL,
-WebSockets, or microservices. Preserve the transport already used by the area.
+Use use-modern-typescript for types and use-modern-javascript for Node/runtime.
 
-## Working rules
-
-- Keep module imports and exports explicit. Use providers for application logic
-  and keep controllers focused on transport concerns.
-- Use dependency injection scopes deliberately; avoid request-scoped providers
-  unless the request lifetime is required and its cost is understood.
-- Validate and transform untrusted input at the pipe/DTO boundary, then keep
-  domain logic independent of transport decorators.
-- Use guards for authorization, interceptors for cross-cutting behavior, and
-  exception filters for transport error mapping; do not hide business decisions
-  in middleware.
-- Prefer one clear async contract per boundary. Do not mix Observable and
-  Promise flows merely for style.
-- Keep configuration, secrets, and generated OpenAPI metadata aligned with the
-  deployed module graph.
-
-Read references/guidelines.md before using version-sensitive Nest APIs or
-adapter-specific behavior.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

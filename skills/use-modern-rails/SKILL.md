@@ -1,36 +1,16 @@
 ---
 name: use-modern-rails
-description: "Use version-aware Ruby on Rails routing, Active Record, jobs, security, Hotwire, and deployment idioms when writing, modifying, fixing, or reviewing Rails code."
+description: "Use when writing or reviewing code involving Rails requests, Active Record, jobs, migrations, and frontend conventions."
 ---
 
-# Modern Rails
+# Rails
 
-Use for Ruby on Rails applications and engines. Pair with use-modern-ruby for
-Ruby rules.
+Resolve the changed file's target from Gemfile/lock, Ruby/Rails, database adapter, job adapter and full-stack/API/Hotwire/other frontend architecture.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read Gemfile, Gemfile.lock, Ruby and Rails versions, database adapter, and
-whether the application is full-stack, API-only, Hotwire, or another frontend
-architecture. Preserve the app's existing conventions.
+Use use-modern-ruby for language; add the matching frontend skill for client code.
 
-## Working rules
+For browser APIs/CSS/accessibility/performance, consult official browser docs or the separately installed modern-web-guidance.
 
-- Use Rails conventions and built-in APIs before adding abstractions or gems.
-  Keep controllers at the HTTP boundary and add a separate object only when
-  the behavior has independent complexity or reuse.
-- Treat Active Record validations as application checks, not a substitute for
-  database constraints and indexes.
-- Inspect query shape for N+1 access, use eager loading deliberately, and batch
-  large data operations instead of loading entire tables.
-- Treat migrations as schema history: append new migrations and do not rewrite
-  migrations that may already have run in another environment.
-- Use strong parameters and the project's authorization boundary; do not rely on
-  hidden form fields or model callbacks as access control.
-- Put slow or retryable work in Active Job. Pass stable identifiers, make jobs
-  idempotent, and account for transaction commit timing.
-- Prefer the project's Hotwire/Turbo/Stimulus conventions before introducing a
-  separate client framework.
-
-Read references/guidelines.md before using version-sensitive Rails, Active Job,
-Solid Queue, or deployment behavior.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

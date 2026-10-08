@@ -1,35 +1,12 @@
 ---
 name: use-modern-ruby
-description: Use version-aware Ruby language, standard-library, object-model, and style idioms when writing, modifying, fixing, or reviewing Ruby code.
+description: "Use when writing or reviewing code involving Ruby language versions, value objects, keyword arguments, and gem boundaries."
 ---
 
-# Modern Ruby
+# Ruby
 
-Apply stable Ruby features supported by the package's declared interpreter. Read
-`references/guidelines.md` before using version-gated syntax or classes.
+Resolve the changed file's target from .ruby-version, Gemfile ruby, gemspec required_ruby_version, lockfile, RuboCop and selected CI/deployment target; distinguish application pin from gem support range.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read the effective target from:
-
-1. `.ruby-version`, `Gemfile` `ruby`, and the gemspec's
-   `required_ruby_version`.
-2. The selected Ruby image/toolchain in CI or deployment configuration.
-3. The target of the gem/application containing the changed file.
-
-If the target is unknown, report it and avoid version-gated syntax. Do not infer
-the target from the local Ruby interpreter.
-
-## Working rules
-
-- Follow the repository's RuboCop configuration and run its formatter/lints.
-- Prefer `Enumerable`, blocks, keyword arguments, and small objects over manual
-  indexing, flag arguments, or duplicated traversal code.
-- Use `# frozen_string_literal: true` when it is the repository's established
-  policy; make mutable strings explicit at the mutation site.
-- Use pattern matching, endless methods, numbered parameters, or `Data` only when
-  the target supports them and the result remains clearer than ordinary Ruby.
-- Raise and rescue specific exceptions; do not use `rescue Exception` or silently
-  turn operational failures into `nil`.
-- Keep metaprogramming, monkey patches, and global mutable state at explicit
-  boundaries; prefer ordinary methods when they are sufficient.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

@@ -1,35 +1,16 @@
 ---
 name: use-modern-nuxt
-description: "Use version-aware Nuxt routing, data fetching, rendering, server routes, and config idioms when writing, modifying, fixing, or reviewing Nuxt code."
+description: "Use when writing or reviewing code involving Nuxt routing, SSR data, Nitro, caching, and deployment."
 ---
 
-# Modern Nuxt
+# Nuxt
 
-Use for Nuxt applications and modules. Pair with use-modern-vue for Vue
-component rules, use-modern-typescript for TypeScript rules, and
-modern-web-guidance for browser, CSS, accessibility, and performance rules.
+Resolve the changed file's target from package.json/lockfile, nuxt.config.*, Nuxt/Vue/Nitro/Node, directory/compatibility settings and deployment preset.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read package.json, the lockfile, nuxt.config.*, the Nuxt major, the Node.js
-target, and the Nitro/deployment preset. Establish the pages, server, and
-middleware conventions used by the project before changing them.
+Use use-modern-vue for components; add use-modern-typescript for TS and use-modern-javascript for runtime.
 
-## Working rules
+For browser APIs/CSS/accessibility/performance, consult official browser docs or the separately installed modern-web-guidance.
 
-- Keep server-only code in server routes or utilities and keep app code out of
-  that boundary. Never expose private runtime configuration to the client.
-- In universal setup code, prefer useFetch or useAsyncData for SSR-aware data
-  loading. Use $fetch directly for event-driven browser requests or inside
-  server handlers where duplicate hydration fetching is not a concern.
-- Make rendering mode and route rules explicit for pages whose freshness,
-  caching, or prerendering affects correctness.
-- Keep composables SSR-safe: do not assume window, document, or per-request
-  mutable state exists on the server.
-- Use file-based pages, server/api routes, and route middleware according to the
-  project's Nuxt major; do not migrate Nuxt generations incidentally.
-- Match the project's Nuxt major when choosing directory conventions and server
-  boundaries; do not copy Nuxt 4 `app/` structure into a Nuxt 3 project.
-
-Read references/guidelines.md before using version-sensitive Nuxt, Nitro, or
-server-components features.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

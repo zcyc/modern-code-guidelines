@@ -172,7 +172,15 @@ Framework skills (25):
 Language skills read the project's explicit language/compiler/runtime target.
 Framework skills additionally resolve the framework, build tool, deployment
 target, and project architecture before applying version-sensitive guidance.
-Version-specific references stay beside each skill.
+Version-specific references stay beside each skill. Entry points resolve targets
+and route to those references; rules are maintained only in the references.
+Each installed skill carries its own target/unknown-version policy and does not
+depend on this repository's root `AGENTS.md` being copied into the project.
+
+Install the companion skills named by your selected skill when using selective
+installation. TypeScript adds compiler/type rules to JavaScript runtime guidance;
+Expo adds SDK/build/update rules to React Native. `use-modern-sveltekit` covers
+standalone Svelte too, with Kit rules applied only to Kit projects.
 
 Apple skills are layered: use `use-modern-swift` for the language, then add
 only the frameworks present in the target. Keep SwiftUI, UIKit, and AppKit
@@ -180,8 +188,10 @@ separate because their lifecycle and platform rules differ; keep SwiftData
 separate because persistence and migration have different boundaries.
 
 The JavaScript skill covers core ECMAScript and Node.js. TypeScript has its own skill
-for compiler/type-system behavior. Browser APIs, CSS, accessibility, and web
-performance remain the responsibility of `modern-web-guidance`.
+for compiler/type-system behavior. For browser APIs, CSS, accessibility, and web
+performance, consult official browser documentation or the separately installed
+[`modern-web-guidance`](https://github.com/GoogleChrome/modern-web-guidance).
+That skill is optional and is not bundled or installed by this package.
 
 ## Rule sources
 
@@ -263,8 +273,25 @@ complements both projects rather than replacing them:
 
 The JavaScript and TypeScript skills intentionally stop at core language, compiler,
 Node.js, and runtime concerns. Browser UI, CSS, accessibility, and web performance
-remain in `modern-web-guidance`, so the projects can be used together with clear
+can use `modern-web-guidance`, so the projects can be used together with clear
 boundaries.
+
+## Maintenance
+
+Run the dependency-free checks with Python 3.11+:
+
+```bash
+python scripts/check_skills.py
+python -m unittest discover -s scripts -p 'test_*.py'
+```
+
+CI checks frontmatter, local references, companion skill names, plugin manifests,
+and README inventories. It does not verify API facts or remote link availability.
+For each version-sensitive rule, verify the exact API name, first supported
+version, stable/preview status, and separate runtime/platform requirements against
+the linked official release/API documentation. Keep rules in references and
+discovery/target routing in `SKILL.md`; check that compression preserves safety,
+lifecycle, migration and verification requirements.
 
 ## Compatibility boundary
 

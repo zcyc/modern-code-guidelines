@@ -1,38 +1,19 @@
-# FastAPI version rules
+# FastAPI
 
-Resolve FastAPI, Starlette, Pydantic, Python, and ASGI server versions before
-using their APIs. FastAPI behavior often depends on all of these layers.
+## Model and dependency gates
 
-## Pydantic generation boundary
+- Pydantic 2 uses model_validate/model_dump/model_config; retain Pydantic 1 APIs only in explicitly v1 projects. Upgrades are separate migrations, with no invisible model-generation mixing.
+- Annotated metadata needs supporting Python/FastAPI versions. Request/response/persistence models differ when shape/trust differs; keep response models/statuses/OpenAPI truthful.
+- Depends constructs reusable dependencies; yield owns cleanup. Request data stays request-scoped, while shared app resources follow lifespan ownership.
+- Prefer lifespan over deprecated startup/shutdown events on supporting releases. Check yield-dependency cleanup timing against streaming responses and the installed FastAPI version.
 
-- When the project uses Pydantic 2, use `model_validate`, `model_dump`, and
-  `model_config`; do not copy Pydantic 1 examples using `parse_obj`, `dict`, or
-  inner `Config` into that codebase.
-- If a maintained project is intentionally on Pydantic 1, follow its declared
-  API consistently and treat a Pydantic upgrade as a separate migration. Do
-  not mix model generations in one boundary.
+## Async and security
 
-## Contracts and dependencies
+- async def awaits non-blocking I/O; plain def endpoints/dependencies run blocking libraries through the threadpool. Ordinary helpers called inside async def are not automatically offloaded.
+- In-process BackgroundTasks are not durable/retried across process failure; use a persistent queue for required survival/retry.
+- Validate input, authenticate/authorize operations and configure CORS separately; keep internal exceptions/secrets out of responses.
 
-- Use Pydantic models for boundary validation and response serialization. Keep
-  the OpenAPI schema truthful; do not hide incompatible responses with broad
-  unions or unchecked dictionaries.
-- Prefer `typing.Annotated` for reusable dependencies and parameter metadata
-  when the project's Python and FastAPI targets support it; keep the dependency
-  contract visible in the type annotation.
-- Prefer Depends for reusable request-bound construction and yield dependencies
-  for cleanup. Do not use a module-global mutable object as a request cache.
-- Use lifespan for application-wide resource startup and shutdown when supported
-  by the installed version.
-
-## Async
-
-- Awaitable external libraries belong in async endpoints. Blocking libraries
-  belong in plain def endpoints/dependencies or an explicit executor boundary.
-- Do not assume background tasks are durable, retried, or observable; use a
-  queue for work that must survive process failure.
-
-## Authority
+## Sources
 
 - https://fastapi.tiangolo.com/
 - https://fastapi.tiangolo.com/async/

@@ -1,43 +1,18 @@
-# Rails version rules
+# Rails
 
-Resolve Ruby, Rails, database adapter, and frontend/job stack versions from
-Gemfile.lock and the project configuration. Rails 7 and 8 defaults differ in
-jobs, assets, and frontend conventions.
+## Gates
 
-## Rails 8.1 feature gate
+- Rails 8.1 adds Active Job continuations and Rails.event reporting; adapters still determine durability/retry and operational behavior.
+- Resolve version defaults for jobs/assets/frontend and actual generated app structure before adopting examples.
 
-- Rails 8.1 and later provide Active Job continuations and the structured
-  `Rails.event` reporter. Use them only when the target supports them; they do
-  not replace the job adapter's durability or the application's logging and
-  authorization boundaries.
+## Requests, data and jobs
 
-## Active Record and schema
+- Controllers orchestrate requests; strong parameters limit assignable fields, while policies/authorization decide permitted operations. Hidden fields/callbacks are not access control.
+- Constraints/indexes protect concurrent writes; model validation alone cannot. Inspect N+1 loading, eager-load deliberately and batch large operations.
+- Append deployed migration history. Active Job jobs use stable IDs/idempotency and explicit commit timing; verify Solid Queue/other adapter database, scheduling/concurrency and durability settings.
+- Preserve Hotwire/Turbo/Stimulus/Inertia/API conventions; new objects/gems/frameworks need actual complexity/reuse. Keep deployment credentials/config private.
 
-- Use database constraints and indexes for invariants; model validations alone
-  cannot protect concurrent writes.
-- Inspect query shape for N+1 access and use eager loading deliberately. Batch
-  large reads and writes instead of loading an entire table.
-- Append migrations as schema history. Do not rewrite a migration that may have
-  run in another environment.
-
-## Requests and jobs
-
-- Use strong parameters and the project's authorization boundary before changing
-  records. Callbacks are not access control.
-- Active Job provides the application job contract; the actual adapter controls
-  durability, retry, scheduling, and concurrency. Make jobs idempotent and pass
-  stable identifiers.
-- If using Solid Queue or another database-backed adapter, validate queue
-  database configuration and transaction timing in the deployment environment.
-
-## Frontend and operations
-
-- Preserve the selected Hotwire/Turbo/Stimulus, Inertia, or API architecture.
-  Do not introduce a separate client framework without a concrete requirement.
-- Keep credentials, production configuration, and deployment defaults aligned
-  with the Rails version and generated application structure.
-
-## Authority
+## Sources
 
 - https://guides.rubyonrails.org/
 - https://guides.rubyonrails.org/getting_started.html

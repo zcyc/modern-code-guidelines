@@ -1,36 +1,16 @@
 ---
 name: use-modern-astro
-description: "Use version-aware Astro islands, content, routing, SSR, integrations, and deployment idioms when writing, modifying, fixing, or reviewing Astro code."
+description: "Use when writing or reviewing code involving Astro islands, content, actions, rendering, and adapters."
 ---
 
-# Modern Astro
+# Astro
 
-Use for Astro sites and applications. Pair with use-modern-typescript for
-TypeScript rules and modern-web-guidance for browser, CSS, accessibility, and
-performance.
+Resolve the changed file's target from package.json/lockfile, Astro/Vite, integrations, content sources, output, adapter and runtime; static vs on-demand routes.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read package.json, the lockfile, Astro version, output mode, adapter, framework
-integrations, content sources, and deployment runtime. Resolve whether the
-changed route is static, prerendered, or rendered on demand.
+Use use-modern-typescript for TS, use-modern-javascript for runtime, and the matching framework skill for islands.
 
-## Working rules
+For browser APIs/CSS/accessibility/performance, consult official browser docs or the separately installed modern-web-guidance.
 
-- Keep the static-by-default model. Add a framework island and a `client:*`
-  directive only for behavior that truly needs client JavaScript.
-- Use content collections/content-layer APIs supported by the project for typed
-  content. Keep content schema and source loaders separate from page rendering.
-- Prefer Astro Actions for type-safe, validated server mutations when the project
-  supports them; use API endpoints when a real HTTP resource or external client
-  contract is required.
-- Choose prerendering or on-demand rendering per route and align the adapter
-  with the deployment runtime. Do not use request-only APIs on a static route.
-- Keep secrets and server-only data in frontmatter, server endpoints, or
-  middleware; do not pass private values through island props or shipped code.
-- Use middleware `locals` for request-scoped data when appropriate, and keep
-  integrations/adapters aligned with the Astro target rather than adding a
-  second rendering or routing layer.
-
-Read references/guidelines.md before using version-sensitive content, SSR,
-middleware, integration, or island behavior.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

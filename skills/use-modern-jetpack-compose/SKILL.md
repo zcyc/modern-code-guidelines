@@ -1,32 +1,14 @@
 ---
 name: use-modern-jetpack-compose
-description: "Use version-aware Jetpack Compose state, recomposition, side-effect, and UI-testing idioms when writing, modifying, fixing, or reviewing Compose code."
+description: "Use when writing or reviewing code involving Jetpack Compose state, effects, recomposition, and Android lifecycle."
 ---
 
-# Modern Jetpack Compose
+# Jetpack Compose
 
-Use for Jetpack Compose UI and state-holder code. Pair with use-modern-kotlin
-for Kotlin rules and the project's Android architecture conventions.
+Resolve the changed file's target from Gradle/version catalogs, Kotlin, AGP, Compose BOM/compiler/plugin, lifecycle/navigation dependencies, min/target SDK and architecture.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read Gradle version catalogs, Android Gradle Plugin, Kotlin, Compose BOM/compiler
-or plugin, min/target SDK, and the Android architecture already used. Do not
-mix Compose APIs from incompatible BOM or compiler lines.
+Use use-modern-kotlin for language and coroutines.
 
-## Working rules
-
-- Keep composables side-effect free and cheap to recompose. Use effect APIs
-  with lifecycle-aware keys for external work.
-- Prefer unidirectional data flow: immutable state flows down and events flow
-  up. Hoist state to the lowest common owner that must read or change it.
-- Use remember for composition-scoped state and rememberSaveable for small UI
-  state that must survive recreation; keep business state in the project's
-  supported state holder or ViewModel.
-- Do not store mutable, non-observable collections as Compose state. Expose
-  immutable values and explicit event callbacks.
-- Give lazy lists and navigation destinations stable keys and identity; avoid
-  using positions for entities that can be inserted or reordered.
-
-Read references/guidelines.md before using version-sensitive Compose runtime,
-Material, navigation, or lifecycle APIs.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

@@ -1,34 +1,14 @@
 ---
 name: use-modern-fastapi
-description: "Use version-aware FastAPI routing, Pydantic validation, async, security, and OpenAPI idioms when writing, modifying, fixing, or reviewing FastAPI code."
+description: "Use when writing or reviewing code involving FastAPI validation, dependencies, lifespan, and async endpoints."
 ---
 
-# Modern FastAPI
+# FastAPI
 
-Use for FastAPI applications and packages. Pair with use-modern-python for
-Python and typing rules.
+Resolve the changed file's target from pyproject.toml/packaging, lockfile, Python/FastAPI/Starlette/Pydantic, ASGI server and dependency/lifespan conventions.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read pyproject.toml or equivalent metadata, lockfile, Python target, FastAPI,
-Starlette, and Pydantic versions. Establish the ASGI server and the project's
-lifespan, dependency, and schema conventions before changing an endpoint.
+Use use-modern-python for language and typing.
 
-## Working rules
-
-- Treat type annotations and Pydantic models as the HTTP contract. Validate
-  untrusted input and keep request, response, and persistence models distinct
-  when their trust or shape differs.
-- Use response models and accurate status codes so serialization and OpenAPI
-  describe the behavior clients receive.
-- Use async def for awaitable I/O; keep blocking calls out of async functions.
-  A plain def path operation or dependency is appropriate when the blocking
-  library should run through FastAPI's threadpool behavior.
-- Use Depends for request-scoped dependencies and yield-based dependencies for
-  resources that need cleanup. Avoid mutable global request state.
-- Use the lifespan mechanism supported by the installed version for startup and
-  shutdown resources. Do not use durable jobs as a substitute for a real queue.
-- Keep authentication, authorization, CORS, and secret handling at the boundary;
-  never expose internal exception details by default.
-
-Read references/guidelines.md before using version-gated Pydantic or lifecycle APIs.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

@@ -1,44 +1,23 @@
-# AppKit version rules
+# AppKit
 
-Resolve the Swift language mode, Xcode, SDK, and macOS deployment target before
-using version-sensitive AppKit APIs. AppKit availability is a platform and
-deployment decision, not just a compiler decision.
+## Availability
 
-## Windows, documents, and commands
+- Read the selected SDK declaration's availability and actor annotations; compare macOS deployment and SDK/compiler independently before adopting an API.
+- SwiftUI hosting requires macOS 10.15+; Observation integration requires macOS 14+. Verify individual APIs beyond these framework baselines.
 
-- Give each window a clear owner, usually a window controller or document
-  controller, and make close, restoration, and teardown follow that ownership.
-- Use `NSDocumentController` and the document architecture for document-based
-  apps instead of duplicating file, undo, autosave, and restoration behavior in
-  view controllers.
-- Route menu and keyboard commands through the responder chain. Implement menu
-  validation from current state and keep command state out of unrelated views.
-- Keep state restoration and deep-link state in explicit values when a window or
-  document must be reconstructed reliably.
+## Windows and UI
 
-## UI and concurrency
+- Own windows through NSWindowController or document controllers. NSDocument architecture owns file lifecycle, undo, autosave and restoration for document apps.
+- Route commands through responder chain/menu validation; reconstruct windows/documents from explicit restoration/deep-link values.
+- UI mutations belong on the required main actor/thread; blocking work and shared model state need separate isolation.
+- Use Auto Layout, system metrics/text sizing, localization and accessibility actions/descriptions rather than fixed display assumptions.
 
-- Keep AppKit mutations on the main actor/main thread required by the API. Move
-  blocking or asynchronous work out of the UI path and return results through an
-  explicit isolation boundary.
-- Prefer Auto Layout, system control metrics, system text sizing where supported,
-  localization, and accessibility descriptions/actions over fixed display sizes.
-- Use Observation or the target's supported model-data mechanism when it reduces
-  manual view invalidation; keep model ownership and availability explicit.
+## SwiftUI interop
 
-## SwiftUI interop and availability
+- NSViewRepresentable/NSViewControllerRepresentable must forward updates, coordinate ownership and release subscriptions/delegates. Avoid retain cycles around views/coordinators.
+- NSHostingView/Controller embeds SwiftUI; keep window/navigation ownership explicit. Preserve native appearance behavior through standard controls.
 
-- Use representables only at a real platform boundary. Forward SwiftUI updates
-  into the AppKit object, avoid retaining coordinators or views unnecessarily,
-  and release subscriptions and delegates with the wrapped object's lifecycle.
-- Use `NSHostingView` or `NSHostingController` when SwiftUI owns part of an
-  AppKit interface, and keep the boundary small enough that window ownership and
-  navigation remain obvious.
-- Guard newer APIs with the declared macOS deployment target and prefer standard
-  AppKit components so supported system appearance changes flow through
-  automatically.
-
-## Authority
+## Sources
 
 - https://developer.apple.com/documentation/appkit
 - https://developer.apple.com/documentation/updates/appkit

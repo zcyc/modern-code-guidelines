@@ -1,37 +1,14 @@
 ---
 name: use-modern-appkit
-description: "Use version-aware AppKit window, view, responder, document, concurrency, accessibility, and SwiftUI interop idioms when writing, modifying, fixing, or reviewing AppKit code."
+description: "Use when writing or reviewing code involving AppKit windows, documents, commands, and SwiftUI integration."
 ---
 
-# Modern AppKit
+# AppKit
 
-Use for native macOS AppKit applications and AppKit code embedded in SwiftUI.
-Pair with `use-modern-swift` for language, concurrency, and API-availability
-rules.
+Resolve the changed file's target from Xcode/Swift, SDK, macOS deployment target, target settings; document architecture, restoration, Objective-C and SwiftUI interop.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read the Xcode and Swift toolchain, SDK, macOS deployment target, and target
-settings. Establish whether the code uses document-based architecture,
-Objective-C interop, state restoration, or SwiftUI representables before using
-newer APIs.
+Use use-modern-swift for language and concurrency; use-modern-swiftui for embedded SwiftUI.
 
-
-## Working rules
-
-- Keep AppKit UI work on the main actor/main thread required by the API, and
-  isolate shared model state from window and view lifecycle state.
-- Use `NSWindowController` and explicit ownership for windows. For document-based
-  apps, use the AppKit document architecture instead of recreating document
-  lifecycle and restoration in view controllers.
-- Use the responder chain and menu validation for command routing; keep command
-  state explicit instead of reaching through unrelated view hierarchies.
-- Prefer Auto Layout, system text sizing where supported, localization, and AppKit
-  accessibility APIs over fixed window or display assumptions.
-- Treat `NSViewRepresentable` and `NSViewControllerRepresentable` as lifecycle
-  boundaries: forward updates, coordinate ownership, and release resources.
-- Make macOS availability checks explicit for newer APIs and keep platform-specific
-  code at the AppKit boundary.
-
-Read `references/guidelines.md` for window and document ownership, responder
-behavior, concurrency, SwiftUI interop, and availability rules.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

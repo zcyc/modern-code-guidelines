@@ -1,40 +1,23 @@
-# UIKit version rules
+# UIKit
 
-Resolve the Swift language mode, Xcode, SDK, deployment target, and Mac Catalyst
-target before using version-sensitive UIKit APIs. UIKit availability is a
-platform and deployment decision, not just a compiler decision.
+## Availability
 
-## App lifecycle
+- Scenes, diffable data sources and UIHostingController start at iOS/iPadOS 13; check Catalyst/platform variants and individual overloads separately.
+- Read availability/main-actor annotations in the selected SDK declaration; compiler availability alone does not satisfy the deployment target.
 
-- Prefer the scene-based lifecycle on targets that support it, and keep
-  application-wide services separate from scene-specific UI state.
-- Treat view-controller callbacks as lifecycle events, not as a general-purpose
-  data-loading scheduler. Start parameterized work with task identity or an
-  explicit lifecycle owner and cancel it when the owner goes away.
-- Keep restoration and deep-link state in explicit value types rather than hidden
-  controller state when the app must restore multiple scenes.
+## Lifecycle and UI
 
-## UI and concurrency
+- App delegates own app-wide services; scene delegates/config own per-window lifecycle. Restoration/deep links reconstruct explicit scene values.
+- View controllers coordinate views/lifecycle; owned tasks load data and cancel when their owner ends. Repeated callbacks are not an unbounded load scheduler.
+- Main actor/thread owns UI mutation; shared model and blocking work need explicit isolation. Diffable data sources use stable domain identifiers.
+- Use Auto Layout/safe areas/traits, Dynamic Type, localization and accessibility labels/traits rather than fixed devices.
 
-- Keep UIKit mutations on the main actor/main thread required by the API. Move
-  blocking or asynchronous work out of the UI path and return results through an
-  explicit isolation boundary.
-- Prefer diffable data sources and stable item identifiers when collection order
-  or membership can change; do not use array positions as identity.
-- Use Auto Layout, safe areas, trait collections, Dynamic Type, localization,
-  and accessibility labels/traits as part of the feature, not as a later pass.
+## SwiftUI interop
 
-## SwiftUI interop and availability
+- UIViewRepresentable/UIViewControllerRepresentable forwards updates and coordinates ownership/teardown; release delegates/subscriptions and avoid retain cycles.
+- UIHostingController embeds SwiftUI with explicit navigation/ownership boundaries.
 
-- Use representables only at a real platform boundary. Forward SwiftUI updates
-  into the UIKit object, avoid retaining coordinators or views unnecessarily,
-  and release subscriptions and delegates with the wrapped object's lifecycle.
-- Use `UIHostingController` when SwiftUI owns a screen inside UIKit, and keep the
-  boundary small enough that ownership and navigation remain obvious.
-- Guard newer APIs with the declared deployment target and prefer standard UIKit
-  components so supported system appearance changes flow through automatically.
-
-## Authority
+## Sources
 
 - https://developer.apple.com/documentation/uikit
 - https://developer.apple.com/documentation/updates/uikit

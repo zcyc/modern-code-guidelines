@@ -1,30 +1,12 @@
 ---
 name: use-modern-python
-description: "Use version-aware Python language, standard-library, typing, and concurrency idioms when writing, modifying, fixing, or reviewing Python code."
+description: "Use when writing or reviewing code involving Python version ranges, typing, standard APIs, and concurrency."
 ---
 
-# Modern Python
+# Python
 
-Apply stable Python patterns supported by the project's explicit interpreter
-range. Read `references/guidelines.md` before using version-gated syntax or APIs.
+Resolve the changed file's target from package pyproject.toml project.requires-python/Poetry/PDM, setup.cfg/setup.py, then tox.ini/noxfile.py/CI matrix; use the full supported interpreter range.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read the declared target from the project, in this order:
-
-1. `pyproject.toml` `project.requires-python` or Poetry/PDM equivalent.
-2. Packaging metadata in `setup.cfg`/`setup.py` when it is the source of truth.
-3. An explicit matrix in `tox.ini`, `noxfile.py`, or checked-in CI configuration.
-
-Use the target of the package/module being changed. If no target is declared, report
-the Python target as unknown and avoid version-gated syntax. Do not infer it from the
-local interpreter.
-
-## Working rules
-
-- Prefer the standard library (`pathlib`, `dataclasses`, `contextlib`, `zoneinfo`, `collections.abc`) before adding a dependency.
-- Use type annotations to express contracts, not to pretend runtime validation happened.
-- Use `ExceptionGroup`/`TaskGroup` only when the target supports them and the operation really has concurrent child failures.
-- Keep cancellation and resource lifetime explicit in async code; do not swallow `CancelledError` as an ordinary failure.
-- Prefer timezone-aware `datetime` values for instants and model date-only values as dates.
-- Use small, direct functions; do not add frameworks or compatibility branches for versions outside the declared target.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

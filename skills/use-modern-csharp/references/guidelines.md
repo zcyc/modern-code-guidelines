@@ -1,74 +1,24 @@
-# C# version rules
+# C# and .NET
 
-Use these rules after resolving the explicit `LangVersion` and target framework. A
-language feature can compile while its supporting .NET API is unavailable, so check
-both constraints.
+## Language gates
 
-## C# 8+
+- C# 8: nullable references, switch expressions, property patterns, ranges/indices, using declarations and async streams; propagate stream cancellation.
+- C# 9: records/init, relational/logical patterns and small top-level entry points.
+- C# 10: file-scoped namespaces, global usings, constant interpolation and improved lambda inference. Keep project-wide style migrations separate.
+- C# 11: raw strings, list patterns, required members, u8 literals for UTF-8 consumers and static abstract interfaces/generic math for genuine numeric abstractions.
+- C# 12: primary constructors and collection expressions with clear initialization/allocation semantics; interceptors require explicit preview support.
+- C# 13: params collections, System.Threading.Lock (also framework-gated) and ref-struct improvements for explicit lifetime contracts.
+- C# 14: extension members, null-conditional assignment, field-backed properties, partial events/constructors, span conversions, compound-assignment operators, unbound generics in nameof and modifiers on simple lambda parameters. Keep mutation/lifetime semantics visible.
+- C# 15: preview compiler/SDK only.
 
-- Enable nullable reference types for new projects and treat warnings as design feedback.
-- Use switch expressions, property/relational patterns, ranges, indices, using declarations, and `IAsyncEnumerable<T>` where they make control flow clearer.
-- Use `await foreach` for asynchronous streams and propagate cancellation when the source supports it.
+## Runtime boundaries
 
-## C# 9+
+- Nullable diagnostics express invariants; repair the invariant instead of adding !. Records fit value-like immutable data; IAsyncEnumerable fits streamed results.
+- Pass CancellationToken through cancellable I/O; await end to end. async void is for event callbacks only.
+- Use DateTimeOffset for instants; TimeProvider needs .NET 8+. Reuse HttpClient or the project's client factory/lifetime.
+- Span/Memory optimizations need an allocation/copying reason. ConfigureAwait(false) depends on synchronization-context requirements, not blanket style.
 
-- Use records and init-only setters for value-like immutable data.
-- Use top-level statements only for small executable entry points; keep library structure explicit.
-- Prefer pattern matching and relational patterns over type tests followed by casts.
-
-## C# 10+
-
-- Use file-scoped namespaces for files with one namespace.
-- Use global usings for stable project-wide dependencies, not for one-off local convenience.
-- Use constant interpolated strings and improved lambda/type inference when they make the contract clearer.
-
-## C# 11+
-
-- Use raw string literals for multi-line JSON, SQL, regular expressions, and other embedded text when escaping would obscure content.
-- Use list patterns for finite sequence shapes and required members when construction must establish an invariant.
-- Use UTF-8 string literals (`u8`) only at APIs that explicitly consume UTF-8 data.
-- Use static abstract interface members/generic math only when the abstraction is genuinely numeric and the target supports it.
-
-## C# 12+
-
-- Use primary constructors when constructor parameters naturally define the type's initialization contract.
-- Use collection expressions (`[...]`) when the target type and allocation behavior are clear.
-- Do not use preview interceptors in production code.
-
-## C# 13+
-
-- Use `params` collections when the API should accept a collection shape rather than force an array allocation.
-- Use the new `System.Threading.Lock` pattern only when the target framework provides it; do not replace every existing lock without a reason.
-- Prefer the language's improved `ref struct` support only in low-level APIs that already have a clear lifetime contract.
-
-## C# 14+
-
-- Use extension members when a group of extension properties/methods belongs to one coherent extension surface.
-- Use null-conditional assignment only when the skipped assignment semantics are intended.
-- Use `field`-backed properties and partial events/constructors only when they remove real boilerplate without hiding lifecycle behavior.
-- Use implicit `Span<T>`/`ReadOnlySpan<T>` conversions only when the API is
-  already span-oriented and the lifetime/allocation behavior remains obvious.
-- Use user-defined compound assignment operators only when the type's mutation
-  semantics are unsurprising and consistent with its ordinary operator.
-- Use unbound generic types in `nameof` when the type name—not a constructed
-  generic shape—is the intended diagnostic or API text.
-- Use modifiers on simple lambda parameters only when they make the delegate's
-  by-reference contract clearer than an explicit parameter type.
-
-## C# 15 (preview)
-
-- Treat C# 15 features as preview: use them only with an explicit preview
-  compiler/SDK configuration and label them as preview; do not introduce them into
-  ordinary production code.
-
-## .NET API rules
-
-- Prefer `HttpClientFactory`/the project's established client lifetime over creating a new `HttpClient` per request.
-- Prefer `TimeProvider` over reading wall-clock time directly in code that needs deterministic tests.
-- Do not use `ConfigureAwait(false)` as a blanket style rule; apply it only when the synchronization-context contract requires it.
-- Avoid `async void` except for event handlers whose caller cannot observe a task.
-
-## Authority
+## Sources
 
 - [Microsoft C# version history](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history)
 - [Microsoft C# 15 preview](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15)

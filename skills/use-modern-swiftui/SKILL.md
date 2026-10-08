@@ -1,35 +1,14 @@
 ---
 name: use-modern-swiftui
-description: "Use version-aware SwiftUI state, view, concurrency, identity, and accessibility idioms when writing, modifying, fixing, or reviewing SwiftUI code."
+description: "Use when writing or reviewing code involving SwiftUI state, identity, navigation, tasks, and platform integration."
 ---
 
-# Modern SwiftUI
+# SwiftUI
 
-Use for SwiftUI applications and packages. Pair with use-modern-swift for
-Swift language, concurrency, and API-availability rules.
+Resolve the changed file's target from Xcode/Swift, SDKs, deployment targets, Package.swift/Xcode settings; Observation, widgets, multiplatform and UIKit/AppKit interop.
 
-## Target resolution
+Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
 
-Read the Xcode and Swift toolchain, deployment targets, package manifest or
-project settings, and the OS SDKs actually used. Establish whether the code
-uses Observation, UIKit/AppKit interop, widgets, or multiplatform views before
-using a newer API.
+Use use-modern-swift; add use-modern-uikit or use-modern-appkit for representable/hosting work.
 
-## Working rules
-
-- Treat a View as a value description. Keep body computation deterministic and
-  free of network, persistence, and other externally observable side effects.
-- Make state ownership explicit: local state belongs to the view, bindings belong
-  to children that edit parent-owned state, and shared models use the project's
-  supported Observation or environment mechanism.
-- Use task-based async work with cancellation and stable task identity; do not
-  start duplicate loads from repeated appearance callbacks.
-- Give ForEach and navigation data stable identity. Do not use array indices as
-  identity when items can change order.
-- Keep UI-facing state isolated to the main actor as required by the target and
-  propagate cancellation and errors instead of silently discarding them.
-- Build for Dynamic Type, localization, accessibility labels/traits, and the
-  supported platform size classes; use UIKit/AppKit only at a real platform boundary.
-
-Read references/guidelines.md for SwiftUI state ownership, identity, async
-lifecycle, and version-gated Observation, navigation, concurrency, or platform APIs.
+Read [references/guidelines.md](references/guidelines.md) before applying rules. Run the project's existing checks for the changed behavior.

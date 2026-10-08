@@ -1,52 +1,19 @@
-# Astro version rules
+# Astro
 
-Resolve Astro, Vite, integrations, adapters, content sources, and deployment
-runtime from the repository. Static, server, and hybrid behavior changes which
-APIs are available at build time or request time.
+## Gates
 
-## Feature gates
+- Actions: 4.15+; Sessions: 5.7+ with a server-capable adapter/storage. Content collection/content-layer schemas and loaders depend on the installed major.
+- Astro 6: Node 22+, Vite 7/Zod 4; content schemas use astro/zod rather than old astro:content imports.
+- Astro 7: Vite 8/Rolldown and Rust compiler defaults; test parsing/whitespace changes, custom integrations and non-Node adapters. Route caching needs an explicit freshness/invalidation contract and compatible provider.
 
-- Astro Actions require Astro 4.15 or later. Use them for typed server
-  mutations only when the target exposes the API and the action boundary is
-  appropriate.
-- Astro Sessions require Astro 5.7 or later and a server-capable adapter or
-  deployment. Static output cannot provide request-persistent sessions.
-- Content collection and content-layer APIs have changed across Astro majors;
-  resolve the installed target before changing schemas or loaders.
-- Astro 6 requires Node 22 or later and uses Vite 7 and Zod 4. For content
-  schemas, use the target's `astro/zod` entry point rather than copying older
-  `astro:content` examples.
-- Astro 7 uses Vite 8/Rolldown and the Rust compiler by default. Treat compiler
-  parsing and whitespace changes as behavior changes, and test custom Vite
-  integrations and non-Node adapters when upgrading.
+## Rendering and boundaries
 
-## Islands and rendering
+- Default to static/server-rendered components; client:* islands only for browser interaction. Match output/prerender/server islands to adapter/runtime and verify built output.
+- Static routes cannot supply request-time cookies/headers/sessions. Sessions are request-persistent state, not a database; check edge middleware's storage contract.
+- Validate content at typed collection/loader boundaries. Use actions for validated server mutations and endpoints for stable HTTP/external-client contracts; authorize both.
+- Frontmatter is server/build code, but rendered HTML and island props are public. Keep secrets out of both; locals owns request-scoped middleware data.
 
-- Astro components render on the server or at build time by default. Use a
-  framework component with a deliberate `client:*` directive only when the
-  browser needs interactivity.
-- On-demand pages and endpoints require a compatible adapter. Keep cookies,
-  request headers, sessions, and protected data on the server-rendered path.
-- Match `output`, per-route `prerender`, server islands, and adapter settings to
-  the deployment runtime; test the built output rather than relying on dev mode.
-- On Astro 7+, use route caching only with an explicit freshness and
-  invalidation contract and a compatible provider; do not infer cache behavior
-  from prerendering alone.
-- Use server sessions for data that must persist across requests when the
-  adapter/storage target supports them. They are not a replacement for a
-  database, and edge middleware may have a different session contract.
-
-## Content and request boundaries
-
-- Prefer typed content collections and the content APIs supported by the target.
-  Validate frontmatter or external content at the source boundary.
-- Middleware can populate `Astro.locals` for request-specific data. Keep that
-  data out of static assumptions and do not expose secrets through component
-  props that become browser HTML or JavaScript.
-- Keep authorization in the action/server boundary and use an API endpoint when
-  callers need a stable HTTP interface.
-
-## Authority
+## Sources
 
 - https://astro.build/blog/astro-7/
 - https://astro.build/blog/astro-6/

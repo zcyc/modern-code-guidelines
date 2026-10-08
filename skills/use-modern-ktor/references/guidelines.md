@@ -1,48 +1,19 @@
-# Ktor version rules
+# Ktor server
 
-Resolve Kotlin, Ktor, Gradle, serialization, engine, and deployment versions from
-the build. Ktor artifact/plugin compatibility, Kotlin compiler compatibility, and
-the runtime target are separate constraints.
+## Version boundary
 
-## Application and plugin structure
+- Keep Ktor artifacts/plugins on one release line and verify Kotlin/serialization/engine compatibility.
+- Ktor 3 replaces low-level I/O with kotlinx-io; use that release's channel/source/sink APIs instead of copying 2.x implementations.
+- Check current plugin imports/configuration against the selected release's migration guide; latest docs need not match a 2.x server.
 
-- Keep `Application.module` focused on assembling configuration, plugins, and
-  routes. Move domain logic into ordinary Kotlin components with explicit
-  dependencies.
-- Install plugins only where their scope is required. Make authentication,
-  serialization, status handling, compression, and CORS policies visible rather
-  than hiding them in a global setup function.
-- Treat route and plugin order as behavior. Test the order when a plugin changes
-  request parsing, authentication, response transformation, or error handling.
+## Pipeline and resources
 
-## Requests, responses, and errors
+- Application.module assembles plugins/routes/config; domain logic uses ordinary Kotlin dependencies. Plugin order and route scope affect auth/parsing/transformation/errors.
+- ContentNegotiation serializes typed payloads; validate path/query/headers/body and authorize before domain work. StatusPages maps expected errors; log unexpected causes without leaking secrets.
+- Own request/application coroutines and cancellation; never detach request work into GlobalScope. Validate config at startup; configure engine timeouts/TLS/trusted proxies and bounded graceful shutdown.
+- testApplication covers routes/plugins/serialization/errors in-process; real sockets belong to socket/TLS/proxy/engine tests. Isolate test configuration.
 
-- Use `ContentNegotiation` and typed serialization for structured payloads. Validate
-  path, query, headers, and body values at the HTTP boundary before calling domain
-  code.
-- Map expected failures to deliberate status codes and safe response bodies with
-  `StatusPages`. Log unexpected causes on the server without exposing internals.
-- Keep handlers short and suspend-aware. Propagate cancellation when a request is
-  gone; do not convert request-scoped work into an unowned global coroutine.
-
-## Configuration and lifecycle
-
-- Validate configuration at startup and keep secrets in environment or the
-  deployment secret store. Do not log credentials or full connection strings.
-- Choose the engine and deployment model explicitly. Configure timeouts, TLS,
-  proxy headers, and graceful shutdown for the actual hosting environment.
-- Stop accepting work and close owned resources during application shutdown; keep
-  background jobs in an application-owned scope with a visible cancellation path.
-
-## Testing
-
-- Use `testApplication` for routing, plugin, serialization, and status behavior.
-  Keep tests in-process unless socket, TLS, proxy, or engine integration is the
-  behavior under test.
-- Exercise invalid input and error paths, not only successful routes. Keep test
-  configuration isolated from development and production configuration.
-
-## Authority
+## Sources
 
 - https://ktor.io/docs/server-create-and-configure.html
 - https://ktor.io/docs/server-plugins.html
@@ -50,3 +21,4 @@ the runtime target are separate constraints.
 - https://ktor.io/docs/server-status-pages.html
 - https://ktor.io/docs/server-auth.html
 - https://ktor.io/docs/server-testing.html
+- [Ktor 3 migration](https://ktor.io/docs/migrating-3.html)

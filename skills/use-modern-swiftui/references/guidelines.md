@@ -1,37 +1,18 @@
-# SwiftUI version rules
+# SwiftUI
 
-Resolve the Swift, Xcode, SDK, and deployment targets before using a SwiftUI
-feature. Availability is determined by the deployment target as well as the
-compiler.
+## Availability
 
-## State and identity
+- NavigationStack/NavigationSplitView require iOS/iPadOS 16, macOS 13, tvOS 16 or watchOS 9 (visionOS 1). Check individual overloads separately.
+- Observation reference models (@Observable/@Bindable) require iOS/iPadOS 17, macOS 14, tvOS 17 or watchOS 10 (visionOS 1); earlier deployments retain supported model-data APIs.
 
-- Use the narrowest state owner that can express the data flow. Keep child views
-  editing parent state through bindings rather than creating a second copy.
-- For iOS 17/iPadOS 17/macOS 14/tvOS 17/watchOS 10 and later, prefer SwiftUI's
-  Observation model (`@Observable`, `@Bindable`) for new reference models when
-  it fits. Use the target's supported model-data API on earlier deployments and
-  keep any observation-model interop explicit.
-- Stable identity is part of UI correctness. Use domain identifiers for
-  collections and navigation, not indices or regenerated UUIDs.
+## State and lifecycle
 
-## Navigation and availability
+- body is a pure value description: no network/persistence side effects. Narrow owners hold state; bindings edit parent-owned state, environment/Observation share models.
+- Stable domain IDs preserve ForEach/navigation identity; indices or regenerated UUIDs lose state during changes. Restoration/deep-link route values stay lightweight and codable when needed.
+- task/task(id:) owns cancellable async work; stable identity prevents duplicate/obsolete loads. Propagate errors/cancellation and update UI on required MainActor isolation.
+- Build for Dynamic Type, localization, accessibility and supported layouts. UIKit/AppKit representables forward updates and release owned resources; keep hosting boundaries explicit.
 
-- Prefer `NavigationStack` or `NavigationSplitView` for new data-driven
-  navigation when the deployment target supports them. Keep route values
-  lightweight, codable when restoration/deep linking matters, and separate from
-  view models.
-
-## Async and platform behavior
-
-- Prefer task-based work that participates in Swift concurrency cancellation.
-  Make repeated or parameterized work use a stable task identity.
-- Keep UI state updates on the main actor when required by the target, and make
-  availability checks explicit for newer OS APIs.
-- Treat UIKit/AppKit representables as lifecycle boundaries: forward updates,
-  release resources, and avoid retaining views or coordinators accidentally.
-
-## Authority
+## Sources
 
 - https://developer.apple.com/documentation/SwiftUI
 - https://developer.apple.com/documentation/swiftui/model-data

@@ -1,51 +1,17 @@
-# Ruby version rules
+# Ruby
 
-Use these rules after resolving the project's Ruby target and RuboCop config.
-Ruby syntax and framework/gem APIs are separate constraints.
+## Gates
 
-## Ruby 2.3+
+- 2.3: # frozen_string_literal: true follows project policy; explicitly duplicate strings that must mutate. Keyword arguments and Enumerable predate this release.
+- 2.7: pattern matching (experimental here); follow selected release status and keyword-argument transition behavior.
+- 3: positional/keyword separation is required; preserve it across forwarding boundaries. Ractors require explicit shareability/isolation design.
+- 3.2: Data for immutable value containers; referenced members may still be mutable.
+- 3.4: implicit it for short unambiguous blocks; Prism is the tooling parser baseline.
+- 4.0: core Set and Array#rfind/#find; preserve traversal/allocation semantics. Ruby::Box is experimental. *nil no longer delegates to nil.to_a.
 
-- Use `# frozen_string_literal: true` when the project enables it and duplicate a
-  string explicitly before mutation.
-- Prefer keyword arguments and `Enumerable` operations when they make the call
-  contract and traversal clear.
+Use specific StandardError subclasses for operational failures, not rescue Exception or silent nil. Keep monkey patches/metaprogramming at explicit boundaries; follow configured RuboCop.
 
-## Ruby 2.7+
-
-- Use pattern matching only for data shapes where `case`/`when` would otherwise
-  obscure the structure; keep keyword-argument behavior aligned with the target.
-
-## Ruby 3+
-
-- Preserve the separation between positional and keyword arguments at public
-  boundaries; do not rely on implicit hash-to-keyword conversion.
-- Use Ractors only when the application has an explicit isolation and shareability
-  design; ordinary threads/fibers do not become safer automatically.
-
-## Ruby 3.2+
-
-- Use `Data` for small immutable value objects when the target provides it and a
-  `Struct` or class would add no needed behavior.
-
-## Ruby 3.4+
-
-- Use the implicit `it` block parameter only for a short, unambiguous
-  single-argument block; keep an explicit parameter for nested or multi-argument
-  logic.
-- Treat Prism as the Ruby 3.4 parser baseline for tooling, but do not make
-  parser-specific behavior part of application semantics.
-
-## Ruby 4.0+
-
-- Use `Set` as a core collection and `Array#rfind`/`Array#find` when they express
-  the traversal directly; keep the older form when its allocation or order
-  behavior is part of the contract.
-- Treat `Ruby::Box` as experimental isolation infrastructure; do not introduce it
-  for ordinary object organization or as a substitute for package boundaries.
-- Remember that `*nil` no longer converts through `nil.to_a`; make splat inputs
-  explicit when nil is a possible value.
-
-## Authority
+## Sources
 
 - [Ruby documentation](https://www.ruby-lang.org/en/documentation/)
 - [Ruby 3.4 release](https://www.ruby-lang.org/en/news/2024/12/25/ruby-3-4-0-released/)

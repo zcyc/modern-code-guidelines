@@ -1,70 +1,25 @@
-# Python version rules
+# Python
 
-Use these rules after resolving the package's explicit `requires-python` target. The
-interpreter version controls both syntax and standard-library availability.
+## Interpreter gates
 
-## Python 3.9+
+- 3.9: built-in collection generics, zoneinfo, removeprefix/removesuffix; pathlib and collections.abc are available earlier.
+- 3.10: match, X | Y, TypeGuard and zip(strict=True) for equal-length invariants.
+- 3.11: TaskGroup for owned sibling tasks, ExceptionGroup/except* for independent concurrent failures, tomllib for TOML reads, Self/LiteralString/StrEnum.
+- 3.12: type aliases/type-parameter syntax, typing.override and relaxed f-string grammar; keep expressions readable.
+- 3.13: free-threaded CPython and JIT are explicit deployment choices; check extension compatibility rather than assuming GIL behavior.
+- 3.14: concurrent.interpreters/InterpreterPoolExecutor need compatible extensions; compression.zstd needs deployment support. t-strings feed custom processors; f-strings produce strings.
+- 3.14 annotations are deferred unless future annotations changes their semantics; inspect with annotationlib VALUE/FORWARDREF/STRING formats. Do not add future annotations automatically.
+- 3.14 CPython emits SyntaxWarning for return/break/continue that exits finally; avoid this because it can discard exceptions, not because it is universally rejected.
+- 3.14 multiprocessing defaults to forkserver on supported POSIX platforms; macOS remains spawn. Review pickling and inherited state.
 
-- Use built-in collection generics (`list[str]`, `dict[str, int]`) in annotations.
-- Use `pathlib.Path` for filesystem paths and `zoneinfo.ZoneInfo` for IANA time zones.
-- Use `str.removeprefix`/`removesuffix` when the operation is a prefix/suffix operation, not arbitrary replacement.
-- Prefer `collections.abc` for public iterable/mapping protocols.
+## Resources and boundaries
 
-## Python 3.10+
+- Validate input at runtime; annotations are not validation. Use aware datetimes for instants and dates for date-only values.
+- Use context managers, owned async tasks and observable cancellation; never swallow CancelledError as ordinary failure.
+- Keep imports at module scope except real cycles/optional dependencies. Avoid mutable defaults, hidden global state and indiscriminate except Exception.
+- Prefer stdlib dataclasses/contextlib/pathlib; dataclasses fit structured data, dictionaries fit unstructured payloads.
 
-- Use structural pattern matching for finite data shapes when it is clearer than nested conditionals.
-- Use `X | Y` for union types and `TypeGuard` for user-defined narrowing.
-- Use `zip(..., strict=True)` when equal-length inputs are an invariant.
-
-## Python 3.11+
-
-- Use `ExceptionGroup` and `except*` for genuinely concurrent operations that can fail independently.
-- Use `asyncio.TaskGroup` for structured sibling-task lifetimes; prefer it to manually managed task lists.
-- Use `tomllib` for reading TOML instead of adding a TOML parser for read-only configuration.
-- Use `typing.Self`, `LiteralString`, and `StrEnum` where they express a real contract.
-
-## Python 3.12+
-
-- Use the `type` statement and type-parameter syntax for generic aliases/functions/classes when it improves the public type model.
-- Use `typing.override` when overriding a base method in a typed class hierarchy.
-- Use the relaxed f-string expression grammar, but keep expressions simple enough to read.
-
-```python
-type UserId = int
-
-def first[T](items: list[T]) -> T:
-    return items[0]
-```
-
-## Python 3.13+
-
-- Treat free-threaded CPython as an explicit deployment/runtime choice; do not assume the GIL is present or absent without project configuration.
-- Use the improved standard-library APIs only when the declared interpreter target includes them.
-- Do not enable the experimental JIT or free-threaded build as an incidental style change.
-
-## Python 3.14+
-
-- Use `concurrent.interpreters` for explicit subinterpreter coordination and `concurrent.futures.InterpreterPoolExecutor` for workloads that benefit from isolated interpreters; verify extension-module compatibility first.
-- When introspecting annotations at runtime, use the documented `annotationlib` APIs rather than reading `__annotations__` dictionaries directly.
-- Treat annotations as lazily evaluated in Python 3.14+; request an explicit
-  annotation format when runtime introspection needs values, strings, or ASTs.
-- Use template string literals (`t"..."`) for custom string-processing APIs, not
-  ordinary interpolation; use f-strings when the result should be a string.
-- Use `compression.zstd` instead of a third-party Zstandard binding when the
-  project target and deployment environment provide it.
-- Do not use `return`, `break`, or `continue` to leave a `finally` block;
-  Python 3.14 rejects that control flow.
-- Do not add `from __future__ import annotations` merely as a cross-version habit when the project targets 3.14+.
-- On Unix, account for the `forkserver` multiprocessing default when code relies on fork inheritance or pickling behavior.
-
-## Cross-version style
-
-- Keep imports at module scope unless a real import cycle or optional dependency requires otherwise.
-- Use context managers for resources and make ownership visible at the call site.
-- Use `dataclass` for data with behavior/validation; use plain dictionaries for genuinely unstructured payloads.
-- Avoid mutable default arguments, broad `except Exception`, and hidden global state.
-
-## Authority
+## Sources
 
 - [Python What’s New](https://docs.python.org/3/whatsnew/)
 - [Python Language Reference](https://docs.python.org/3/reference/)
