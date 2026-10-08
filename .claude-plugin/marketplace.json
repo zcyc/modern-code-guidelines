@@ -9,7 +9,7 @@
       "name": "modern-code-guidelines",
       "source": "./",
       "description": "Version-aware coding, database, framework, and secure-coding guidance for seventeen language and twenty-five framework skills from one canonical Agent Skills source.",
-      "version": "0.11.0",
+      "version": "0.12.0",
       "author": {
         "name": "Local developer"
       },
