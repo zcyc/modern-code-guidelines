@@ -1,7 +1,7 @@
 {
   "name": "modern-code-guidelines",
   "description": "Helps Claude Code write modern code across seventeen language and twenty-five framework skills from one canonical Agent Skills source.",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "author": {
     "name": "Local developer"
   },
