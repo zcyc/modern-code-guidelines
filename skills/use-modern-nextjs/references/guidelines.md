@@ -9,7 +9,7 @@
 
 ## Server boundaries
 
-- Client props must be serializable and safe to disclose; keep credentials/database clients server-only. A client module can still prerender on the server, so unguarded browser APIs remain unsafe during render.
+- Props passed from Server to Client Components must be React-serializable and safe to disclose; keep credentials/database clients server-only. Client Components can prerender on the server, so unguarded browser APIs remain unsafe during render.
 - Treat every Server Action/route handler as a directly callable entry: validate arguments, authenticate and authorize the specific resource in that call or its server-only data layer. Page/layout/proxy checks alone do not protect actions.
 - Return only needed fields; action IDs, hidden UI and encryption are not authorization. Keep server-only modules out of client imports.
 - Use loading/error/not-found boundaries where independent streaming/failure is needed; framework navigation/metadata/images preserve router behavior.

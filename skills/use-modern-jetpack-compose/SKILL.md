@@ -1,13 +1,13 @@
 ---
 name: use-modern-jetpack-compose
-description: "Use when writing or reviewing code involving Jetpack Compose state, effects, recomposition, and Android lifecycle."
+description: "Use for Jetpack Compose code and reviews: state, effects, recomposition, and Android lifecycle."
 ---
 
 # Jetpack Compose
 
 Resolve the changed file's target from Gradle/version catalogs, Kotlin, AGP, Compose BOM/compiler/plugin, lifecycle/navigation dependencies, min/target SDK and architecture.
 
-Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
+Respect the declared target range; if unknown, report it and avoid version-gated APIs. Verify gated APIs in official versioned docs. Installed tools do not establish the target. Keep unrelated migrations/config changes out of local fixes. Preview/experimental features require explicit project opt-in.
 
 Use use-modern-kotlin for language and coroutines.
 

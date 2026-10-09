@@ -2,13 +2,14 @@
 
 ## Version gates
 
-- 8: java.time, try-with-resources, computeIfAbsent/merge/getOrDefault and String.join. Optional models absence at return boundaries, not every field/parameter.
+- 7: try-with-resources for explicit ownership and automatic cleanup of AutoCloseable resources.
+- 8: java.time, computeIfAbsent/merge/getOrDefault and String.join. Optional models absence at return boundaries, not every field/parameter.
 - 9: supported module boundaries, List/Set/Map.of and Collectors.filtering/flatMapping; keep collection mutability/null policies explicit.
 - 10: local var when the initializer reveals the type.
 - 14: switch expressions for value-producing branches.
 - 15: text blocks for embedded text.
-- 16: records and instanceof patterns.
-- 17: sealed hierarchies and Stream.toList (unmodifiable result).
+- 16: records, instanceof patterns and Stream.toList (unmodifiable result).
+- 17: sealed hierarchies.
 - 21: record/switch patterns, sequenced collections and virtual threads for high-concurrency blocking I/O; bound scarce external resources separately.
 - 22: unnamed variables/patterns. String templates were withdrawn in 23; do not recommend them.
 - 25: module imports (also in non-modular source), compact source/instance main for scripts, flexible constructor bodies for necessary pre-super work.
@@ -20,6 +21,8 @@ Preserve public behavior/module boundaries; a local edit does not authorize a JD
 ## Sources
 
 - [Oracle Java language updates](https://docs.oracle.com/en/java/javase/26/language/java-language-changes-summary.html)
+- [Java 7 resource management](https://www.oracle.com/technical-resources/articles/java/trywithresources.html)
+- [Java 16 Stream.toList](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream/Stream.html#toList())
 - [JDK 26 release notes](https://www.oracle.com/java/technologies/javase/26-relnote-issues.html)
 - [JEP 511: Module Import Declarations](https://openjdk.org/jeps/511)
 - [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se26/html/index.html)

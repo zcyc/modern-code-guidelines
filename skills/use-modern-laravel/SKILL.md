@@ -1,13 +1,13 @@
 ---
 name: use-modern-laravel
-description: "Use when writing or reviewing code involving Laravel routing, authorization, Eloquent, migrations, and queues."
+description: "Use for Laravel code and reviews: routing, authorization, Eloquent, migrations, and queues."
 ---
 
 # Laravel
 
 Resolve the changed file's target from composer.json/lock, PHP/Laravel, bootstrap/config, database, queue backend and Blade/Livewire/Inertia/API stack.
 
-Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
+Respect the declared target range; if unknown, report it and avoid version-gated APIs. Verify gated APIs in official versioned docs. Installed tools do not establish the target. Keep unrelated migrations/config changes out of local fixes. Preview/experimental features require explicit project opt-in.
 
 Use use-modern-php for language; add the matching frontend skill when editing frontend code.
 

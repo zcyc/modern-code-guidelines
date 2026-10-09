@@ -1,13 +1,13 @@
 ---
 name: use-modern-csharp
-description: "Use when writing or reviewing code involving C# language features, nullable types, async, and .NET APIs."
+description: "Use for C# code and reviews: language features, nullable references, async, and .NET APIs."
 ---
 
 # C#
 
 Resolve the changed file's target from .csproj and inherited Directory.Build.props/targets: LangVersion, TargetFramework(s), Nullable, ImplicitUsings; global.json SDK and deployment runtime.
 
-Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
+Respect the declared target range; if unknown, report it and avoid version-gated APIs. Verify gated APIs in official versioned docs. Installed tools do not establish the target. Keep unrelated migrations/config changes out of local fixes. Preview/experimental features require explicit project opt-in.
 
 Compiler syntax and framework APIs have separate gates.
 

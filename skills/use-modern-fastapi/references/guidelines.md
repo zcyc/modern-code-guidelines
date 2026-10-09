@@ -12,6 +12,7 @@
 - async def awaits non-blocking I/O; plain def endpoints/dependencies run blocking libraries through the threadpool. Ordinary helpers called inside async def are not automatically offloaded.
 - In-process BackgroundTasks are not durable/retried across process failure; use a persistent queue for required survival/retry.
 - Validate input, authenticate/authorize operations and configure CORS separately; keep internal exceptions/secrets out of responses.
+- When browser authentication uses cookies, verify explicit CSRF token/origin checks for mutations and test rejection. CORS and HttpOnly cookies do not replace CSRF protection; GET must remain free of mutations.
 
 ## Sources
 
@@ -20,3 +21,4 @@
 - https://fastapi.tiangolo.com/tutorial/dependencies/
 - https://fastapi.tiangolo.com/advanced/events/
 - https://fastapi.tiangolo.com/tutorial/response-model/
+- [OWASP CSRF prevention](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)

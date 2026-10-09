@@ -1,13 +1,13 @@
 ---
 name: use-modern-typescript
-description: "Use when writing or reviewing code involving TypeScript compiler configuration, narrowing, types, and emitted module contracts."
+description: "Use for TypeScript code and reviews: compiler configuration, types, narrowing, and emitted module contracts."
 ---
 
 # TypeScript
 
-Resolve the changed file's target from workspace-selected compiler from package.json/lockfile; effective tsconfig extends/project references including target/lib/module/moduleResolution/strict/verbatimModuleSyntax and the config that includes this file.
+Resolve the workspace compiler from package.json/lockfile and the changed file's effective tsconfig, including extends/project references and target/lib/module/moduleResolution/strict/verbatimModuleSyntax.
 
-Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
+Respect the declared target range; if unknown, report it and avoid version-gated APIs. Verify gated APIs in official versioned docs. Installed tools do not establish the target. Keep unrelated migrations/config changes out of local fixes. Preview/experimental features require explicit project opt-in.
 
 Use use-modern-javascript for runtime APIs and Node/module behavior.
 

@@ -1,13 +1,13 @@
 ---
 name: use-modern-flask
-description: "Use when writing or reviewing code involving Flask factories, contexts, async views, and WSGI deployment."
+description: "Use for Flask code and reviews: factories, request contexts, async views, and WSGI deployment."
 ---
 
 # Flask
 
 Resolve the changed file's target from Python/Flask and extension versions, packaging/lockfile, configuration, WSGI server or ASGI adapter and async extra.
 
-Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
+Respect the declared target range; if unknown, report it and avoid version-gated APIs. Verify gated APIs in official versioned docs. Installed tools do not establish the target. Keep unrelated migrations/config changes out of local fixes. Preview/experimental features require explicit project opt-in.
 
 Use use-modern-python for language and concurrency.
 

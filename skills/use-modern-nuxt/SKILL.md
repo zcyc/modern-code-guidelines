@@ -1,13 +1,13 @@
 ---
 name: use-modern-nuxt
-description: "Use when writing or reviewing code involving Nuxt routing, SSR data, Nitro, caching, and deployment."
+description: "Use for Nuxt code and reviews: routing, SSR data, Nitro, caching, and deployment."
 ---
 
 # Nuxt
 
 Resolve the changed file's target from package.json/lockfile, nuxt.config.*, Nuxt/Vue/Nitro/Node, directory/compatibility settings and deployment preset.
 
-Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
+Respect the declared target range; if unknown, report it and avoid version-gated APIs. Verify gated APIs in official versioned docs. Installed tools do not establish the target. Keep unrelated migrations/config changes out of local fixes. Preview/experimental features require explicit project opt-in.
 
 Use use-modern-vue for components; add use-modern-typescript for TS and use-modern-javascript for runtime.
 
