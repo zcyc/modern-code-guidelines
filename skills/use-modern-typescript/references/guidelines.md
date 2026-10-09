@@ -11,6 +11,7 @@
 - 5.9: newer module syntax requires matching module/bundler/runtime; check declaration output against actual consumer targets.
 - 6: review breaking/deprecated options before upgrades; es2025 lib/target does not polyfill runtime APIs. RegExp.escape is a runtime gate. Replace deprecated es5/node resolution/baseUrl/outFile options through an explicit migration, not new shims/suppressions.
 - 7: remove constructs/options dropped after 6. Defaults include strict, module esnext, noUncheckedSideEffectImports and stable type ordering; keep compiler/editor diagnostics aligned. Compiler integrations must use the release's supported API; do not assume the former compiler API is available.
+- 7: types defaults to [] and rootDir to ./; explicitly select required ambient packages (e.g. node/jest) and verify emitted directory paths against package exports, entry points and deployment scripts during upgrades.
 
 ## Contracts
 

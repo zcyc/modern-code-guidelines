@@ -1,6 +1,6 @@
 {
   "name": "modern-code-guidelines",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Version-aware coding, standard-library, database, framework, and secure-coding guidance for seventeen language and twenty-five framework skills, with one canonical Agent Skills source for mainstream coding agents.",
   "author": {
     "name": "Local developer"

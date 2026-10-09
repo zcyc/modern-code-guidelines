@@ -1,13 +1,13 @@
 ---
 name: use-modern-nestjs
-description: "Use when writing or reviewing code involving NestJS modules, providers, validation, transports, and adapter behavior."
+description: "Use for NestJS code and reviews: modules, providers, validation, transports, and adapters."
 ---
 
 # NestJS
 
 Resolve the changed file's target from package.json/lockfile, Nest core/packages, platform adapter, Node/TypeScript, module format and Express/Fastify/GraphQL/WebSocket/microservice transport.
 
-Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
+Respect the declared target range; if unknown, report it and avoid version-gated APIs. Verify gated APIs in official versioned docs. Installed tools do not establish the target. Keep unrelated migrations/config changes out of local fixes. Preview/experimental features require explicit project opt-in.
 
 Use use-modern-typescript for types and use-modern-javascript for Node/runtime.
 

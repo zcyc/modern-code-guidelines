@@ -5,6 +5,7 @@
 - Vue 3 new application SFCs prefer Composition API/script setup; local changes preserve existing Options API/Vue 2 style.
 - 3.4: defineModel; Reactivity Transform removed from core (external macro packages are explicit dependencies).
 - 3.5: compiler-managed reactive props destructuring in script setup. Earlier destructuring needs toRef/toRefs or preserved property access.
+- Destructured props passed to watch/composables need getters, e.g. watch(() => foo, ...) or useComposable(() => foo); passing foo passes its current value, even in 3.5+.
 
 ## Reactivity and contracts
 
@@ -19,3 +20,4 @@
 - [Composition API FAQ](https://vuejs.org/guide/extras/composition-api-faq)
 - [Vue with TypeScript](https://vuejs.org/guide/typescript/overview)
 - [Composables](https://vuejs.org/guide/reusability/composables)
+- [Passing destructured props into functions](https://vuejs.org/guide/components/props.html#passing-destructured-props-into-functions)

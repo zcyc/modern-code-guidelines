@@ -1,13 +1,13 @@
 ---
 name: use-modern-angular
-description: "Use when writing or reviewing code involving Angular components, signals, templates, forms, and change detection."
+description: "Use for Angular code and reviews: components, signals, templates, forms, and change detection."
 ---
 
 # Angular
 
 Resolve the changed file's target from package.json/lockfile, angular.json, tsconfig, Angular/TypeScript versions; standalone vs NgModule, SSR, ZoneJS vs zoneless.
 
-Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
+Respect the declared target range; if unknown, report it and avoid version-gated APIs. Verify gated APIs in official versioned docs. Installed tools do not establish the target. Keep unrelated migrations/config changes out of local fixes. Preview/experimental features require explicit project opt-in.
 
 Use use-modern-typescript for types and use-modern-javascript for runtime behavior.
 

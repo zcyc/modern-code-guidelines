@@ -10,6 +10,7 @@
 ## Data and plans
 
 - Enforce invariants with constraints/foreign keys and transactions; application checks alone cannot protect concurrent writes.
+- Transactions alone do not prevent lost updates or write skew. For read-modify-write invariants, choose atomic conditional updates, appropriate locks or isolation for the selected engine; check affected rows and retry the whole transaction on documented retryable conflicts with bounded attempts. Keep external side effects outside retried transactions or make them idempotent.
 - Keep deployed migrations as history. Review destructive changes, locks, rewrites and backfills at production scale; use transactions/reversibility where the engine/deployment permits.
 - CTEs name meaningful stages; window/set operations can replace application loops. Avoid SELECT * in stable consumer contracts.
 - Use representative EXPLAIN plans before performance claims/index additions; follow the configured SQLFluff/equivalent dialect and style.
@@ -20,3 +21,4 @@
 - [ISO/IEC 9075:2023 SQL standard](https://www.iso.org/standard/76583.html)
 - [PostgreSQL sorting rows](https://www.postgresql.org/docs/current/queries-order.html)
 - [PostgreSQL release notes](https://www.postgresql.org/docs/release/)
+- [PostgreSQL transaction isolation](https://www.postgresql.org/docs/current/transaction-iso.html)

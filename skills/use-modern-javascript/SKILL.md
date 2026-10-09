@@ -1,13 +1,13 @@
 ---
 name: use-modern-javascript
-description: "Use when writing or reviewing code involving JavaScript and TypeScript runtime behavior, ECMAScript APIs, and Node.js."
+description: "Use for JavaScript/TypeScript runtime code and reviews: ECMAScript APIs, Node.js, and module behavior."
 ---
 
 # JavaScript
 
 Resolve the changed file's target from package.json engines.node/type, .nvmrc/.node-version, CI/container runtime; browserslist/build target for browsers. Resolve package module/export contracts.
 
-Use only features supported by the declared target/range; report unknowns and verify gated APIs against official versioned docs. Local tools are not target evidence. Keep migrations and unrelated configuration changes outside a local fix. Preview/experimental features require explicit project opt-in.
+Respect the declared target range; if unknown, report it and avoid version-gated APIs. Verify gated APIs in official versioned docs. Installed tools do not establish the target. Keep unrelated migrations/config changes out of local fixes. Preview/experimental features require explicit project opt-in.
 
 For TS, also use use-modern-typescript; it covers types/compiler, this skill covers runtime.
 

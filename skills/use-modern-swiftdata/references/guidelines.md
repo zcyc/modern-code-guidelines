@@ -9,7 +9,7 @@
 
 - @Model declares persisted identity/relationships; use separate transport/presentation values when their shape/lifetime differs.
 - Own ModelContainer at app or explicit feature scope and inject it. ModelContext stays on its owning actor; pass IDs/Sendable values, not managed instances/contexts, across actors.
-- @ModelActor supplies an owned background context. @Query is for SwiftUI live reads; FetchDescriptor is for service/actor/command work with explicit predicate/sort/identity.
+- @ModelActor isolates an owned context through its model executor; it does not guarantee a background thread. @Query is for SwiftUI live reads; FetchDescriptor is for service/actor/command work with explicit predicate/sort/identity.
 - Surface save failures and reconcile optimistic UI; transaction/command boundaries own writes. Keep network/migration/unbounded fetches out of repeatedly evaluated UI paths.
 
 ## Migration and sync
@@ -23,5 +23,6 @@
 - https://developer.apple.com/documentation/swiftdata/modelcontainer
 - https://developer.apple.com/documentation/swiftdata/modelcontext
 - https://developer.apple.com/documentation/swiftdata/modelactor
+- https://developer.apple.com/documentation/swiftdata/modelexecutor
 - https://developer.apple.com/documentation/swiftdata/schemamigrationplan
 - https://developer.apple.com/documentation/coredata
