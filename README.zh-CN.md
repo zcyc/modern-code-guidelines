@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-这是一个同时面向 Codex、Cursor、Claude Code、Kiro、Google Antigravity、Gemini CLI、GitHub Copilot、Cline、OpenCode、Devin、JetBrains Junie 和 OpenHands 的共享 skill 包，包含四十二个可独立触发的语言与框架 skill：
+这是一个同时面向 Codex、Cursor、Claude Code、Kiro、Google Antigravity、Gemini CLI、GitHub Copilot、Cline、OpenCode、Devin、JetBrains Junie 和 OpenHands 的共享 skill 包，包含四十三个可独立触发的语言与框架 skill：
 
 - Codex：`.codex-plugin/plugin.json`
 - Cursor：`.cursor-plugin/plugin.json`
@@ -135,7 +135,7 @@ npx skills add zcyc/modern-code-guidelines --skill '*' --agent gemini-cli --copy
 
 语言 skill 都会读取项目明确声明的语言、编译器或运行时版本，只应用该版本可用且稳定的现代实践。各语言的版本规则与 skill 放在一起。
 
-## 支持的框架（25 个）
+## 支持的框架（26 个）
 
 - `use-modern-react`
 - `use-modern-nextjs`
@@ -143,6 +143,7 @@ npx skills add zcyc/modern-code-guidelines --skill '*' --agent gemini-cli --copy
 - `use-modern-angular`
 - `use-modern-spring-boot`
 - `use-modern-aspnet-core`
+- `use-modern-unity`
 - `use-modern-django`
 - `use-modern-fastapi`
 - `use-modern-express`
