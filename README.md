@@ -4,7 +4,7 @@
 
 A shared skill package for Codex, Cursor, Claude Code, Kiro, Google Antigravity,
 Gemini CLI, GitHub Copilot, Cline, OpenCode, Devin, JetBrains Junie, and OpenHands,
-containing forty-two independently triggered language and framework skills:
+containing forty-three independently triggered language and framework skills:
 
 - Codex: `.codex-plugin/plugin.json`
 - Cursor: `.cursor-plugin/plugin.json`
@@ -141,7 +141,7 @@ Language skills (17):
 - `use-modern-sql`
 - `use-modern-shell`
 
-Framework skills (25):
+Framework skills (26):
 
 - `use-modern-react`
 - `use-modern-nextjs`
@@ -149,6 +149,7 @@ Framework skills (25):
 - `use-modern-angular`
 - `use-modern-spring-boot`
 - `use-modern-aspnet-core`
+- `use-modern-unity`
 - `use-modern-django`
 - `use-modern-fastapi`
 - `use-modern-express`
